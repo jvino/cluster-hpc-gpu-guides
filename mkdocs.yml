@@ -1,0 +1,35 @@
+site_name: ReCaS-Bari Cluster HPC/GPU
+repo_url: https://github.com/jvino/cluster-hpc-gpu-guides
+site_author: Gioacchino Vino - gioacchino.vino@ba.infn.it
+theme:
+  name: material
+  palette:
+    primary: teal
+    accent: green
+  logo: assets/logo_infn.png
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.integrate
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences 
+  - pymdownx.snippets
+  - pymdownx.tabbed
+  - admonition
+  - pymdownx.details
+  - attr_list
+   
+nav:
+  - Interactive services:
+    - Jupyter Notebook: 'jupyterno_notebook.md'
+    - Rstudio: 'rstudio.md'
+  - Job Submission:
+    - Chronos: 'chronos.md'
+  - Tutorials:
+    - Docker and Dockerfile: 'docker.md'
+ 
+copyright: Copyright &copy; 2022 INFN
