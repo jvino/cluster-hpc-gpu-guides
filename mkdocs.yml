@@ -1,0 +1,48 @@
+site_name: Docker Tutorial - part 1
+repo_url: https://github.com/maricaantonacci/docker-tutorial
+site_author: Marica Antonacci - marica.antonacci@ba.infn.it
+theme:
+  name: material
+  palette:
+    primary: teal
+    accent: green
+  logo: assets/logo_infn.png
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.integrate
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences 
+  - pymdownx.snippets
+  - pymdownx.tabbed
+  - admonition
+  - pymdownx.details
+  - attr_list
+   
+nav:
+  - Intro: 
+    - Docker info: 'intro/index.md'
+    - Run your first container: 'intro/hello-world.md'
+    - Where are Docker images stored?: 'intro/images.md'
+    - Docker container lifecycle: 'intro/container.md'
+  - Docker Container manipulation:
+    - Work with your first container: 'container/manipulation.md'
+  - Going further:
+    - Run a dockerized service: 'container/example.md'
+  - Container networking:
+    - Bridge mode and port mapping: 'container/networking.md'
+  - Persistent data:
+    - Docker volumes and bind-mounts: 'container/volumes.md'
+    - Docker volume plugins - an example: 'container/volume_plugin.md'
+    - Summary: 'container/volume_summary.md'
+  - Environment variables:
+    - How to pass env variables to a container: 'container/env_vars.md'
+  - Docker web UI:
+    - Portainer: 'gui/portainer.md'
+
+ 
+copyright: Copyright &copy; 2021 INFN
