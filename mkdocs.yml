@@ -1,6 +1,6 @@
-site_name: Docker Tutorial - part 1
-repo_url: https://github.com/maricaantonacci/docker-tutorial
-site_author: Marica Antonacci - marica.antonacci@ba.infn.it
+site_name: ReCaS-Bari Cluster HPC/GPU Guides 1
+repo_url: https://github.com/jvino/cluster-hpc-gpu-guides
+site_author: Gioacchino Vino - gioacchino.vino@ba.infn.it
 theme:
   name: material
   palette:
@@ -45,4 +45,4 @@ nav:
     - Portainer: 'gui/portainer.md'
 
  
-copyright: Copyright &copy; 2021 INFN
+copyright: Copyright &copy; 2022 INFN
