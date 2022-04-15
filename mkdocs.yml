@@ -5,7 +5,7 @@ theme:
   name: material
   palette:
     primary: teal
-    accent: green
+    accent: orange
   logo: assets/logo_infn.png
   features:
     - navigation.sections
@@ -24,25 +24,12 @@ markdown_extensions:
   - attr_list
    
 nav:
-  - Abstract: 
-    - Docker info: 'intro/index.md'
-    - Run your first container: 'intro/hello-world.md'
-    - Where are Docker images stored?: 'intro/images.md'
-    - Docker container lifecycle: 'intro/container.md'
-  - Docker Container manipulation:
-    - Work with your first container: 'container/manipulation.md'
-  - Going further:
-    - Run a dockerized service: 'container/example.md'
-  - Container networking:
-    - Bridge mode and port mapping: 'container/networking.md'
-  - Persistent data:
-    - Docker volumes and bind-mounts: 'container/volumes.md'
-    - Docker volume plugins - an example: 'container/volume_plugin.md'
-    - Summary: 'container/volume_summary.md'
-  - Environment variables:
-    - How to pass env variables to a container: 'container/env_vars.md'
-  - Docker web UI:
-    - Portainer: 'gui/portainer.md'
-
+  - Interactive Services: 
+    - Jupyter Notebook: 'interactive_services/jupyter_notebook.md'
+    - RStudio: 'interactive_services/rstudio.md'
+  - Job Submission:
+    - Chronos: 'job_submission/chronos.md'
+  - Guides:
+    - Docker and Dockerfile: 'guides/docker_and_dockerfile.md'
  
-copyright: Copyright &copy; 2021 INFN
+copyright: Copyright &copy; 2022 INFN
