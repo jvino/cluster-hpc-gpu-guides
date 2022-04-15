@@ -1,4 +1,4 @@
-site_name: Docker Tutorial - part 1
+site_name: ReCaS-Bari Cluster HPC/GPU
 repo_url: https://github.com/jvino/cluster-hpc-gpu-guides
 site_author: Gioacchino Vino - gioacchino.vino@ba.infn.it
 theme:
@@ -24,7 +24,7 @@ markdown_extensions:
   - attr_list
    
 nav:
-  - Intro: 
+  - Abstract: 
     - Docker info: 'intro/index.md'
     - Run your first container: 'intro/hello-world.md'
     - Where are Docker images stored?: 'intro/images.md'
