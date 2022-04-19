@@ -59,8 +59,8 @@ This method requires a JSON file containing all the job information and the exec
 
 ```bash
 {
-	"name": "**<detailed-and-unique-job-name>**",
-	"command": "python3.6 **</lustre/path/to/your/code>**",
+	"name": "<detailed-and-unique-job-name>",
+	"command": "python3.6 </lustre/path/to/your/code>",
 	"shell": true,
 	"retries": 2,
 	"description": "",
@@ -70,21 +70,21 @@ This method requires a JSON file containing all the job information and the exec
 	"gpus": 1,
 	"environmentVariables": [],
 	"arguments": [],
-	"runAsUser": "**<your-username>**",
-	"owner": "**<your-username>**",
-	"ownerName": "**<your-username>**",
+	"runAsUser": "<your-username>",
+	"owner": "<your-username>",
+	"ownerName": "<your-username>",
 	"container": {
 		"type": "mesos",
-		"image": "**<your-container-image>**",
-		"volumes": [{"containerPath": "**/lustre/path/to/your/home-directory>**", 
-			"hostPath": "**/lustre/path/to/your/home-directory**", 
-			"mode": "RW"}]
-},
-	"schedule": "R1//PT10S"
+		"image": "<your-container-image>",
+		"volumes": [{"containerPath": "/lustre/path/to/your/home-directory>", 
+			         "hostPath": "/lustre/path/to/your/home-directory", 
+             		 "mode": "RW"}]
+    },
+	"schedule": "R1//P1Y"
 }
 ```
 
-Notes:
+!!! note 
 - It’s important to insert an unique **name** for each submitted job, this will be important during the debugging phase. The name should **ALWAYS** start with your **username**. Insert dash ( - ) between words. Es “myuser-test-job-1-date-2020-09-34”.
 - The **command** field is specific for each application, what written in the example will not work in your use case. Absolute path is preferred.
 - **<your-username>** is the user created during the registration.
