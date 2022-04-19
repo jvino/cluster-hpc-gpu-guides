@@ -5,8 +5,10 @@
 
 ## 1 Introduction
 **Chronos is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.**
+
 **IMPORTANT**: ONLY Docker containers can be executed in the cluster.
-At this [link](https://www.recas-bari.it/images/manuali/Docker_and_Dockerfile_EN.pdf) you can find a short introduction to Docker containers.
+
+You can use already built docker container or you can build your custom container. Please refer to the guide at this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/) for more details.
 
 ## 2 Access to the ReCaS Chronos instance
 Chronos is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
@@ -30,7 +32,7 @@ Issue: Name, Surname, username, email
 
 Once the request will be approved, the administrator will provide hostname, port and authentication information in order to access your personal Chronos instance.
 
-## 3 Chronos
+## 3 Chronos web interface
 Using the URL provided by the administrator of the service in the browser, it is possible to access the Chronos web interface as shown in the following figure.
 
 ![inital_screen](images/inital_screen.png)
@@ -38,6 +40,7 @@ Using the URL provided by the administrator of the service in the browser, it is
 The web interface is the unique way to check your job status. Moreover, it can be used to submit scheduled or dependent jobs.
 
 **IMPORTANT:** To access your web interface, please, follow instructions in section 4.
+
 ## 3.1 Submit a job using the web interface
 Clicking on the “ADD JOB” box you submit a job. The following figure shows the box where you insert all parameters needed to submit a job.
 
