@@ -89,8 +89,8 @@ This method requires a JSON file containing all the job information and the exec
 !!! note 
     - It’s important to insert an unique **name** for each submitted job, this will be important during the debugging phase. The name should **ALWAYS** start with your **username**. Insert dash ( - ) between words. Es “myuser-test-job-1-date-2020-09-34”.
     - The **command** field is specific for each application, what written in the example will not work in your use case. Absolute path is preferred.
-    - **<your-username>** is the user created during the registration.
-    - **<your-container-image>** is the container image name to use for your application.
+    - **\<your-username\>** is the user created during the registration.
+    - **\<your-container-image\>** is the container image name to use for your application.
     - The **schedule** field is used to type how many times you want to execute the job and the period among execution, please refer to this [guide](https://mesos.github.io/chronos/docs/api.html) (Adding a Scheduled Job - section) if you need it otherwise leave it as you see in the example.
 
 The command used to submit the job is based on CURL. On a machine with a Linux OS, open a file editor and copy the following lines inside and save it (e.g. with the “submit-to-chronos” name).
