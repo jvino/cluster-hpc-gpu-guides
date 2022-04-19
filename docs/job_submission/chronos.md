@@ -32,7 +32,7 @@ Issue: Name, Surname, username, email
 
 Once the request will be approved, the administrator will provide hostname, port and authentication information in order to access your personal Chronos instance.
 
-## 3 Chronos web interface
+## 3 Chronos web interface  
 Using the URL provided by the administrator of the service in the browser, it is possible to access the Chronos web interface as shown in the following figure.
 
 ![inital_screen](images/inital_screen.png)
@@ -40,7 +40,7 @@ Using the URL provided by the administrator of the service in the browser, it is
 The web interface is the unique way to check your job status. Moreover, it can be used to submit scheduled or dependent jobs.
 
 !!! note 
-To access your web interface, please, follow instructions in section 4.
+    To access your web interface, please, follow instructions in section 4.
 
 ## 3.1 Submit a job using the web interface
 Clicking on the “ADD JOB” box you submit a job. The following figure shows the box where you insert all parameters needed to submit a job.
