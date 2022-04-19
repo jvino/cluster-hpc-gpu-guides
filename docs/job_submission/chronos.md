@@ -131,12 +131,12 @@ The procedure to access to the Chronos instance through the SSH SOCKS Tunnel is 
 ```bash
    ssh -D 33333 <username>@frontend.recas.ba.infn.it
 ```
-1. Open Firefox then
-   1. Settings" -> "Network Settings" -> check "Manual proxy configuration"
-   2. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
-   3. Check SOCKS v5
-   4. Close
-2. Access your Chronos instance using the URL
+2. Open Firefox then
+    1. Settings" -> "Network Settings" -> check "Manual proxy configuration"
+    2. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
+    3. Check SOCKS v5
+    4. Close
+3. Access your Chronos instance using the URL
 
 ## 4 User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Chronos support” and then describe your issue. In case the issue is related to a job, in the description MUST be inserted the job name.
