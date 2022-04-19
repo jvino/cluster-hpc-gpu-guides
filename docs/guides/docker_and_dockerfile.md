@@ -4,7 +4,7 @@
 Docker is an open-source project that automates the deployment of software applications inside **containers** by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. The key benefit of Docker is that it allows users to package an application with all of its dependencies into a standardized unit for software development.
 
 
-## 2 Access to the ReCaS dedicated machine for develop docker container for GPU applications
+## 2 Access to the dedicated machine for built custom docker container
 ReCaS Bari data center provides a dedicated machine to allow users to develop their container to be deployed in a second step on a separated cluster where high performance GPUs are available.
 
 This machine is accessible only to users with a ReCaS-Bari HPC/HTC account active. Users without such an account should register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
