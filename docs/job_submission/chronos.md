@@ -116,10 +116,13 @@ bash ./submit_chronos job.json
 !!! note
     Since your Chronos instance is not accessible from outside, the unique procedure to submit job is to store json files and the script used to submit jobs in your home directory on frontend.recas.ba.infn.it (officially the ReCaS-Bari storage based on GPFS) and execute the command from there.
 
-## 3.3 Support
+## 3.3 User Support
 For any problem related to the Chronos service, use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) for create a support request, inserting as title “ReCaS HPC/GPU: Chronos issue”, then describe the problem in the issue box. Your username and job\_name **MUST** be added.
 
 At the moment, users can not access to the job logs. For support on a specific job, submit a support request providing the username, job\_name and describing the problem in the issue box.
+
+!!! note
+It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with title “ReCaS HPC/GPU: subscribe to the mailing list”.
 
 ## 3.4 Access to the Chronos Web Interface
 
@@ -136,12 +139,60 @@ The procedure to access to the Chronos instance through the SSH SOCKS Tunnel is 
     2. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
     3. Check SOCKS v5
     4. Close
-
-![firefox_settings](images/firefox_settings.png)
-
 3. Access your Chronos instance using the URL
 
-## 4 User Support
-If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Chronos support” and then describe your issue. In case the issue is related to a job, in the description MUST be inserted the job name.
+The following figure shows the firefox network settings
+![firefox_settings](images/firefox_settings.png)
 
-It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with title “ReCaS HPC/GPU: subscribe to the mailing list”.
+## 4 Example
+
+The following JSON could be used as first test by the user.
+
+```bash
+{
+  "name": "<username>-my-first-job-submission",
+  "command": "sleep 5 && nvidia-smi",
+  "shell": true,
+  "retries": 4,
+  "description": "",
+  "cpus": 1,
+  "disk": 0,
+  "mem": 1024,
+  "gpus": 1,
+  "environmentVariables": [],
+  "arguments": [],
+  "runAsUser": "<username>",
+  "owner": "<username>",
+  "ownerName": "<username>",
+  "container": {
+    "type": "mesos",
+    "image": "registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1",
+    "volumes": [{"containerPath": "/lustrehome/<username>", "hostPath": "/lustrehome/<username>", "mode": "RW"}]
+  },
+  "schedule": "R1//P1Y"
+}
+```
+
+Save it as "*my-first-job.json*" on your personal computer and send it and the file used to submit the job to your home in the ReCaS-Bari Storage using the command:
+
+```bash
+scp ./my-first-job.json submit_chronos <username>@frontend.recas.ba.infn.it:
+```
+
+Then access to your storage using:
+
+```bash
+ssh <username>@frontend.recas.ba.infn.it:
+```
+
+Finally, submit the job using the command:
+
+```bash
+bash submit_chronos my-first-job.json
+```
+
+Go to the web inteface to verify if the job was successfully submitted and executed.
+
+
+
+
