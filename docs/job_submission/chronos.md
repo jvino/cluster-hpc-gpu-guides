@@ -93,9 +93,6 @@ This method requires a JSON file containing all the job information and the exec
     - **<your-container-image>** is the container image name to use for your application.
     - The **schedule** field is used to type how many times you want to execute the job and the period among execution, please refer to this [guide](https://mesos.github.io/chronos/docs/api.html) (Adding a Scheduled Job - section) if you need it otherwise leave it as you see in the example.
 
-
-
-
 The command used to submit the job is based on CURL. On a machine with a Linux OS, open a file editor and copy the following lines inside and save it (e.g. with the “submit-to-chronos” name).
 
 ```bash
@@ -116,34 +113,29 @@ To submit the job, execute the following command (supposing the json file name i
 bash ./submit_chronos job.json
 ```
 
-#3.3 Support
+!!! note
+    Since your Chronos instance is not accessible from outside, the unique procedure to submit job is to store json files and the script used to submit jobs in your home directory on frontend.recas.ba.infn.it (officially the ReCaS-Bari storage based on GPFS) and execute the command from there.
+
+## 3.3 Support
 For any problem related to the Chronos service, use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) for create a support request, inserting as title “ReCaS HPC/GPU: Chronos issue”, then describe the problem in the issue box. Your username and job\_name **MUST** be added.
 
 At the moment, users can not access to the job logs. For support on a specific job, submit a support request providing the username, job\_name and describing the problem in the issue box.
 
 ## 3.4 Access to the Chronos Web Interface
 
-!!! note
-    To access your web interface, please, follow instructions in section 4.
-
-
-**IMPORTANT**: Chronos instance is not accessible from outside.
-
-**IMPORTANT**: The unique procedure to submit job is to store json files and the script used to submit jobs in your home directory on frontend.recas.ba.infn.it (officially the ReCaS-Bari storage based on GPFS) and execute the command from there.
-
-**IMPORTANT**: In order to access your Chronos instance is needed to create a SSH SOCKS Tunnel. **Firefox is mandatory**, please install it.
+In order to access your Chronos instance is needed to create a SSH SOCKS Tunnel. **Firefox is mandatory**, please install it.
 
 The procedure to access to the Chronos instance through the SSH SOCKS Tunnel is composed of 2 steps:
 
-1. Open a shell and execute the following command and do not close the shell 
+1. Open a shell and execute the following command and **DO NOT CLOSE IT**:
 ```bash
    ssh -D 33333 <username>@frontend.recas.ba.infn.it
 ```
 1. Open Firefox then
    1. Settings" -> "Network Settings" -> check "Manual proxy configuration"
-   1. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
-   1. Check SOCKS v5
-   1. Close
+   2. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
+   3. Check SOCKS v5
+   4. Close
 2. Access your Chronos instance using the URL
 
 ## 4 User Support
