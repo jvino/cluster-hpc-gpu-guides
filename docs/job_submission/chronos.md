@@ -134,12 +134,12 @@ The procedure to access to the Chronos instance through the SSH SOCKS Tunnel is 
 ```bash
    ssh -D 33333 <username>@frontend.recas.ba.infn.it
 ```
-2. Open Firefox then
+1. Open Firefox then:
     1. Settings" -> "Network Settings" -> check "Manual proxy configuration"
-    2. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
-    3. Check SOCKS v5
-    4. Close
-3. Access your Chronos instance using the URL
+    1. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
+    1. Check SOCKS v5
+    1. Close
+1. Access your Chronos instance using the URL
 
 The following figure shows the firefox network settings
 ![firefox_settings](images/firefox_settings.png)
