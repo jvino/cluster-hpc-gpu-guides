@@ -31,18 +31,16 @@ Title: “ReCaS HPC/GPU: new Chronos instance request”
 Issue: Name, Surname, username, email
 ```
 
-## 3 Chronos web interface 
-Using the URL provided by the administrator of the service in the browser, it is possible to access the Chronos web interface as shown in the following figure.
+## 3 Chronos Web Interface
+Chronos provdes a simple and fast web interface as shown in the following figure.
 
 ![inital_screen](images/inital_screen.png)
 
-The web interface is the unique way to check your job status. Moreover, it can be used to submit scheduled or dependent jobs.
+Through the web interface is possible to verify your job status. Moreover, it can be used to submit scheduled or dependent jobs.
 
-!!! note
-    To access your web interface, please, follow instructions in section 4.
 
-## 3.1 Submit a job using the web interface
-Clicking on the “ADD JOB” box you submit a job. The following figure shows the box where you insert all parameters needed to submit a job.
+## 3.1 Submit a job using the Web Interface
+The web interface provides the possibility to submit a job by clicking on the “ADD JOB”. The following figure shows the box where you can insert all job parameters.
 
 ![graphical_job_submission](images/graphical_job_submission.png)
 
@@ -52,11 +50,17 @@ The following image shows the status of a job.
 
 ![job_state](images/job_state.png)
 
-Using the box on the right, you can start the job again, edit the job description, stop and delete a job, respectively.
+The boxes on the right allow to start again the job, edit the job description, stop and delete a job, respectively.
 
-**IMPORTANT:** The job name MUST be unique and start with your username, always. This must be provided when you will describe the problem in a support request. Using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) for support requests, inserting as title “ReCaS HPC/GPU: Chronos issue”, then describe the problem in the issue box, where your username and job\_name must be added.
+!!! note 
+    - It’s important to insert an unique **name** for each submitted job, this will be important during the debugging phase. The name should **ALWAYS** start with your **username**. Insert dash ( - ) between words. Es “myuser-test-job-1-date-2020-09-34”.
+    - The **command** field is specific for each application, what written in the example will not work in your use case. Absolute path is preferred.
+    - **<your-username>** is the user created during the registration.
+    - **<your-container-image>** is the container image name to use for your application.
+    - The **schedule** field is used to type how many times you want to execute the job and the period among execution, please refer to this [guide](https://mesos.github.io/chronos/docs/api.html) (Adding a Scheduled Job - section) if you need it otherwise leave it as you see in the example.
+
 ## 3.2 Submit the job using the terminal
-Although, submitting jobs through the web interface might seem easier at first, it could be not comfortable, scalable and fast. Submitting jobs using the terminal is advised.
+Although submitting jobs through the web interface might seem easier at first, it could be not comfortable, scalable and fast. Submitting jobs using the terminal is recommended.
 
 This method requires a JSON file containing all the job information and the execution of a command that transmits the job information to your personal Chronos instance. Following an example of a JSON file. Insert the information of your specific job and save the file.
 
@@ -86,14 +90,6 @@ This method requires a JSON file containing all the job information and the exec
 	"schedule": "R1//P1Y"
 }
 ```
-
-!!! note 
-- It’s important to insert an unique **name** for each submitted job, this will be important during the debugging phase. The name should **ALWAYS** start with your **username**. Insert dash ( - ) between words. Es “myuser-test-job-1-date-2020-09-34”.
-- The **command** field is specific for each application, what written in the example will not work in your use case. Absolute path is preferred.
-- **<your-username>** is the user created during the registration.
-- **<your-container-image>** is the container image name to use for your application.
-- The **schedule** field is used to type how many times you want to execute the job and the period among execution, please refer to this [guide](https://mesos.github.io/chronos/docs/api.html) (Adding a Scheduled Job - section) if you need it otherwise leave it as you see in the example.
-
 The command used to submit the job is based on CURL. On a machine with a Linux OS, open a file editor and copy the following lines inside and save it (e.g. with the “submit-to-chronos” name).
 
 ```bash
@@ -117,14 +113,21 @@ Once the request will be approved, the administrator will provide:
 
 
 
+!!! note
+    To access your web interface, please, follow instructions in section 4.
+
+
 To submit the job, execute the following command (supposing the json file name is “job.json” and the submit command file name is “submit-to-chronos.sh”)
 
 ```bash
 chmod 755 submit-to-chronos (only once)
 ./submit-to-chronos job.json
 ```
+#3.3 Support
+Use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) for support requests, inserting as title “ReCaS HPC/GPU: Chronos issue”, then describe the problem in the issue box, where your username and job\_name must be added.
 
-## 4 Interacting with Chronos
+
+## 3.4 Access to the Chronos Web Interface
 **IMPORTANT**: Chronos instance is not accessible from outside.
 
 **IMPORTANT**: The unique procedure to submit job is to store json files and the script used to submit jobs in your home directory on frontend.recas.ba.infn.it (officially the ReCaS-Bari storage based on GPFS) and execute the command from there.
