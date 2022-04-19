@@ -39,7 +39,8 @@ Using the URL provided by the administrator of the service in the browser, it is
 
 The web interface is the unique way to check your job status. Moreover, it can be used to submit scheduled or dependent jobs.
 
-**IMPORTANT:** To access your web interface, please, follow instructions in section 4.
+!!! note 
+To access your web interface, please, follow instructions in section 4.
 
 ## 3.1 Submit a job using the web interface
 Clicking on the “ADD JOB” box you submit a job. The following figure shows the box where you insert all parameters needed to submit a job.
