@@ -122,7 +122,7 @@ For any problem related to the Chronos service, use this [link](https://www.reca
 At the moment, users can not access to the job logs. For support on a specific job, submit a support request providing the username, job\_name and describing the problem in the issue box.
 
 !!! note
-It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with title “ReCaS HPC/GPU: subscribe to the mailing list”.
+    It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with title “ReCaS HPC/GPU: subscribe to the mailing list”.
 
 ## 3.4 Access to the Chronos Web Interface
 
@@ -173,7 +173,7 @@ The following JSON could be used as first test by the user.
 }
 ```
 
-Save it as "*my-first-job.json*" on your personal computer and send it and the file used to submit the job to your home in the ReCaS-Bari Storage using the command:
+Save it as "*my-first-job.json*" on your personal computer and send this file and that used to submit the job to your home in the ReCaS-Bari Storage using the command:
 
 ```bash
 scp ./my-first-job.json submit_chronos <username>@frontend.recas.ba.infn.it:
