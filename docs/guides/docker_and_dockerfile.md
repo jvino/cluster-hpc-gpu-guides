@@ -1,58 +1,65 @@
-﻿RECAS HPC
+# Docker containers and dockerfile writing
 
-Docker containers and dockerfile writing
+## 1 Introduction
+Docker is an open-source project that automates the deployment of software applications inside **containers** by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. The key benefit of Docker is that it allows users to package an application with all of its dependencies into a standardized unit for software development.
 
-# 1 Introduction
-#### Docker is an open-source project that automates the deployment of software applications inside **containers** by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. The key benefit of Docker is that it allows users to package an application with all of its dependencies into a standardized unit for software development.
-# 2 Access to the ReCaS dedicated machine for develop docker container for GPU applications
+
+## 2 Access to the ReCaS dedicated machine for develop docker container for GPU applications
 ReCaS Bari data center provides a dedicated machine to allow users to develop their container to be deployed in a second step on a separated cluster where high performance GPUs are available.
 
 This machine is accessible only to users with a ReCaS-Bari HPC/HTC account active. Users without such an account should register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
 In order to  access the machine, use the following command in a command prompt/shell (Linux, Mac, and Windows ≥10) and then insert your password when prompted.
 
+```bash
 ssh <username>@tesla02.recas.ba.infn.it
+```
 
 In case you don’t use the ReCaS-VPN, first access to the frontend
 
+```bash
 ssh <username>@frontend.recas.ba.infn.it
-# 3 Docker most important operation
+```
+
+## 3 Docker most important operation
 In this document, the most important aspects of Docker will be covered.
-## 3.1 Docker pull
+
+### 3.1 Docker pull
 The **pull** command fetches an image from the Docker registry (a place where the docker images are stored and can be downloaded/pulled) and saves it to our host in order to use it.
 
-**docker pull ubuntu:20.04**
-
+```bash
+docker pull ubuntu:20.04
 20.04: Pulling from library/ubuntu
-
 345e3491a907: Pull complete
-
 57671312ef6f: Pull complete
-
 5e9250ddb7d0: Pull complete
-
 Digest: sha256:cf31af331f38d1d7158470e095b132acd126a7180a54f263d386da88eb681d93
-
 Status: Downloaded newer image for ubuntu:20.04
-
 docker.io/library/ubuntu:20.04
+```
 
+You can use the `docker images ls` command to see the list of all images on your system.
 
-You can use the **docker images ls** command to see the list of all images on your system.
-
-**docker image ls**
+```bash
+docker image ls
 
 REPOSITORY   TAG   	IMAGE ID   	  CREATED   	  SIZE
 
 ubuntu   	20.04 	7e0aa2d69a15   3 weeks ago   72.7MB
-## 3.2 Docker run
+```
+
+### 3.2 Docker run
 Now that the *ubuntu:20.04* Docker image is on the host, it is possible to run it using the command:
 
-**docker run ubuntu:20.04**
+```bash
+docker run ubuntu:20.04
+```
 
 As you can see, this command does nothing. When you call run, the Docker client finds the image (ubuntu:20.04 in this case), loads up the container and then runs a command in that container. When we ran **docker run ubuntu:20.04**, we didn't provide a command, so the container booted up, ran an empty command and then exited.
 
-**docker run ubuntu:20.04 echo "My first command in a container"**
+```bash
+docker run ubuntu:20.04 echo "My first command in a container"
+```
 
 My first command in a container
 
@@ -60,38 +67,41 @@ As you can see, an output has been printed.
 
 If you want to execute multiple commands inside the container, it is possibile open a terminal inside it so you can type any commands you want.
 
-**docker run -it ubuntu:20.04 /bin/bash**
+```bash
+docker run -it ubuntu:20.04 /bin/bash
 
-**ls /**
-
+ls /
 bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 
-**uptime**
-
+uptime
 15:37:57 up  7:20,  0 users,  load average: 0.00, 0.03, 0.05
 
-**exit**
-## 3.3 Docker ps
-The **docker ps** command shows you all containers that are currently running.
+exit
+```
 
-**docker ps**
+### 3.3 Docker ps
+The `docker ps` command shows you all containers that are currently running.
+
+```bash
+docker ps
 
 CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
+```
 
 Since no containers are running, we see a blank line. Let's try a more useful variant:
 
-**docker ps -a**
+```bash
+docker ps -a
 
 CONTAINER ID   IMAGE      	COMMAND              	CREATED     	STATUS                   	PORTS 	NAMES
-
 afcac6f85b26   ubuntu:20.04   "bash"               	3 minutes ago   Exited (130) 4 seconds ago         	blissful\_chaum
-
 ee288eeb2a67   ubuntu:20.04   "echo 'My first comm…"   4 minutes ago   Exited (0) 4 minutes ago           	flamboyant\_spence
-
 fac38035f7bc   ubuntu:20.04   "/bin/bash"          	6 minutes ago   Exited (0) 6 minutes ago           	peaceful\_kepler
+```
 
-The -a flag is used to show all the containers (while the default shows just the ones currently running), so what we see above is a list of all containers that we ran (and not deleted) up to now. Please notice that the STATUS column shows that these containers exited a few minutes ago.
-## 3.4 Docker container rm
+The `-a` flag is used to show all the containers (while the default shows just the ones currently running), so what we see above is a list of all containers that we ran (and not deleted) up to now. Please notice that the STATUS column shows that these containers exited a few minutes ago.
+
+### 3.4 Docker container rm
 To remove a non-running container, use this command:
 
 **docker container rm afcac6f85b26 ee288eeb2a67 fac38035f7bc**
