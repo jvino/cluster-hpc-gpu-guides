@@ -55,8 +55,8 @@ The boxes on the right allow to start again the job, edit the job description, s
 !!! note 
     - It’s important to insert an unique **name** for each submitted job, this will be important during the debugging phase. The name should **ALWAYS** start with your **username**. Insert dash ( - ) between words. Es “myuser-test-job-1-date-2020-09-34”.
     - The **command** field is specific for each application, what written in the example will not work in your use case. Absolute path is preferred.
-    - **<your-username>** is the user created during the registration.
-    - **<your-container-image>** is the container image name to use for your application.
+    - **your-username** is the user created during the registration.
+    - **your-container-image** is the container image name to use for your application.
     - The **schedule** field is used to type how many times you want to execute the job and the period among execution, please refer to this [guide](https://mesos.github.io/chronos/docs/api.html) (Adding a Scheduled Job - section) if you need it otherwise leave it as you see in the example.
 
 ## 3.2 Submit the job using the terminal
@@ -125,6 +125,9 @@ chmod 755 submit-to-chronos (only once)
 ```
 #3.3 Support
 Use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) for support requests, inserting as title “ReCaS HPC/GPU: Chronos issue”, then describe the problem in the issue box, where your username and job\_name must be added.
+
+ The job name MUST be unique and start with your username, always. This must be provided when you will describe the problem in a support request. Using this link for support requests, inserting as title “ReCaS HPC/GPU: Chronos issue”, then describe the problem in the issue box, where your username and job_name must be added.
+
 
 
 ## 3.4 Access to the Chronos Web Interface
