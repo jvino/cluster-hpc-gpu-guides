@@ -166,8 +166,7 @@ The following JSON could be used as first test by the user.
   "ownerName": "<username>",
   "container": {
     "type": "mesos",
-    "image": "registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1",
-    "volumes": [{"containerPath": "/lustrehome/<username>", "hostPath": "/lustrehome/<username>", "mode": "RW"}]
+    "image": "registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1"
   },
   "schedule": "R1//P1Y"
 }
