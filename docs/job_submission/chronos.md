@@ -6,18 +6,7 @@
 ## 1 Introduction
 Chronos is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.
 
-**ONLY** Docker containers can be executed in the cluster.
-{: .alert .alert-danger}
-
-<div class="panel panel-danger">
-**Danger**
-{: .panel-heading}
-<div class="panel-body">
-
-DANGER DESCRIPTION
-
-</div>
-</div>
+> **_NOTES:_** **ONLY** Docker containers can be executed in the cluster.
 
 
 You can run a third party Docker container or you can build your custom one. Please refer to the guide at this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/) for more details.
