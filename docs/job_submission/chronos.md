@@ -4,16 +4,17 @@
 *Updated on 19Apr2022*	
 
 ## 1 Introduction
-**Chronos is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.**
+Chronos is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.
 
-**IMPORTANT**: ONLY Docker containers can be executed in the cluster.
+!!! note
+    **ONLY** Docker containers can be executed in the cluster.
 
-You can use already built docker container or you can build your custom container. Please refer to the guide at this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/) for more details.
+You can run a third party Docker container or you can build your custom one. Please refer to the guide at this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/) for more details.
 
-## 2 Access to the ReCaS Chronos instance
-Chronos is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
+## 2 Request your personal ReCaS Chronos instance
+Chronos is available only for users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
-You can check if the registration is successfully completed by access to the **frontend.recas.ba.infn.it** server via ssh:
+You can verify if the registration is successfully completed by access to the **frontend.recas.ba.infn.it** server via ssh:
 
 ```bash
 
@@ -30,16 +31,14 @@ Title: “ReCaS HPC/GPU: new Chronos instance request”
 Issue: Name, Surname, username, email
 ```
 
-Once the request will be approved, the administrator will provide hostname, port and authentication information in order to access your personal Chronos instance.
-
-## 3 Chronos web interface  
+## 3 Chronos web interface 
 Using the URL provided by the administrator of the service in the browser, it is possible to access the Chronos web interface as shown in the following figure.
 
 ![inital_screen](images/inital_screen.png)
 
 The web interface is the unique way to check your job status. Moreover, it can be used to submit scheduled or dependent jobs.
 
-!!! note 
+!!! note
     To access your web interface, please, follow instructions in section 4.
 
 ## 3.1 Submit a job using the web interface
@@ -108,6 +107,15 @@ curl -u $USERNAME:$PASSWORD -L -H 'Content-Type: application/json' -X POST --dat
 ```
 
 **PASSWORD**, **HOSTNAME** and **PORT** variables will be sent by email.
+
+!!!!!!!!!!!!!!!!!!1
+Once the request will be approved, the administrator will provide:
+- hostname
+- port
+- password aauthentication information in order to access your personal Chronos instance.
+!!!!!!!!!!!!!!!!!!!
+
+
 
 To submit the job, execute the following command (supposing the json file name is “job.json” and the submit command file name is “submit-to-chronos.sh”)
 
