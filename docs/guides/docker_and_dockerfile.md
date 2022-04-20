@@ -3,7 +3,7 @@
 ## 1 Introduction
 Docker is an open-source project that automates the deployment of software applications inside **containers** by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. Docker containers package an application with all of its dependencies into a standardized unit for software development.
 
-## 2 Access to the dedicated machine for built custom docker containers
+## 2 Access to the machine for building custom Docker containers
 The ReCaS Bari data center make available a dedicated machine to develop containers to be deployed on the HPC/GPU Cluster.
 
 This machine is accessible only to users with a ReCaS-Bari HPC/HTC account active. Users without such an account should register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
@@ -27,7 +27,8 @@ In this document, the most important aspects of Docker will be covered.
 The **pull** command fetches an image from the Docker registry (a place where the docker images are stored and can be downloaded/pulled) and saves it to our host in order to use it.
 
 ```bash
-**docker pull ubuntu:20.04**
+docker pull ubuntu:20.04
+
 20.04: Pulling from library/ubuntu
 345e3491a907: Pull complete
 57671312ef6f: Pull complete
@@ -40,7 +41,8 @@ docker.io/library/ubuntu:20.04
 You can use the `docker images ls` command to see the list of all images on your system.
 
 ```bash
-**docker image ls**
+docker image ls
+
 REPOSITORY   TAG   	IMAGE ID   	  CREATED   	  SIZE
 ubuntu   	20.04 	7e0aa2d69a15   3 weeks ago   72.7MB
 ```
@@ -55,7 +57,8 @@ docker run ubuntu:20.04
 As you can see, this command does nothing. When you call run, the Docker client finds the image (ubuntu:20.04 in this case), loads up the container and then runs a command in that container. When we ran `docker run ubuntu:20.04`, we didn't provide a command, so the container booted up, ran an empty command and then exited.
 
 ```bash
-**docker run ubuntu:20.04 echo "My first command in a container"**
+docker run ubuntu:20.04 echo "My first command in a container"
+
 My first command in a container
 ```
 
