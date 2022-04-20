@@ -241,11 +241,9 @@ RUN python3 -m pip install -r /home/$USERNAME/requirements
 
 Let’s explain the Dockerfile.
 
-The `FROM` statement defines the Docker image to be used as a starting point. Every Dockerfile starts with the `FROM` statement.
-
 `FROM python:3.9.9-slim`
 
-The following section is **MANDATORY** and creates your user inside the container in order to access your data on the ReCaS-Bari GPFS file system. (/lustre/home and /lustrehome directories).
+The `FROM` statement defines the Docker image to be used as a starting point. Every Dockerfile starts with the `FROM` statement.
 
 ```bash
 \# User section (Mandatory)
@@ -255,22 +253,24 @@ ENV GROUPID=<your group-id>
 RUN groupadd -g $GROUPID $USERNAME && adduser --disabled-password --gecos '' --uid $USERID --gid $GROUPID $USERNAME
 ```
 
+The above section is **MANDATORY** and creates your user inside the container in order to access your data on the ReCaS-Bari GPFS file system. (/lustre/home and /lustrehome directories).
+
 If you don’t know your userid and/or groupid, execute the following command on `tesla02.recas.ba.infn.it`:
 
 `id <username>`
 
 And get the numbers, now names/words.
 
-The `USER` statement sets the username for any commands that follow it in the Dockerfile.
-
 `USER $USERNAME`
 
-In next lines, the `requirements` file is copied in the container using the `ADD` statement and the python modules listed inside it are installed using pip, through the RUN statement:
+The `USER` statement sets the username for any commands that follow it in the Dockerfile.
 
 ```bash
 ADD requirements /home/$USERNAME/requirements
 RUN python3 -m pip install -r /home/$USERNAME/requirements
 ```
+
+In above lines, the `requirements` file is copied in the container using the `ADD` statement and the python modules listed inside it are installed using pip, through the RUN statement:
 
 Now all files have been written and you are ready to build your customized tensorflow docker image using the following command
 
@@ -280,8 +280,7 @@ Finally, upload the image to the docker registry:
 
 `docker push registry-clustergpu.recas.ba.infn.it/<username>/mypython3.9:0.1`
 
-## 6 Use case: execute your custom docker image in the HPC/GPU Cluster using Chronos
-
+## 6 Use case: use a custom docker image with Chronos
 Prefer to this [guide](https://jvino.github.io/cluster-hpc-gpu-guides/job_submission/chronos/) for more details on Chronos.
 
 Create a JSON file in your HOME directory in the ReCaS-Bari Storage (e.g. `/lustrehome/<username>/my-python3.9-job.json`) containing:
@@ -289,14 +288,14 @@ Create a JSON file in your HOME directory in the ReCaS-Bari Storage (e.g. `/lust
 ```bash
 {
   "name": "<username>-my-python3.9-job",
-  "command": "python3 /lustrehome/<username>/my_script.py",
+  "command": "python3 /lustrehome/<username>/my_script.py > /lustrehome/<username>/my_script.output",
   "shell": true,
   "retries": 4,
   "description": "",
   "cpus": 1,
   "disk": 0,
   "mem": 1024,
-  "gpus": 1,
+  "gpus": 0,
   "environmentVariables": [],
   "arguments": [],
   "runAsUser": "<username>",
@@ -328,3 +327,7 @@ Finally, you can submit the job using the folling command:
 ```bash
 bash submit_chronos /lustrehome/<username>/my-python3.9-job.json
 ```
+
+Wait few seconds and the file `/lustrehome/<username>/my_script.output` should be in your directory. Watch it using:
+
+` cat /lustrehome/<username>/my_script.output`
