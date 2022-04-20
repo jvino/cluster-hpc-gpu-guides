@@ -42,12 +42,11 @@ You should see this login web page and use your ReCaS username and password to a
 ![rstudio@](images/rstudio2.png)
 
 ## 3 General information
-!!! warning
-    Your instance of RStudio is executed inside a container and **ONLY** the files stored in your HOME directory in the ReCaS-Bari GPFS file system will be preserved if faults occur, namely /lustrehome. Any local file content or module installation is lost if the container is stopped or crashes. So, use the GPFS file system for all your important files.
+- Your instance of RStudio is executed inside a container and **ONLY** the files stored in your HOME directory in the ReCaS-Bari GPFS file system will be preserved if faults occur, namely /lustrehome. Any local file content or module installation is lost if the container is stopped or crashes. So, use the GPFS file system for all your important files.
 
-**Containers could crash at any time also during the execution of the code**, partial results CAN NOT be restored and will be lost. To manage this situation, consider storing in your HOME directory in GPFS all partial results.
+- **Containers could crash at any time also during the execution of the code**, partial results CAN NOT be restored and will be lost. To manage this situation, consider storing in your HOME directory in GPFS all partial results.
 
-Also consider that you do not have infinite space in the GPFS file system. Use it wisely.
+- Also consider that you do not have infinite space in the GPFS file system. Use it wisely.
 
 ## 4 User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: RStudio support” and then describe your issue.
