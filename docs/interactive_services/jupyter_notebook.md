@@ -86,7 +86,7 @@ Your instance of Jupyter notebook is executed inside a container and **ONLY** th
 
 Also consider that you do not have infinite space in the GPFS file system. Use it wisely.
 
-Delete files using Jupyter Notebook will create a *.Trash* hidden folder in your HOME directory. To remove completely the file, please access using SSH to `frontend.recas.ba.infn.it` and remove the folder. The content of the *Trash* folder is to consider part of your quota. 
+Delete files using Jupyter Notebook will create a *.Trash* hidden folder in your HOME directory. To remove completely files, please access using SSH to `frontend.recas.ba.infn.it`folder. The content of the *Trash* folder contribute to your quota.
 
 
 ## 4 Notebook tips
