@@ -11,7 +11,7 @@ The following figure shows the provided IDE you can access using your web browse
 
 In the bottom right section you are able to browse graphically your HOME directory located in the ReCaS-Bari GPFS file system.
 
-## 2 Request
+## 2 Service Request
 Rstudio on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
 You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
