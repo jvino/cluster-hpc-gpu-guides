@@ -131,7 +131,7 @@ CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
 
 !!! warning "Saved docker images"
-The machine `tesla02.recas.ba.infn.it` is used **ONLY** to test container to be deployed on the HPC/GPU Cluster. Periodically all saved container images will be removed. Be aware of it.
+    The machine `tesla02.recas.ba.infn.it` is used **ONLY** to test container to be deployed on the HPC/GPU Cluster. Periodically all saved container images will be removed. Be aware of it.
 
 ### 3.5 Docker exec
 Docker gives the possibility to force a container in the background even if no command is passed.
@@ -191,7 +191,7 @@ docker pull registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu:0.1
 ```
 
 !!! warning "Storage quota"
-Each user has a storage quota on the container registry. Use the same name (such as `myubuntu:0.1`) in most cases: the pushing docker image will overwrite the existing one.
+    Each user has a storage quota on the container registry. Use the same name (such as `myubuntu:0.1`) in most cases: the pushing docker image will overwrite the existing one.
 
 
 ## 5 Dockerfile
