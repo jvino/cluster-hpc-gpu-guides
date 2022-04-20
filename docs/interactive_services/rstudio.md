@@ -11,15 +11,14 @@ The following figure shows the provided IDE you can access using your web browse
 
 In the bottom right section you are able to browse graphically your HOME directory located in the ReCaS-Bari GPFS file system.
 
-## 2 Required information
-
+## 2 Request
 Rstudio on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
 You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
 
 `ssh <username>@frontend.recas.ba.infn.it`
 
-After that, you can request your personal Jupyter Notebook instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
+After that, you can request your personal RStudio instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
 
 Please provide the following information:
 
@@ -37,11 +36,11 @@ Issue:
 
 After that you will receive an email to the same address containing your URL to use to access the remote Rstudio Server.
 
-You should see this login web page and use your ReCaS username and password to access the RStudio IDE.
+The following image shows you the RStudio login web page. Use your ReCaS username and password to access.
 
 ![rstudio2](images/rstudio2.png)
 
-## 3 General information
+## 3 Important information
 - Your instance of RStudio is executed inside a container and **ONLY** the files stored in your HOME directory in the ReCaS-Bari GPFS file system will be preserved if faults occur, namely /lustrehome. Any local file content or module installation is lost if the container is stopped or crashes. So, use the GPFS file system for all your important files.
 
 - **Containers could crash at any time also during the execution of the code**, partial results CAN NOT be restored and will be lost. To manage this situation, consider storing in your HOME directory in GPFS all partial results.
