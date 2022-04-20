@@ -241,12 +241,16 @@ RUN python3 -m pip install -r /home/$USERNAME/requirements
 
 Let’s explain the Dockerfile.
 
+### 5.1 FROM Statement
+
 `FROM python:3.9.9-slim`
 
 The `FROM` statement defines the Docker image to be used as a starting point. Every Dockerfile starts with the `FROM` statement.
 
+### 5.2 User creation section
+
 ```bash
-\# User section (Mandatory)
+# User section (Mandatory)
 ENV USERNAME=<your username>
 ENV USERID=<your user-id>
 ENV GROUPID=<your group-id>
@@ -261,16 +265,22 @@ If you don’t know your userid and/or groupid, execute the following command on
 
 And get the numbers, now names/words.
 
+### 5.3 USER Statement
+
 `USER $USERNAME`
 
 The `USER` statement sets the username for any commands that follow it in the Dockerfile.
+
+### 5.4 Python module installation
 
 ```bash
 ADD requirements /home/$USERNAME/requirements
 RUN python3 -m pip install -r /home/$USERNAME/requirements
 ```
 
-In above lines, the `requirements` file is copied in the container using the `ADD` statement and the python modules listed inside it are installed using pip, through the RUN statement:
+In above lines, the `requirements` file is copied in the container using the `ADD` statement and the python modules listed inside it are installed using pip.
+
+### 5.5 Docker container building and pushing
 
 Now all files have been written and you are ready to build your customized tensorflow docker image using the following command
 
