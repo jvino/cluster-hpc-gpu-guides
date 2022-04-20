@@ -39,7 +39,7 @@ After that you will receive an email to the same address containing your URL to 
 
 You should see this login web page and use your ReCaS username and password to access the RStudio IDE.
 
-![rstudio@](images/rstudio2.png)
+![rstudio2](images/rstudio2.png)
 
 ## 3 General information
 - Your instance of RStudio is executed inside a container and **ONLY** the files stored in your HOME directory in the ReCaS-Bari GPFS file system will be preserved if faults occur, namely /lustrehome. Any local file content or module installation is lost if the container is stopped or crashes. So, use the GPFS file system for all your important files.
