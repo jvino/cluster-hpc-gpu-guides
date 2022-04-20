@@ -29,7 +29,10 @@ Please provide the following information:
 
 ```bash
 Title: “ReCaS HPC/GPU: new Chronos instance request”
-Issue: Name, Surname, username, email
+Issue:
+- Name and Surname
+- Username
+- Email
 ```
 
 ## 3 Chronos Web Interface
