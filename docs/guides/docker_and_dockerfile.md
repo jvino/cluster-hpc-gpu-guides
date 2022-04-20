@@ -131,7 +131,7 @@ CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
 
 !!! warning "Saved docker images"
-The machine `tesla02.recas.ba.infn.it` is used **ONLY** to test container to be deployed on the HPC/GPU Cluster. Periodically all saved container images will be removed
+The machine `tesla02.recas.ba.infn.it` is used **ONLY** to test container to be deployed on the HPC/GPU Cluster. Periodically all saved container images will be removed. Be aware of it.
 
 ### 3.5 Docker exec
 Docker gives the possibility to force a container in the background even if no command is passed.
@@ -191,70 +191,58 @@ docker pull registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu:0.1
 ```
 
 !!! warning "Storage quota"
-Each user has a storage quota on the registry. Use the same name (like `myubuntu:0.1`) in most cases: the pushing docker image will overwrite the existing one.
+Each user has a storage quota on the container registry. Use the same name (such as `myubuntu:0.1`) in most cases: the pushing docker image will overwrite the existing one.
 
 
 ## 5 Dockerfile
-Using the commands `docker run -d` and `docker exec` is possible to execute a container in detached mode and execute commands inside it, e.g. to create files or install packages. Docker also gives the possibility to save this customized container. Unfortunately this kind of container can not be deployed in the ReCaS GPU cluster. Dockerfile is the solution for this issue.
+Using the commands `docker run -d` and `docker exec` is possible to execute a container in detached mode and execute commands inside it, e.g. to create files or install packages. Docker also gives the possibility to save this customized container. Unfortunately this kind of containers can not be deployed in the ReCaS GPU cluster. Dockerfile is the solution for this issue.
 
 A Dockerfile is a simple text file that contains a list of commands that the Docker client calls while creating an image. It's a simple way to automate the image creation process. An advantage is that the commands you write in a Dockerfile are almost identical to their equivalent Linux commands. This makes Dockerfiles easier to write.
 
-Let’s start with an example. The goal is to customize the Docker image ‘**tensorflow/tensorflow:2.5.0-gpu-jupyter**’ in order to make it run with your ReCaS account user, needed in order to access your personal directory on ReCaS GPFS, and your desired python module.
+Let’s start with an example. The goal is to customize the Docker image `python:3.9.9-slim` in order to make it run with your ReCaS account user, needed in order to access your personal directory on ReCaS GPFS, and your desired python module.
 
-In order to do so, access  the `tesla02` machine, create a dedicated directory:
+In order to do so, access  the `tesla02.recas.ba.infn.it` machine, create a dedicated directory:
 
 ```bash
-mkdir /home/<username>/mytf-2.5.0
-cd /home/<username>/mytf-2.5.0
+mkdir /home/<username>/my_python3.9
+cd /home/<username>/my_python3.9
 ```
 
-Use your favorite editor and create a file named **requirements** and copy this content inside.
+Use your favorite editor and create a file named `requirements` and copy this content inside.
 
 ```bash
-scikit-learn
 pandas
-seaborn
-matplotlib
-scipy
 numpy
-keras
-tensorflow-gpu
-six
-notebook
+tables
+matplotlib
 ```
 
-In this file we put a list of python modules we want to install in the container.
+In this file you should put a list of python modules you want to install in the container.
 
 Now, create another file named `Dockerfile` and copy the following content inside it.
 
 ```bash
-FROM tensorflow/tensorflow:2.5.0-gpu-jupyter
+FROM python:3.9.9-slim
 # User section (Mandatory)
 ENV USERNAME=<your username>
 ENV USERID=<your user-id>
 ENV GROUPID=<your group-id>
 
 RUN groupadd -g $GROUPID $USERNAME && adduser --disabled-password --gecos '' --uid $USERID --gid $GROUPID $USERNAME
-RUN apt install python3-pip
 
 USER $USERNAME
 # python modules installation
 ADD requirements /home/$USERNAME/requirements
 RUN python3 -m pip install -r /home/$USERNAME/requirements
-ENV NOT\_DIR="/home/$USERNAME"
-ENV ENCRYPTED\_PASS='argon2:$argon2id$v=19$m=10240,t=10,p=8$nNK7QMKyBjri0bVd9IehVg$MhxTUXl0dIQAthxmZP7HUA'
-CMD ["sh", "-c", "jupyter notebook --ip=\* --NotebookApp.password=$ENCRYPTED\_PASS --notebook-dir=$NOT\_DIR --no-browser --port=$PORT\_JUPYTER"]
 ```
 
 Let’s explain the Dockerfile.
 
-The `FROM` statement defines the Docker image to be used as a starting point. Every Dockerfile starts with the ‘FROM’ statement.
+The `FROM` statement defines the Docker image to be used as a starting point. Every Dockerfile starts with the `FROM` statement.
 
-```bash
-FROM tensorflow/tensorflow:2.5.0-gpu-jupyter
-```
+`FROM python:3.9.9-slim`
 
-This section is **MANDATORY** and creates your user inside the container in order to enable the possibility to access your data on the ReCaS-Bari GPFS file system. (/lustre/home and /lustrehome directories).
+The following section is **MANDATORY** and creates your user inside the container in order to access your data on the ReCaS-Bari GPFS file system. (/lustre/home and /lustrehome directories).
 
 ```bash
 \# User section (Mandatory)
@@ -264,11 +252,9 @@ ENV GROUPID=<your group-id>
 RUN groupadd -g $GROUPID $USERNAME && adduser --disabled-password --gecos '' --uid $USERID --gid $GROUPID $USERNAME
 ```
 
-If you don’t know your userid and/or groupid, execute the following command on `tesla02`:
+If you don’t know your userid and/or groupid, execute the following command on `tesla02.recas.ba.infn.it`:
 
-```bash
-id <username>
-```
+`id <username>`
 
 And get the numbers, now names/words.
 
@@ -276,70 +262,66 @@ The `USER` statement sets the username for any commands that follow it in the Do
 
 `USER $USERNAME`
 
-In next lines, the **requirement** file is copied in the container using the ADD statement and the python modules listed inside it are installed using pip, through the RUN statement),
+In next lines, the `requirements` file is copied in the container using the `ADD` statement and the python modules listed inside it are installed using pip, through the RUN statement:
 
 ```bash
 ADD requirements /home/$USERNAME/requirements
 RUN python3 -m pip install -r /home/$USERNAME/requirements
 ```
 
-In the last section, two environmental variables are set for the notebook directory and encrypted password options. Section 5.1 contains the procedure to create an encrypted password to be used for authentication in Jupyter Notebook. Finally, the CMD statement defines the command to be executed when the Docker container is deployed on a machine.
+Now all files have been written and you are ready to build your customized tensorflow docker image using the following command
 
-```bash
-ENV NOT\_DIR="/home/$USERNAME"
-ENV ENCRYPTED\_PASS='argon2:$argon2id$v=19$m=10240,t=10,p=8$nNK7QMKyBjri0bVd9IehVg$MhxTUXl0dIQAthxmZP7HUA'
-CMD ["sh", "-c", "jupyter notebook --ip=\* --NotebookApp.password=$ENCRYPTED\_PASS --notebook-dir=$NOT\_DIR --no-browser --port=$PORT\_JUPYTER"]
-```
-
-Now all files have been written and we are ready to build your customized tensorflow docker image using the following command
-
-`docker build -t registry-clustergpu.recas.ba.infn.it/<username>/mytf:0.1 .`
+`docker build -t registry-clustergpu.recas.ba.infn.it/<username>/mypython3.9:0.1 .`
 
 Finally, upload the image to the docker registry:
 
-`docker push registry-clustergpu.recas.ba.infn.it/<username>/mytf:0.1`
+`docker push registry-clustergpu.recas.ba.infn.it/<username>/mypython3.9:0.1`
 
-### 5.1 Preparing a hashed password
-You can prepare a hashed password manually.
+## 6 Use case: execute your custom docker image in the HPC/GPU Cluster using Chronos
 
-Open a shell, install the notebook python module (python3 -m pip install notebook) and type the following lines in a python shell:
+Prefer to this [guide](https://jvino.github.io/cluster-hpc-gpu-guides/job_submission/chronos/) for more details on Chronos.
+
+Create a JSON file in your HOME directory in the ReCaS-Bari Storage (e.g. `/lustrehome/<username>/my-python3.9-job.json`) containing:
 
 ```bash
-[root@your-machine ~]# python3
-\>>> from notebook.auth import passwd
-\>>> passwd()
-Enter password:
-Verify password:
-
-'argon2:$argon2id$v=19$m=10240,t=10,p=8$+Gzqn+ZgyvjrXo9eJTIe3w$z0fzG6RZgSbcSXkCAYb3vw'
+{
+  "name": "<username>-my-python3.9-job",
+  "command": "python3 /lustrehome/<username>/my_script.py",
+  "shell": true,
+  "retries": 4,
+  "description": "",
+  "cpus": 1,
+  "disk": 0,
+  "mem": 1024,
+  "gpus": 1,
+  "environmentVariables": [],
+  "arguments": [],
+  "runAsUser": "<username>",
+  "owner": "<username>",
+  "ownerName": "<username>",
+  "container": {
+    "type": "mesos",
+    "image": "registry-clustergpu.recas.ba.infn.it/<username>/mypython3.9:0.1",
+    "volumes": [{"containerPath": "/lustrehome/<username>", "hostPath": "/lustrehome/<username>", "mode": "RW"}]
+  },
+  "schedule": "R1//P1Y"
+}
 ```
 
-Finally, save the string 'argon2:$argon2id$v=19$m=10240,t=10,p=8$+Gzqn+ZgyvjrXo9eJTIe3w$z0fzG6RZgSbcSXkCAYb3vw'
+Create a python script in your HOME directory in the ReCaS-Bari Storage (e.g. `/lustrehome/<username>/my_script.py`) containing: 
 
-And provide it among the required information.
-
-For reference, the [official web page](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#preparing-a-hashed-password).
-
-## 6 Request
-You can request your personal Jupyter Notebook instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
-Please provide the following information:
 ```bash
-Title: “ReCaS HPC Jupyter Notebook request - custom docker image”
-Issue:
-
-- Name and Surname
-- Username
-- Email
-- Number of required CPU
-- Number of required GPU
-- Amount of RAM
-- Image name\* (E.g. registry-clustergpu.recas.ba.infn.it/fake/mytf:0.1 )
-- Other info, if you believe could be useful
+import pandas as pd
+data = {
+    'apples': [3, 2, 0, 1], 
+    'oranges': [0, 3, 7, 2]
+}
+df = pd.DataFrame(data)
+print(df.shape)
 ```
 
-After having completed the above steps you will receive an email containing the URL needed to access the remote Jupyter Notebook.
+Finally, you can submit the job using the folling command:
 
-Pointing your browser to such URL, you should see the  login page below, where you can use the password you chose when executing the commands described in section 5.1
-
-![](Aspose.Words.fd9b9dee-f664-46a5-a580-27484bb80f3c.001.png)
-
+```bash
+bash submit_chronos /lustrehome/<username>/my-python3.9-job.json
+```
