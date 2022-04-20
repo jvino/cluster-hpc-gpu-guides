@@ -193,6 +193,13 @@ docker push registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu
 docker pull registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu
 ```
 
+!!! warning "Storage quota"
+qweqweqwe
+qweqweqwe
+qweqweqwe
+
+
+
 ## 5 Dockerfile
 Using the commands `docker run -d` and `docker exec` is possible to execute a container in detached mode and execute commands inside it, e.g. to create files or install packages. Docker also gives the possibility to save this customized container. Unfortunately this kind of container can not be deployed in the ReCaS GPU cluster. Dockerfile is the solution for this issue.
 
@@ -263,7 +270,7 @@ ENV GROUPID=<your group-id>
 RUN groupadd -g $GROUPID $USERNAME && adduser --disabled-password --gecos '' --uid $USERID --gid $GROUPID $USERNAME
 ```
 
-If you don’t know your userid and/or groupid, execute the following command on **tesla02**:
+If you don’t know your userid and/or groupid, execute the following command on `tesla02`:
 
 ```bash
 id <username>
