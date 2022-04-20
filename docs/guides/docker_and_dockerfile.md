@@ -263,7 +263,7 @@ If you don’t know your userid and/or groupid, execute the following command on
 
 `id <username>`
 
-And get the numbers, now names/words.
+And get the numbers, not names/words.
 
 ### 5.3 USER Statement
 
@@ -278,7 +278,7 @@ ADD requirements /home/$USERNAME/requirements
 RUN python3 -m pip install -r /home/$USERNAME/requirements
 ```
 
-In above lines, the `requirements` file is copied in the container using the `ADD` statement and the python modules listed inside it are installed using pip.
+In above lines, the `requirements` file is copied in the container using the `ADD` statement and the python modules listed inside it are installed.
 
 ### 5.5 Docker container building and pushing
 
