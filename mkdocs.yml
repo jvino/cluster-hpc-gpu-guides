@@ -1,4 +1,4 @@
-site_name: ReCaS-Bari Cluster HPC/GPU
+site_name: ReCaS-Bari HPC/GPU Cluster
 repo_url: https://github.com/jvino/cluster-hpc-gpu-guides
 site_author: Gioacchino Vino - gioacchino.vino@ba.infn.it
 theme:
