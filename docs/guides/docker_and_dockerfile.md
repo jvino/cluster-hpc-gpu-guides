@@ -1,20 +1,20 @@
 # Docker containers and dockerfile
 
 ## 1 Introduction
-Docker is an open-source project that automates the deployment of software applications inside **containers** by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. Docker containers package an application with all of its dependencies into a standardized unit for software development.
+Docker is an open source project that automates the deployment of software applications inside **containers** by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. A Docker container packages an application with all of its dependencies into a standardized unit for software development.
 
-## 2 Access to the machine for building custom Docker containers
-The ReCaS Bari data center make available a dedicated machine to develop containers to be deployed on the HPC/GPU Cluster.
+## 2 Building custom Docker containers in ReCaS-Bari
+The ReCaS Bari data center makes available a dedicated machine where to develop containers to be deployed on the HPC/GPU Cluster.
 
 This machine is accessible only to users with a ReCaS-Bari HPC/HTC account active. Users without such an account should register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
-In order to access the machine, first access to the frontend using the following command in a command prompt/shell (Linux, Mac, and Windows ≥10) and then insert your password when prompted.
+In order to access the machine, first access to the frontend using SSH in a command prompt/shell (Linux, Mac, and Windows ≥10) and insert your password when prompted.
 
 ```bash
 ssh <username>@frontend.recas.ba.infn.it
 ```
 
-and then access to the dedicated machine:
+After that, access the dedicated machine:
 
 ```bash
 ssh <username>@tesla02.recas.ba.infn.it
@@ -24,7 +24,7 @@ ssh <username>@tesla02.recas.ba.infn.it
 In this document, the most important aspects of Docker will be covered.
 
 ### 3.1 Docker pull
-The `pull` command fetches an image from the Docker registry (a place where the docker images are stored and can be downloaded/pulled) and saves it to our host in order to use it.
+The `pull` command fetches an image from the Docker registry (a place where the docker images are stored and can be downloaded/pulled) and saves it to a host for using it.
 
 ```bash
 docker pull ubuntu:20.04
@@ -40,7 +40,7 @@ Status: Downloaded newer image for ubuntu:20.04
 docker.io/library/ubuntu:20.04
 ```
 
-You can use the `docker images ls` command to see the list of all images on your system.
+You can use the `docker images ls` command to list all images on your system.
 
 ```bash
 docker image ls
@@ -52,13 +52,13 @@ ubuntu   	20.04 	7e0aa2d69a15   3 weeks ago   72.7MB
 ```
 
 ### 3.2 Docker run
-Now that the `ubuntu:20.04` Docker image is on the host, it is possible to run it using the command:
+Now that the `ubuntu:20.04` Docker image is on your host, you are able to run it using the command:
 
 ```bash
 docker run ubuntu:20.04
 ```
 
-As you can see, this command does nothing. When you call run, the Docker client finds the image (ubuntu:20.04 in this case), loads up the container and then runs a command in that container. When we ran `docker run ubuntu:20.04`, we didn't provide a command, so the container booted up, ran an empty command and then exited.
+As you can see, this command does nothing. When you execute `docker run`, the Docker client finds the image (ubuntu:20.04 in this case), loads up the container and then runs a command in that container. When we ran `docker run ubuntu:20.04`, we didn't provide a command, so the container booted up, ran an empty command and then exited.
 
 ```bash
 docker run ubuntu:20.04 echo "My first command in a container"
@@ -70,7 +70,7 @@ My first command in a container
 
 As you can see, an output has been printed.
 
-If you want to execute multiple commands inside the container, it is possibile open a terminal inside it so you can type any commands you want.
+If you want to execute multiple commands inside the container, it is possibile open a terminal inside it.
 
 ```bash
 docker run -it ubuntu:20.04 /bin/bash
@@ -86,9 +86,6 @@ The `docker ps` command shows you all containers that are currently running.
 
 ```bash
 docker ps
-```
-Output:
-```bash
 CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
 
@@ -96,9 +93,6 @@ Since no containers are running, we see a blank line. Let's try a more useful va
 
 ```bash
 docker ps -a
-```
-Output:
-```bash
 CONTAINER ID   IMAGE      	COMMAND              	CREATED     	STATUS                   	PORTS 	NAMES
 afcac6f85b26   ubuntu:20.04   "bash"               	3 minutes ago   Exited (130) 4 seconds ago         	blissful\_chaum
 ee288eeb2a67   ubuntu:20.04   "echo 'My first comm…"   4 minutes ago   Exited (0) 4 minutes ago           	flamboyant\_spence
@@ -108,7 +102,7 @@ fac38035f7bc   ubuntu:20.04   "/bin/bash"          	6 minutes ago   Exited (0) 6
 The `-a` flag is used to show all the containers (while the default shows just the ones currently running), so what we see above is a list of all containers that we ran (and not deleted) up to now. Please notice that the STATUS column shows that these containers exited a few minutes ago.
 
 ### 3.4 Docker container rm
-To remove a non-running container, use this command:
+To remove non-running containers, use this command:
 
 ```bash
 docker container rm afcac6f85b26 ee288eeb2a67 fac38035f7bc
@@ -124,7 +118,7 @@ docker ps -a
 CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
 
-If you want remove a container immediately after having executed some commands inside it you can use the --rm flag:
+If you want remove a container immediately after having executed some commands inside it you can use the `--rm` flag:
 
 ```bash
 docker run -it --rm ubuntu:20.04 /bin/bash
@@ -135,6 +129,9 @@ exit
 docker ps -a
 CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
+
+!!! warning "Saved docker images"
+The machine `tesla02.recas.ba.infn.it` is used **ONLY** to test container to be deployed on the HPC/GPU Cluster. Periodically all saved container images will be removed
 
 ### 3.5 Docker exec
 Docker gives the possibility to force a container in the background even if no command is passed.
@@ -151,10 +148,10 @@ The `-d` flag tells Docker to DETACH the container and run it in background and 
 ```bash
 docker ps
 CONTAINER ID   IMAGE      	COMMAND   	CREATED     	STATUS     	PORTS 	NAMES
-048f685e181b   ubuntu:20.04   "/bin/bash"   4 seconds ago   Up 3 seconds         	laughing\_proskuriakova
+048f685e181b   ubuntu:20.04   "/bin/bash"   4 seconds ago   Up 3 seconds         	laughing_proskuriakova
 ```
 
-Using `docker exec` is possible to enter inside the container using a shell:
+Using `docker exec` is possible to enter inside the container with a shell:
 
 ```bash
 docker exec -it 048f685e181b /bin/bash
@@ -169,13 +166,13 @@ If inside the container there is a service exposing a specific port, you need to
 docker run -p 11111:12345 python:3 python3 -m http.server 12345
 ```
 
-The above command executes a http server using the container image `python:3`. The server is linked to the port 12345 **inside** the container. Using -p 11111:12345, you are mapping the port 11111 on the host to the port 12345 of the container. So, in order to access the served web page you need to connect to tesla02.recas.ba.infn.it:11111 using your browser.
+The above command executes a http server using the container image `python:3`. The server is linked to the port 12345 **inside** the container. Using -p 11111:12345, you are mapping the port 11111 on the host to the port 12345 of the container. So, in order to access the served web page you need to connect to `tesla02.recas.ba.infn.it:11111` using your browser.
 
 ### 4 ReCaS Docker registry
 
 ReCaS provides a dedicated Docker registry for containers to be used on the GPU cluster.
 
-On the tesla02 machine, login to the docker registry using the following command:
+On the `tesla02` machine, login to the docker registry using the following command:
 
 ```bash
 docker login registry-clustergpu.recas.ba.infn.it
@@ -188,16 +185,13 @@ The followings commands allow to store an official Docker image from Docker Hub 
 
 ```bash
 docker pull ubuntu
-docker image tag ubuntu registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu
-docker push registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu
-docker pull registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu
+docker image tag ubuntu registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu:0.1
+docker push registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu:0.1
+docker pull registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu:0.1
 ```
 
 !!! warning "Storage quota"
-qweqweqwe
-qweqweqwe
-qweqweqwe
-
+Each user has a storage quota on the registry. Use the same name (like `myubuntu:0.1`) in most cases: the pushing docker image will overwrite the existing one.
 
 
 ## 5 Dockerfile
@@ -235,7 +229,7 @@ Now, create another file named `Dockerfile` and copy the following content insid
 
 ```bash
 FROM tensorflow/tensorflow:2.5.0-gpu-jupyter
-\# User section (Mandatory)
+# User section (Mandatory)
 ENV USERNAME=<your username>
 ENV USERID=<your user-id>
 ENV GROUPID=<your group-id>
@@ -244,7 +238,7 @@ RUN groupadd -g $GROUPID $USERNAME && adduser --disabled-password --gecos '' --u
 RUN apt install python3-pip
 
 USER $USERNAME
-\# python modules installation
+# python modules installation
 ADD requirements /home/$USERNAME/requirements
 RUN python3 -m pip install -r /home/$USERNAME/requirements
 ENV NOT\_DIR="/home/$USERNAME"
