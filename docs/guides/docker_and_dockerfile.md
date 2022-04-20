@@ -1,4 +1,4 @@
-# Docker containers and dockerfile
+# Docker containers and Dockerfile
 
 ## 1 Introduction
 Docker is an open source project that automates the deployment of software applications inside **containers** by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. A Docker container packages an application with all of its dependencies into a standardized unit for software development.
