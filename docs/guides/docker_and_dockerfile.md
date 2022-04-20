@@ -24,7 +24,7 @@ ssh <username>@tesla02.recas.ba.infn.it
 In this document, the most important aspects of Docker will be covered.
 
 ### 3.1 Docker pull
-The **pull** command fetches an image from the Docker registry (a place where the docker images are stored and can be downloaded/pulled) and saves it to our host in order to use it.
+The `pull` command fetches an image from the Docker registry (a place where the docker images are stored and can be downloaded/pulled) and saves it to our host in order to use it.
 
 ```bash
 docker pull ubuntu:20.04
