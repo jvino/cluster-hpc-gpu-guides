@@ -191,10 +191,10 @@ docker pull registry-clustergpu.recas.ba.infn.it/<your username>/myubuntu:0.1
 ```
 
 !!! warning "Storage quota"
-    Each user has a storage quota on the ReCaS-Bari container registry. There is a limit of pushed container images
+    Each user has a storage quota on the ReCaS-Bari container registry. There is a limit of number of different container images you can save.
 
 !!! tip
-    Using the same name (such as `myubuntu:0.1`) the pushing docker image will overwrite the existing
+    Using the same name (such as `myubuntu:0.1`) the pushing docker image will overwrite the existing one.
 
 
 ## 5 Dockerfile
