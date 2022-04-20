@@ -44,7 +44,9 @@ You can use the `docker images ls` command to see the list of all images on your
 
 ```bash
 docker image ls
-
+```
+Output:
+```bash
 REPOSITORY   TAG   	IMAGE ID   	  CREATED   	  SIZE
 ubuntu   	20.04 	7e0aa2d69a15   3 weeks ago   72.7MB
 ```
@@ -60,7 +62,9 @@ As you can see, this command does nothing. When you call run, the Docker client 
 
 ```bash
 docker run ubuntu:20.04 echo "My first command in a container"
-
+```
+Output:
+```bash
 My first command in a container
 ```
 
@@ -69,7 +73,7 @@ As you can see, an output has been printed.
 If you want to execute multiple commands inside the container, it is possibile open a terminal inside it so you can type any commands you want.
 
 ```bash
-**docker run -it ubuntu:20.04 /bin/bash**
+docker run -it ubuntu:20.04 /bin/bash
 ls /
 bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 uptime
@@ -82,14 +86,19 @@ The `docker ps` command shows you all containers that are currently running.
 
 ```bash
 docker ps
-
+```
+Output:
+```bash
 CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
 
 Since no containers are running, we see a blank line. Let's try a more useful variant:
 
 ```bash
-**docker ps -a**
+docker ps -a
+```
+Output:
+```bash
 CONTAINER ID   IMAGE      	COMMAND              	CREATED     	STATUS                   	PORTS 	NAMES
 afcac6f85b26   ubuntu:20.04   "bash"               	3 minutes ago   Exited (130) 4 seconds ago         	blissful\_chaum
 ee288eeb2a67   ubuntu:20.04   "echo 'My first comm…"   4 minutes ago   Exited (0) 4 minutes ago           	flamboyant\_spence
@@ -102,7 +111,7 @@ The `-a` flag is used to show all the containers (while the default shows just t
 To remove a non-running container, use this command:
 
 ```bash
-**docker container rm afcac6f85b26 ee288eeb2a67 fac38035f7bc**
+docker container rm afcac6f85b26 ee288eeb2a67 fac38035f7bc
 afcac6f85b26
 ee288eeb2a67
 fac38035f7bc
@@ -111,19 +120,19 @@ fac38035f7bc
 You can check using `docker ps -a` that the selected container is not on the host anymore
 
 ```bash
-**docker ps -a**
+docker ps -a
 CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
 
 If you want remove a container immediately after having executed some commands inside it you can use the --rm flag:
 
 ```bash
-**docker run -it --rm ubuntu:20.04 /bin/bash**
+docker run -it --rm ubuntu:20.04 /bin/bash
 ls /
 bin  boot  dev  etc  home  lib  lib32  lib64  libx32  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 exit
 
-**docker ps -a**
+docker ps -a
 CONTAINER ID   IMAGE 	COMMAND   CREATED   STATUS	PORTS 	NAMES
 ```
 
@@ -133,14 +142,14 @@ Docker gives the possibility to force a container in the background even if no c
 For example:
 
 ```bash
-**docker run -d -it ubuntu:20.04**
+docker run -d -it ubuntu:20.04
 048f685e181b2064538d482fa48fc553aa6821b5f51d254e79aca8a5b6069834
 ```
 
 The `-d` flag tells Docker to DETACH the container and run it in background and to print its ID. Since the container is still running, `docker ps` prints its information
 
 ```bash
-**docker ps**
+docker ps
 CONTAINER ID   IMAGE      	COMMAND   	CREATED     	STATUS     	PORTS 	NAMES
 048f685e181b   ubuntu:20.04   "/bin/bash"   4 seconds ago   Up 3 seconds         	laughing\_proskuriakova
 ```
@@ -148,7 +157,7 @@ CONTAINER ID   IMAGE      	COMMAND   	CREATED     	STATUS     	PORTS 	NAMES
 Using `docker exec` is possible to enter inside the container using a shell:
 
 ```bash
-**docker exec -it 048f685e181b /bin/bash**
+docker exec -it 048f685e181b /bin/bash
 hostname
 048f685e181b
 ```
@@ -169,7 +178,7 @@ ReCaS provides a dedicated Docker registry for containers to be used on the GPU 
 On the tesla02 machine, login to the docker registry using the following command:
 
 ```bash
-**docker login registry-clustergpu.recas.ba.infn.it**
+docker login registry-clustergpu.recas.ba.infn.it
 Username: <type your ReCaS-Bari HPC/HTC account username>
 Password: <type your ReCaS-Bari HPC/HTC account password>
 Login Succeeded
@@ -220,9 +229,9 @@ Now, create another file named `Dockerfile` and copy the following content insid
 ```bash
 FROM tensorflow/tensorflow:2.5.0-gpu-jupyter
 \# User section (Mandatory)
-ENV USERNAME=\<your username>
-ENV USERID=\<your user-id>
-ENV GROUPID=\<your group-id>
+ENV USERNAME=<your username>
+ENV USERID=<your user-id>
+ENV GROUPID=<your group-id>
 
 RUN groupadd -g $GROUPID $USERNAME && adduser --disabled-password --gecos '' --uid $USERID --gid $GROUPID $USERNAME
 RUN apt install python3-pip
@@ -248,16 +257,16 @@ This section is **MANDATORY** and creates your user inside the container in orde
 
 ```bash
 \# User section (Mandatory)
-ENV USERNAME=\<your username>
-ENV USERID=\<your user-id>
-ENV GROUPID=\<your group-id>
+ENV USERNAME=<your username>
+ENV USERID=<your user-id>
+ENV GROUPID=<your group-id>
 RUN groupadd -g $GROUPID $USERNAME && adduser --disabled-password --gecos '' --uid $USERID --gid $GROUPID $USERNAME
 ```
 
 If you don’t know your userid and/or groupid, execute the following command on **tesla02**:
 
 ```bash
-id \<username>
+id <username>
 ```
 
 And get the numbers, now names/words.
