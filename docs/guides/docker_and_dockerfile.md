@@ -28,7 +28,9 @@ The `pull` command fetches an image from the Docker registry (a place where the 
 
 ```bash
 docker pull ubuntu:20.04
-
+```
+Output:
+```bash
 20.04: Pulling from library/ubuntu
 345e3491a907: Pull complete
 57671312ef6f: Pull complete
@@ -135,7 +137,7 @@ For example:
 048f685e181b2064538d482fa48fc553aa6821b5f51d254e79aca8a5b6069834
 ```
 
-The `-d` flag tells Docker to DETACH the container and run it in background and to print its ID. Since the container is still running, **docker ps** prints its information
+The `-d` flag tells Docker to DETACH the container and run it in background and to print its ID. Since the container is still running, `docker ps` prints its information
 
 ```bash
 **docker ps**
@@ -168,8 +170,8 @@ On the tesla02 machine, login to the docker registry using the following command
 
 ```bash
 **docker login registry-clustergpu.recas.ba.infn.it**
-Username: \<type your ReCaS-Bari HPC/HTC account username>
-Password: \<type your ReCaS-Bari HPC/HTC account password>
+Username: <type your ReCaS-Bari HPC/HTC account username>
+Password: <type your ReCaS-Bari HPC/HTC account password>
 Login Succeeded
 ```
 
