@@ -1,18 +1,15 @@
-﻿RECAS HPC/GPU
+#JupyterNotebook
 
-JupyterNotebook
+*Updated on 15Apr2022*
 
-Updated on 27Jan2022
-# 1 Introduction
-#### The Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualisations and narrative text. Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualisation, machine learning, and much more.	
-Through Jupyter Notebook you can access your files and directories stored in the ReCaS-Bari GPFS file system and browse graphically, as shown in the following figure.
+## 1 Introduction
+The Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualisations and narrative text.
+Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualisation, machine learning, and much more.
+Through Jupyter Notebook, you can access your files and directories stored in the ReCaS-Bari GPFS file system and browse graphically, as shown in the following figure.
 
 To create a new notebook with Python 3, click on “New” and then select “Python 3”, as shown in the following figure.
 
-
-
 Finally, the Integrated Development Environment (IDE) is opened, as shown in the figure.
-
 
 
 
