@@ -20,9 +20,9 @@ Finally, the Integrated Development Environment (IDE) is opened, as shown in the
 The Jupyter Notebook instance MUST BE used ONLY for the developing phase. As soon as the code/analysis works, users are encouraged to use the [Job Orchestration service](https://jvino.github.io/cluster-hpc-gpu-guides/job_submission/chronos/).
 
 !!! note
-    Every Jupyter Notebook instance on HPC/GPU cluster is allowed ONLY for a month. After, the instance will be killed. An email will be sent a week before.    To extend the period of usage, create a ticket using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) with title “ReCaS HPC/GPU: Jupyter Notebook instance - Time extension request” and describe a valid reason for extension of time.
+    Every Jupyter Notebook instance on HPC/GPU cluster is allowed **ONLY** for a month. After, the instance will be killed. An email will be sent a week before. To extend the period of usage, create a ticket using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) with title “ReCaS HPC/GPU: Jupyter Notebook instance - Time extension request” and describe a valid reason for extension of time.
 
-## 3 Service request
+## 2 Service request
 Jupyter Notebook on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
 You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
@@ -58,7 +58,7 @@ In the following image, you can see the login web page. Insert your password use
 !!! warning "IMPORTANT" 
     **DO NOT SHARE** your password. People knowning hostname, port and password have access to your home directory with delete permission.
 
-### 3.1 Preparing a hashed password
+### 2.1 Preparing a hashed password
 You can prepare a hashed password manually.
 
 Open a shell, install the notebook python module (pip3 install notebook) and type the following lines in a python shell:
@@ -78,8 +78,7 @@ And provide it among the required information.
 
 For reference, the [official web page](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#preparing-a-hashed-password).
 
-## 4 Notebook tips
-### 4.1 General information
+## 3 Important information
 
 Your instance of Jupyter notebook is executed inside a container and **ONLY** the files stored in your HOME directory in the ReCaS-Bari GPFS file system will be preserved if faults occur, namely /lustrehome. Any local file content or module installation are lost if the container is stopped or crashes. So, use the GPFS file system for all your important files.
 
@@ -87,8 +86,10 @@ Your instance of Jupyter notebook is executed inside a container and **ONLY** th
 
 Also consider that you do not have infinite space in the GPFS file system. Use it wisely.
 
-### 4.2 Install python modules
+Delete files using Jupyter Notebook will create a *.Trash* hidden folder in your HOME directory. To remove completely the file, please access using SSH to `frontend.recas.ba.infn.it` and remove the folder. The content of the *Trash* folder is to consider part of your quota. 
 
+
+## 4 Notebook tips
 To install python modules directly inside the code is needed to add some lines at the beginning.
 
 Following lines install multiple modules inside the jupyter notebook and then import all of them. Replace `<user>` with your username.
