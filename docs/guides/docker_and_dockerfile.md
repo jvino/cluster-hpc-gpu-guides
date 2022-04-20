@@ -338,6 +338,6 @@ Finally, you can submit the job using the folling command:
 bash submit_chronos /lustrehome/<username>/my-python3.9-job.json
 ```
 
-Wait few seconds and the file `/lustrehome/<username>/my_script.output` should be in your directory. Watch it using:
+Wait few seconds and the file `/lustrehome/<username>/my_script.output` should appear in your directory. Watch it using:
 
 ` cat /lustrehome/<username>/my_script.output`
