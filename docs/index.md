@@ -6,7 +6,7 @@ Whenever possible, services will be instantiated within a private network, in or
 
 
 
-#Cluster HPC/GPU in ReCaS=Bari
+#Cluster HPC/GPU in ReCaS-Bari
 Il Cluster GPU è parte integrante del cluster HPC di ReCaS-Bari e vede la propria potenzialità maggiormente espressa per applicazioni che utilizzano GPU. Mette a disposizione 1755 core, 13.7 TB di RAM, 55 TB di spazio disco e 38 GPU ad altissime prestazioni (18 Nvidia A100 e 20 Nvidia V100). Ogni nodo ha accesso al file system distribuito di ReCaS-Bari, con circa 3800 TB in singola replica e altri 180 TB, dove è garantita una maggiore sicurezza dei dati attraverso la doppia replica. La banda di comunicazione nodo-storage è di 10 Gbps.
 Le applicazioni sono eseguite esclusivamente tramite Docker container, tecnologia che conferisce semplicità di configurazione ed esecuzione, affidabilià, flessibilità e sicurezza.
 L'utente può richiedere l'istanziazione di servizi interattivi, come IDE utilizzabili da remoto (Jupyter Notebook e RStudio), e la sottomissione di workflow rappresentati con Directed Acyclic Graphs (DAG).
