@@ -40,7 +40,7 @@ Status: Downloaded newer image for ubuntu:20.04
 docker.io/library/ubuntu:20.04
 ```
 
-You can use the `docker images ls` command to list all images on your system.
+You can use the `docker image ls` command to list all images on your system.
 
 ```bash
 docker image ls
