@@ -107,7 +107,7 @@ The command used to submit the job is based on CURL. On a machine with a Linux O
    curl -u $USERNAME:$PASSWORD -L -H 'Content-Type: application/json' -X POST --data-binary "@$FILE" http://$HOSTNAME:$PORT/v1/scheduler/iso8601
 ```
 
-Once the request will be approved, the administrator will provide **chronos-instance-password**, **chronos-instance-hostname** and **chronos-instance-port** by email.
+Once the request will be approved, the administrator will provide **<chronos-instance-password\>**, **<chronos-instance-hostname\>** and **<chronos-instance-port\>** by email.
 
 To submit the job, execute the following command (supposing the json file name is “*job.json*” and the submit command file name is “submit_chronos”)
 
@@ -136,12 +136,12 @@ Open a shell and execute the following command:
 ```
 
 !!! note
-    **localhost-port**: you can choose the port by yourself
+    **<localhost-port\>**: you can choose the port by yourself
 
 !!! warning "IMPORTANT"  
     The SSH tunnel works in background (-f flag), if the process crashes or you reboot your machine, you have to create again the SSH tunnel using the above command
 
-Now you are able to access to your Chronos instance using your favorite browser and the url "localhost:localhost-port" 
+Now you are able to access to your Chronos instance using your favorite browser and the url "localhost:<localhost-port\>" 
 
 ## 4 Example
 
