@@ -128,11 +128,9 @@ At the moment, users can not access to the job logs. For support on a specific j
 
 ## 3.4 Access to the Chronos Web Interface
 
-In order to access your Chronos instance is needed to create a SSH Tunnel. 
+In order to access your Chronos instance is needed to create a SSH Tunnel.  
 
-The procedure to access to the Chronos instance through the SSH Tunnel is composed of 2 steps:
-
-1. Open a shell and execute the following command:
+Open a shell and execute the following command:
 ```bash
    ssh -f -N -L 127.0.0.1:<localhost-port>:<chronos-instance-hostname>:<chronos-instance-port> <your-username>@frontend.recas.ba.infn.it
 ```
