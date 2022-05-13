@@ -1,4 +1,3 @@
-
 #Job orchestrator with Chronos
 
 *Updated on 19Apr2022*	
@@ -18,8 +17,7 @@ Chronos is available only for users with a ReCaS-Bari HPC/HTC account active. Us
 You can verify if the registration is successfully completed by access to the **frontend.recas.ba.infn.it** server via ssh:
 
 ```bash
-
-	ssh <username>@frontend.recas.ba.infn.it
+   ssh <your-username>@frontend.recas.ba.infn.it
 ```
 
 After that, you can request your personal Chronos instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
@@ -28,11 +26,11 @@ Please provide the following information:
 
 
 ```bash
-Title: “ReCaS HPC/GPU: new Chronos instance request”
-Issue:
-- Name and Surname
-- Username
-- Email
+   Title: “ReCaS HPC/GPU: new Chronos instance request”
+   Issue:
+   - Name and Surname
+   - Username
+   - Email
 ```
 
 ## 3 Chronos Web Interface
@@ -100,21 +98,21 @@ This method requires a JSON file containing all the job information and the exec
 The command used to submit the job is based on CURL. On a machine with a Linux OS, open a file editor and copy the following lines inside and save it (e.g. with the “submit-to-chronos” name).
 
 ```bash
-#!/bin/bash
-FILE=$1
-USERNAME=<your-username>
-PASSWORD=XXXX
-HOSTNAME=XXXX
-PORT=XXXX
-curl -u $USERNAME:$PASSWORD -L -H 'Content-Type: application/json' -X POST --data-binary "@$FILE" http://$HOSTNAME:$PORT/v1/scheduler/iso8601
+   #!/bin/bash
+   FILE=$1
+   USERNAME=<your-username>
+   PASSWORD=<chronos-instance-password>
+   HOSTNAME=<chronos-instance-hostname>
+   PORT=<chronos-instance-port>
+   curl -u $USERNAME:$PASSWORD -L -H 'Content-Type: application/json' -X POST --data-binary "@$FILE" http://$HOSTNAME:$PORT/v1/scheduler/iso8601
 ```
 
-Once the request will be approved, the administrator will provide **PASSWORD**, **HOSTNAME** and **PORT** by email.
+Once the request will be approved, the administrator will provide **<chronos-instance-password>**, **<chronos-instance-hostname>** and **<chronos-instance-port>** by email.
 
 To submit the job, execute the following command (supposing the json file name is “*job.json*” and the submit command file name is “submit_chronos”)
 
 ```bash
-bash ./submit_chronos job.json
+   bash ./submit_chronos job.json
 ```
 
 !!! note
@@ -125,28 +123,27 @@ For any problem related to the Chronos service, use this [link](https://www.reca
 
 At the moment, users can not access to the job logs. For support on a specific job, submit a support request providing the username, job\_name and describing the problem in the issue box.
 
-!!! note
-    It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with title “ReCaS HPC/GPU: subscribe to the mailing list”.
+!!! tip
+    It is **STRONGLY** advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.
 
 ## 3.4 Access to the Chronos Web Interface
 
-In order to access your Chronos instance is needed to create a SSH SOCKS Tunnel. **Firefox is mandatory**, please install it.
+In order to access your Chronos instance is needed to create a SSH Tunnel. 
 
-The procedure to access to the Chronos instance through the SSH SOCKS Tunnel is composed of 2 steps:
+The procedure to access to the Chronos instance through the SSH Tunnel is composed of 2 steps:
 
 1. Open a shell and execute the following command and **DO NOT CLOSE IT**:
 ```bash
-   ssh -D 33333 <username>@frontend.recas.ba.infn.it
+   ssh -f -N -L 127.0.0.1:<localhost-port>:<chronos-instance-hostname>:<chronos-instance-port> <your-username>@frontend.recas.ba.infn.it
 ```
-1. Open Firefox then:
-    1. Settings" -> "Network Settings" -> check "Manual proxy configuration"
-    1. Insert in the field "SOCKS Host" ->  "127.0.0.1" and Port -> "33333"
-    1. Check SOCKS v5
-    1. Close
-1. Access your Chronos instance using the URL
 
-The following figure shows the firefox network settings
-![firefox_settings](images/firefox_settings.png)
+!!! note
+    **<localhost-port>** you can chooes the port by yourself
+
+!!! warning "IMPORTANT"  
+    The SSH tunnel works in background (-f flag), if the process crashes or you reboot your machine, you have to create again the SSH tunnel using the above command
+
+Now you are able to access to your Chronos instance using your favorite browser and the url "localhost:<localhost-port>" 
 
 ## 4 Example
 
