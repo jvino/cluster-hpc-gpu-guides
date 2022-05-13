@@ -141,7 +141,7 @@ Open a shell and execute the following command:
 !!! warning "IMPORTANT"  
     The SSH tunnel works in background (-f flag), if the process crashes or you reboot your machine, you have to create again the SSH tunnel using the above command
 
-Now you are able to access to your Chronos instance using your favorite browser and the url "localhost:<localhost-port>" 
+Now you are able to access to your Chronos instance using your favorite browser and the url "localhost:localhost-port" 
 
 ## 4 Example
 
