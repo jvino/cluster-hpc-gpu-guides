@@ -136,7 +136,7 @@ Open a shell and execute the following command:
 ```
 
 !!! note
-    **localhost-port**: you can chooes the port by yourself
+    **localhost-port**: you can choose the port by yourself
 
 !!! warning "IMPORTANT"  
     The SSH tunnel works in background (-f flag), if the process crashes or you reboot your machine, you have to create again the SSH tunnel using the above command
