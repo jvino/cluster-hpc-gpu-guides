@@ -132,7 +132,7 @@ In order to access your Chronos instance is needed to create a SSH Tunnel.
 
 The procedure to access to the Chronos instance through the SSH Tunnel is composed of 2 steps:
 
-1. Open a shell and execute the following command and **DO NOT CLOSE IT**:
+1. Open a shell and execute the following command:
 ```bash
    ssh -f -N -L 127.0.0.1:<localhost-port>:<chronos-instance-hostname>:<chronos-instance-port> <your-username>@frontend.recas.ba.infn.it
 ```
