@@ -78,7 +78,7 @@ This method requires a JSON file containing all the job information and the exec
 	"owner": "<your-username>",
 	"ownerName": "<your-username>",
 	"container": {
-                "forcePullImage": true,
+		"forcePullImage": true,
 		"type": "mesos",
 		"image": "<your-container-image>",
 		"volumes": [{"containerPath": "/lustre/path/to/your/home-directory>", 
