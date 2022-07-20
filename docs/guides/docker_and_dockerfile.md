@@ -20,10 +20,8 @@ After that, access the dedicated machine:
 ssh <username>@tesla02.recas.ba.infn.it
 ```
 
-!!! warning 
-    “SSH Too Many Authentication Failures Error”. Use the following command
-    
-    ssh -o IdentitiesOnly=yes <username>@tesla02.recas.ba.infn.it
+!!! warning “SSH Too Many Authentication Failures Error”
+    Use the following command: ssh -o IdentitiesOnly=yes <username>@tesla02.recas.ba.infn.it
 
 ## 3 Docker most important commands
 In this document, the most important aspects of Docker will be covered.
