@@ -21,7 +21,7 @@ ssh <username>@tesla02.recas.ba.infn.it
 ```
 
 !!! warning “SSH Too Many Authentication Failures Error”
-    Use the following command: ssh -o IdentitiesOnly=yes <username>@tesla02.recas.ba.infn.it
+    If you facing this error, use the following command `ssh -o IdentitiesOnly=yes <username>@tesla02.recas.ba.infn.it`
 
 ## 3 Docker most important commands
 In this document, the most important aspects of Docker will be covered.
