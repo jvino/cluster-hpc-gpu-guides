@@ -1,6 +1,13 @@
 #Job orchestrator with Chronos
 
-*Updated on 19Apr2022*	
+*Updated on 04Oct2022*
+
+## 0 User Support
+If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Chronos instance support” and then describe your issue.
+
+
+*It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.*
+
 
 ## 1 Introduction
 Chronos is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.
