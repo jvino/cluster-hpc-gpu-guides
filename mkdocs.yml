@@ -26,6 +26,7 @@ markdown_extensions:
 nav:
   - Intro: 'index.md'
   - Interactive Services: 
+    - JupyterHub: 'interactive_services/jupyterhub.md'
     - Jupyter Notebook: 'interactive_services/jupyter_notebook.md'
     - RStudio: 'interactive_services/rstudio.md'
   - Job Submission:
