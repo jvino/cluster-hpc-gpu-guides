@@ -1,3 +1,3 @@
-# docker-tutorial
+# recas-cluster-gpu-guides
 
-[https://maricaantonacci.github.io/docker-tutorial/](https://maricaantonacci.github.io/docker-tutorial/)
+[https://jvino.github.io/cluster-hpc-gpu-guides/](https://jvino.github.io/cluster-hpc-gpu-guides/)
