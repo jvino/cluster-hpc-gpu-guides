@@ -1,4 +1,4 @@
-#JupyterHub for ReCaS users
+#Jupyter instances for ReCaS users
 
 *Updated on 02Dic2022*
 
@@ -14,7 +14,7 @@ Uses include: data cleaning and transformation, numerical simulation, statistica
 
 Notebook/Lab served through this service can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
 
-Only registered users can access to this service. In the request section there are information how to request the service.
+Only registered users can access to this service. In the request section you can find information how to request the service.
 
 ## 2 Access to the service
 
