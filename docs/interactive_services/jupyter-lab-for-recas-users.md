@@ -1,4 +1,4 @@
-#Jupyter Lab instances for ReCaS users
+#Jupyter Lab for ReCaS users
 
 *Updated on 02Dic2022*
 
