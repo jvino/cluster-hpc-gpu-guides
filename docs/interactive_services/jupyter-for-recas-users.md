@@ -1,4 +1,4 @@
-#Jupyter instances for ReCaS users
+#Jupyter Lab instances for ReCaS users
 
 *Updated on 02Dic2022*
 
@@ -9,10 +9,10 @@ If you need support for your application, please use this [link](https://www.rec
 **It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.**
 
 ## 1 Introduction
-The ReCaS JupyterHub provides Jupyter Notebook/Lab for the ReCaS users. Jupyter Notebooks/Labs are open-source web applications that allows you to create and share documents that contain live code, equations, visualisations and narrative text.
+The ReCaS JupyterHub provides Jupyter Lab instances for the ReCaS users. Jupyter Labs are open-source web applications that allows you to create and share documents that contain live code, equations, visualisations and narrative text.
 Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualisation, machine learning, and much more.
 
-Notebook/Lab served through this service can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
+Jupyter Lab served through this service can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
 
 Only registered users can access to this service. In the request section you can find information how to request the service.
 
@@ -36,7 +36,7 @@ As you can see, you have the possibility to configure 5 fields.
 
 ### 3.1 Additional paths to mount
 
-By default your personal home directory (usually `/lustrehome/{username}`) is mounted inside your Jupyter Notebook/Lab instance. 
+By default your personal home directory (usually `/lustrehome/{username}`) is mounted inside your Jupyter Lab instance. 
 
 This configuration section allows you to mount additional and **ALREADY CREATED** directories, like those used to shared files in a team. 
 
@@ -46,13 +46,13 @@ Multiple paths can be inserted in this field but they should be separeted using 
 
 Users can have multiple groups, for example because collaborate with different teams (each having own team directory).
 
-When users want their Jupyter Notebook/Lab instance can read/write files in this shared directories, the corresponding team group should be selected.
+When users want their Jupyter Lab instance can read/write files in this shared directories, the corresponding team group should be selected.
 
 If you don't know what select, just leave the default value.
 
 ### 3.3 CPUs
 
-Here you can select the number of cpus you want associate with your Jupyter Notebook/Lab instance. 
+Here you can select the number of cpus you want associate with your Jupyter Lab instance. 
 The available choices are: 1, 2, 4, 8 and 16.
 If you select a number of cpus greater than 1 ensure that your code is able to use a multicore architecture, otherwise your application will use only 1 cpu. 
 
@@ -60,7 +60,7 @@ If you don't know what select, select 1 cpu. You have always to change it later.
 
 ### 3.4 Memory (RAM)
 
-Here you can select the amount of RAM memory you want associate with your Jupyter Notebook/Lab instance. 
+Here you can select the amount of RAM memory you want associate with your Jupyter Lab instance. 
 The available choices are: 8, 16 and 32 GB.
 You should select the mininum value that allow your application to run.
 
@@ -123,13 +123,13 @@ Your Jupyter instance is executed inside a container and **ONLY** the files stor
 
 Also consider that you do not have infinite space in the GPFS file system. Use it wisely.
 
-Delete files using Jupyter Notebook will create a *.Trash* hidden folder in your HOME directory. To remove completely files, please access using SSH to `frontend.recas.ba.infn.it`. The content of the *.Trash* folder contribute to your quota.
+Delete files using Jupyter Lab will create a *.Trash* hidden folder in your HOME directory. To remove completely files, please access using SSH to `frontend.recas.ba.infn.it`. The content of the *.Trash* folder contribute to your quota.
 
 ## 7 Service request TO BE WRITTEN
-Jupyter Notebook on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
+Jupyter Lab on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
 You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
 
 `ssh <username>@frontend.recas.ba.infn.it`
 
-After that, you can request your personal Jupyter Notebook instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
+After that, you can request your personal Jupyter Lab instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
