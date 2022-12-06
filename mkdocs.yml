@@ -33,5 +33,6 @@ nav:
     - Chronos: 'job_submission/chronos.md'
   - Guides:
     - Docker and Dockerfile: 'guides/docker_and_dockerfile.md'
+    - Jupyter Lab: 'guides/jupyter-lab.md'
  
 copyright: Copyright &copy; 2022 INFN
