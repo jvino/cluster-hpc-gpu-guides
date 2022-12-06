@@ -18,7 +18,7 @@ Only registered users can access to this service. In the request section you can
 
 ## 2 Access to the service
 
-The ReCaS JupytreHub service is available at this [link](https://hpc.recas.ba.infn.it:10001/)
+The ReCaS JupyterHub service is available at this [link](https://hpc.recas.ba.infn.it:10001/)
 
 Once clicked on the link, you will see the authentication page, shown in the following image:
 
@@ -87,7 +87,7 @@ After its initialization, the following image shows you the interface you will s
 
 ![jupyterhub-3-lab](images/jupyterhub-3-lab.png)
 
-There is a dedicated guide for Jupyter Lab, accessible to this link (TO DO)
+There is a dedicated guide for Jupyter Lab, accessible to this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/jupyter-lab/).
 
 !!! note
     On the left you can see the mounted home directory. In the system your directory (and all the additional ones you inserted in the respective field) are mounted under `/jupyter-workspace/`, e.g. `/jupyter-workspace/lustrehome/{username}`. Please, use this information to access to your files.
