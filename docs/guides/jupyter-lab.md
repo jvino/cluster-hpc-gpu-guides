@@ -1,6 +1,6 @@
 #Jupyter Lab Guide
 
-*Updated on 04Oct2022*
+*Updated on 06Dic2022*
 
 ## 0 User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter Notebook support” and then describe your issue.
