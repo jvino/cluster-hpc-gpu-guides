@@ -1,4 +1,4 @@
-#Jupyter Notebook
+#Jupyter Lab Guide
 
 *Updated on 04Oct2022*
 
@@ -17,7 +17,7 @@ Jupyter Lab served through this service can access your files and directories st
 ## 2 Installing new Python modules
 Addictional lines are needed in the code in order to install Python modules inside the notebook.
 
-Following you can see an example of the installation of `pyarrow`
+Following you can see an example of the `pyarrow` installation..
 
 ```bash
 import os, sys, site
