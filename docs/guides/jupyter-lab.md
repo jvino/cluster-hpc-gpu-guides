@@ -30,3 +30,29 @@ if not site.getusersitepackages() in sys.path:
 # Imports
 import pyarrow
 ```
+
+## 3 Upload file from local 
+
+To Upload files from local to the workspace you can use the specific button shown in the following figure.
+
+![jupyterlab-upload-file](images/jupyterlab-upload-file.png)
+
+## 4 Enable Resources Usage Dashboards
+
+It is enable the possibility to monitor in real-time the JupyterLab resources usage.
+
+First of all, click in the third button starting from the top named "System Dashboards", shown in the following figure.
+
+![jupyterlab-monitor-resources-1](images/jupyterlab-monitor-resources-1.png)
+
+Then with a double click on the blue buttons, they will be put on a tab close to the one of the code.
+
+There is the possibility to move it in order to create a separate window.
+
+In the following figure, you can see the "Machine Resources" window put on the right.
+
+![jupyterlab-monitor-resources-2](images/jupyterlab-monitor-resources-2.png)
+
+Additional charts can be put on the screen.
+
+![jupyterlab-monitor-resources-3](images/jupyterlab-monitor-resources-3.png)
