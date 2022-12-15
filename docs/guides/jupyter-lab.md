@@ -112,7 +112,7 @@ Running a code exploiting Dask object, multiple plots can be put inside the wind
 
 ![jupyterlab-monitor-dask-3](images/jupyterlab-monitor-dask-3.png)
 
-### 6 Useful links
+## 6 Useful links
 
 [Dask Webpage](https://www.dask.org/)
 
