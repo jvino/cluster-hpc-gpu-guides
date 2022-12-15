@@ -109,7 +109,7 @@ Dash provides additional graphical objects to monitor in real-time application i
 
 Firstly, the creation of a Dask cluster through the Jupyter Lab interface. 
 
-This is done by selecting the forth tabs on the left, the `Dask Tab`, and create a new cluster by clicking on the `NEW` button, as shown in the following figure.
+This is done by selecting the forth tabs on the left, the `Dask` Tab, and create a new cluster by clicking on the `NEW` button, as shown in the following figure.
 
 ![jupyterlab-monitor-dask-1](images/jupyterlab-monitor-dask-1.png)
 
