@@ -105,13 +105,15 @@ it is recommended to read the [official Dask guide](https://distributed.dask.org
 
 ### 5.2 Enable Dask Resource Usage Dashboards
 
-In order to plot some useful information regarding the execution of the code, it is important to create the Dask cluster through the Jupyter Lab interface. 
+Dash provides additional graphical objects to monitor the resource usage, the application progress, etc. in real-time.
 
-By selecting the forth tabs on the left, the `Dask Tab`, you have the possibility to create a new cluster by clicking on the new button, as shown in the following figure.
+The first step concerns the creation of a Dask cluster through the Jupyter Lab interface. 
+
+This is done by selecting the forth tabs on the left, the `Dask Tab`, and create a new cluster by clicking on the `NEW` button, as shown in the following figure.
 
 ![jupyterlab-monitor-dask-1](images/jupyterlab-monitor-dask-1.png)
 
-The second step consist of to import the created cluster in the code.
+The second step concerns the importing of the created cluster in the code.
 
 This is easily done by clicking the `< >` button on the bottom left, as shown in the following figure, after having selected the cell inside the notebook.
 
