@@ -32,43 +32,50 @@ import graphviz
 !!! warning 
 	Remember to put a `!` before the command. 
 
-Alternately you can use also conda (environment named `rapids`) and install packages using the Terminal, accessible opening a new Lancher and selecting `Terminal`. 
+Alternately you can use also `conda` (environment named `rapids`) and install packages using the Terminal (you can access to it by opening a new Lancher and selecting `Terminal`). 
 
-For example:
+The following lines show how to install `mysql` package:
 
 ```bash
 conda activate rapids
 conda install -y mysql
 ```
 
-Then return in the notebook and `import mysql`.
+After the installation, return in the notebook and type  `import mysql`.
 
 !!! note
-    When possible, prefer `pip`.
+    Consider `pip` as first option.
 
 ## 3 Upload file from local file system
 
-To Upload files from local file system to the JupyterLab workspace you can use the specific button shown in the following figure.
+To Upload files from your local file system to the JupyterLab workspace, press the button shown in the following figure and select the files to would like to upload.
 
 ![jupyterlab-upload-file](images/jupyterlab-upload-file.png)
 
 ## 4 Enable Resource Usage Dashboards
 
-It is enable the possibility to monitor in real-time the JupyterLab resources usage.
+The ReCaS Jupyter Lab gives you the possibility to monitor in real-time the resource usage of your application. 
 
-First of all, click in the third button starting from the top named "System Dashboards", shown in the following figure.
+Few simple steps are needed to build your personal dashboard.
+
+First, click in the third tab on the left, named "System Dashboards", as shown in the following figure.
 
 ![jupyterlab-monitor-resources-1](images/jupyterlab-monitor-resources-1.png)
 
-Then with a double click on the blue buttons, they will be put on a tab close to the one of the code.
+Second, double click on the favorite blue button and it will be enabled. 
+
+The plot will be placed as tab, near the notebook tab: you can grab it and select your favorite position.
+, they will be put on a tab close to the one of the code.
 
 There is the possibility to move it in order to create a separate window.
 
-In the following figure, you can see the "Machine Resources" window put on the right.
+In the following figure it is shown the "Machine Resources" plots.
 
 ![jupyterlab-monitor-resources-2](images/jupyterlab-monitor-resources-2.png)
 
-Additional charts can be put on the screen.
+Additional plots can be put on the screen.
+
+In the following figure it is shown also the "GPU Resources" plots.
 
 ![jupyterlab-monitor-resources-3](images/jupyterlab-monitor-resources-3.png)
 
