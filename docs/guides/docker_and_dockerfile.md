@@ -73,7 +73,7 @@ My first command in a container
 
 As you can see, an output has been printed.
 
-If you want to execute multiple commands inside the container, it is possibile open a terminal inside it.
+If you want to execute multiple commands inside the container, it is possible open a terminal inside it.
 
 ```bash
 docker run -it ubuntu:20.04 /bin/bash
