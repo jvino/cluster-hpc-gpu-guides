@@ -14,6 +14,8 @@ Uses include: data cleaning and transformation, numerical simulation, statistica
 
 Jupyter Lab served through this service can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
 
+The ReCaS Jupyter Lab instance is based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
+
 ## 2 Installing new Python modules
 To install new Python packages you can use  `pip` .
 
@@ -73,7 +75,45 @@ Additional charts can be put on the screen.
 
 ## 5 Dask
 
+Dask is a flexible open-source Python library for parallel computing. Dask scales Python code from multi-core local machines to large distributed clusters in the cloud. Dask provides a familiar user interface by mirroring the APIs of other libraries in the PyData ecosystem including: `Pandas`, `Scikit-learn` and `NumPy`. It also exposes low-level APIs that help programmers run custom algorithms in parallel. (From Wikipedia)
 
+### 5.1 Start Dask cluster
 
-### 5.1 Enable Dask Resource Usage Dashboards
+The easiest way to deploy a Dask cluster is through the following lines:
 
+```python
+from dask.distributed import Client, LocalCluster
+cluster = LocalCluster()  # Launches a scheduler and workers locally
+client = Client(cluster)  # Connect to distributed cluster and override default
+```
+
+Then computation on Dask DataFrame can be executed.  
+
+```python
+df.x.sum().compute()  # This now runs on the distributed system
+```
+
+### 5.2 Enable Dask Resource Usage Dashboards
+
+In order to plot some useful information regarding the execution of the code, it is important to create the Dask cluster through the Jupyter Lab interface. 
+
+By selecting the forth tabs on the left, the `Dask Tab`, you have the possibility to create a new cluster by clicking on the new button, as shown in the following figure.
+
+![jupyterlab-monitor-dask-1](images/jupyterlab-monitor-dask-1.png)
+
+The second step consist of to import the created cluster in the code.
+
+This is easily done by clicking the `< >` button on the bottom left, as shown in the following figure, after having selected the cell inside the notebook.
+
+![jupyterlab-monitor-dask-2](images/jupyterlab-monitor-dask-2.png)
+
+Running a code exploiting Dask object, multiple plots can be put inside the windows, showing the progress of the applcation, as shown in the following figure.
+
+![jupyterlab-monitor-dask-3](images/jupyterlab-monitor-dask-3.png)
+
+### 6 Useful links
+
+[Dask Webpage](https://www.dask.org/)
+[Dask GitHub page](https://github.com/dask/dask)
+[RAPIDS Webpage](https://rapids.ai/)
+[RAPIDS Docker container Webpage](https://hub.docker.com/r/rapidsai/rapidsai/)
