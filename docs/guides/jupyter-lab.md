@@ -94,6 +94,8 @@ Then computation on Dask DataFrame can be executed.
 df.x.sum().compute()  # This now runs on the distributed system
 ```
 
+This guide can not replace the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html), recommended to be read.
+
 ### 5.2 Enable Dask Resource Usage Dashboards
 
 In order to plot some useful information regarding the execution of the code, it is important to create the Dask cluster through the Jupyter Lab interface. 
