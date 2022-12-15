@@ -135,7 +135,19 @@ If the code exploit Dask objects, during its execution the information about the
 
 ![jupyterlab-monitor-dask-3](images/jupyterlab-monitor-dask-3.png)
 
-## 6 Useful links
+## 6 RAPIDS
+
+The RAPIDS suite of open source software libraries gives you the freedom to execute end-to-end data science and analytics pipelines entirely on GPUs. 
+
+Seamlessly scale from GPU workstations to multi-GPU servers and multi-node clusters with Dask.
+
+Accelerate your Python data science toolchain with minimal code changes and no new tools to learn.
+
+RAPIDS is an open source project. Supported by NVIDIA, it also relies on Numba, Apache Arrow, and many more open source projects. 
+
+[Reference](https://rapids.ai/)
+
+## 7 Useful links
 
 [Dask Webpage](https://www.dask.org/)
 
