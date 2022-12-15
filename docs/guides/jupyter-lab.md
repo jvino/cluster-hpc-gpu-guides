@@ -114,6 +114,9 @@ Running a code exploiting Dask object, multiple plots can be put inside the wind
 ### 6 Useful links
 
 [Dask Webpage](https://www.dask.org/)
+
 [Dask GitHub page](https://github.com/dask/dask)
+
 [RAPIDS Webpage](https://rapids.ai/)
+
 [RAPIDS Docker container Webpage](https://hub.docker.com/r/rapidsai/rapidsai/)
