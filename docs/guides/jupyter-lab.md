@@ -95,31 +95,31 @@ client = Client(cluster)  # Connect to distributed cluster and override default
 
 After that, computation on Dask DataFrames can be executed. 
 
-In the following lines it is shown the evaluation of the sum of the column `x` of the dataframe `df`.
+In the following line is shown the evaluation of the sum of the column `x` of the dataframe `df`.
 
 ```python
 df.x.sum().compute()  # This now runs on the distributed system
 ```
 
-it is recommended to read the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html) to learn all provided capabilities.
+It is recommended to read the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html) to learn all provided capabilities.
 
 ### 5.2 Enable Dask Resource Usage Dashboards
 
-Dash provides additional graphical objects to monitor the resource usage, the application progress, etc. in real-time.
+Dash provides additional graphical objects to monitor in real-time application information like resource usage and application progress.
 
-The first step concerns the creation of a Dask cluster through the Jupyter Lab interface. 
+Firstly, the creation of a Dask cluster through the Jupyter Lab interface. 
 
 This is done by selecting the forth tabs on the left, the `Dask Tab`, and create a new cluster by clicking on the `NEW` button, as shown in the following figure.
 
 ![jupyterlab-monitor-dask-1](images/jupyterlab-monitor-dask-1.png)
 
-The second step concerns the importing of the created cluster in the code.
+Secondly, the importing of the created cluster in the code.
 
-This is easily done by clicking the `< >` button on the bottom left, as shown in the following figure, after having selected the cell inside the notebook.
+This is easily done by clicking the `< >` button on the bottom left after having selected the cell inside the notebook, as shown in the following figure.
 
 ![jupyterlab-monitor-dask-2](images/jupyterlab-monitor-dask-2.png)
 
-You can see the added code, copied following for convenience.
+Following it is copied the generated code for convenience.
 
 ```python
 from dask.distributed import Client
@@ -131,7 +131,7 @@ client
 
 Multiple Dask graphical objects can be enabled and moved inside the window.
 
-If the code exploit Dask objects, during its execution the information about resources usage, application progress, ... are shown in real-time, as shown in the following figure.
+If the code exploit Dask objects, during its execution the information about the application (resources usage, application progress, ...) are shown in real-time, as shown in the following figure.
 
 ![jupyterlab-monitor-dask-3](images/jupyterlab-monitor-dask-3.png)
 
