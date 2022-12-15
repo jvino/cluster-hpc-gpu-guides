@@ -45,7 +45,8 @@ conda install -y mysql
 
 Then return in the notebook and `import mysql`.
 
-When possible, prefer `pip`.
+!!! note
+    When possible, prefer `pip`.
 
 ## 3 Upload file from local file system
 
