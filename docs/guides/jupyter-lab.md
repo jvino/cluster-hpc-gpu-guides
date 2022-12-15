@@ -79,9 +79,13 @@ In the following figure it is shown also the "GPU Resources" plots.
 
 Dask is a flexible open-source Python library for parallel computing. Dask scales Python code from multi-core local machines to large distributed clusters in the cloud. Dask provides a familiar user interface by mirroring the APIs of other libraries in the PyData ecosystem including: `Pandas`, `Scikit-learn` and `NumPy`. It also exposes low-level APIs that help programmers run custom algorithms in parallel. (Wikipedia)
 
+Dask gives the possibility to split the workload among multiple workers. 
+So the first step concerns the creation of a cluster. 
+Workers can be executed on different machines or on the same machine.
+
 ### 5.1 Start Dask cluster
 
-The easiest way to deploy a Dask cluster is through the following lines:
+The easiest way to create a Dask cluster is through the following lines:
 
 ```python
 from dask.distributed import Client, LocalCluster
@@ -89,13 +93,15 @@ cluster = LocalCluster()  # Launches a scheduler and workers locally
 client = Client(cluster)  # Connect to distributed cluster and override default
 ```
 
-Then computation on Dask DataFrame can be executed.  
+After that, computation on Dask DataFrames can be executed. 
+
+In the following lines it is shown the evaluation of the sum of the column `x` of the dataframe `df`.
 
 ```python
 df.x.sum().compute()  # This now runs on the distributed system
 ```
 
-This guide can not replace the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html), that is recommended to be read.
+it is recommended to read the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html) to learn all provided capabilities.
 
 ### 5.2 Enable Dask Resource Usage Dashboards
 
