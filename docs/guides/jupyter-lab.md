@@ -30,7 +30,7 @@ import graphviz
 ```
 
 !!! warning 
-	Remember to put a `!` before the command. 
+	Remember to put a `!` before the `pip install` command. 
 
 Alternately you can use also `conda` (environment named `rapids`) and install packages using the Terminal (you can access to it by opening a new Lancher and selecting `Terminal`). 
 
@@ -54,7 +54,7 @@ To Upload files from your local file system to the JupyterLab workspace, press t
 
 ## 4 Enable Resource Usage Dashboards
 
-The ReCaS Jupyter Lab gives you the possibility to monitor in real-time the resource usage of your application. 
+The ReCaS Jupyter Lab gives you the possibility to monitor the resource usage of your application in real-time. 
 
 Few simple steps are needed to build your personal dashboard.
 
@@ -62,12 +62,8 @@ First, click in the third tab on the left, named "System Dashboards", as shown i
 
 ![jupyterlab-monitor-resources-1](images/jupyterlab-monitor-resources-1.png)
 
-Second, double click on the favorite blue button and it will be enabled. 
-
-The plot will be placed as tab, near the notebook tab: you can grab it and select your favorite position.
-, they will be put on a tab close to the one of the code.
-
-There is the possibility to move it in order to create a separate window.
+Second, double click on the favorite blue button and it will be places as a tab, near the notebook one.
+Grab and move it and select your favorite position.
 
 In the following figure it is shown the "Machine Resources" plots.
 
@@ -81,7 +77,7 @@ In the following figure it is shown also the "GPU Resources" plots.
 
 ## 5 Dask
 
-Dask is a flexible open-source Python library for parallel computing. Dask scales Python code from multi-core local machines to large distributed clusters in the cloud. Dask provides a familiar user interface by mirroring the APIs of other libraries in the PyData ecosystem including: `Pandas`, `Scikit-learn` and `NumPy`. It also exposes low-level APIs that help programmers run custom algorithms in parallel. (From Wikipedia)
+Dask is a flexible open-source Python library for parallel computing. Dask scales Python code from multi-core local machines to large distributed clusters in the cloud. Dask provides a familiar user interface by mirroring the APIs of other libraries in the PyData ecosystem including: `Pandas`, `Scikit-learn` and `NumPy`. It also exposes low-level APIs that help programmers run custom algorithms in parallel. (Wikipedia)
 
 ### 5.1 Start Dask cluster
 
