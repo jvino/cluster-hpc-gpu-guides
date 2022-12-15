@@ -1,38 +1,36 @@
 #Jupyter Lab Guide
 
-*Updated on 06Dic2022*
+*Updated on 12Dic2022*
 
 ## 0 User Support
-If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter Notebook support” and then describe your issue.
+If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter Lab support” and then describe your issue.
 
 
 **It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.**
 
 ## 1 Introduction
-The ReCaS JupyterHub provides Jupyter Lab instances for the ReCaS users. Jupyter Labs are open-source web applications that allows you to create and share documents that contain live code, equations, visualisations and narrative text.
-Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualisation, machine learning, and much more.
+Jupyter Labs are open-source web applications that allows you to create and share documents that contain live code, equations, visualizations and narrative text.
+Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualization, machine learning, and much more.
 
-Jupyter Lab served through this service can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
+The ReCaS Jupyter Lab can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
 
-The ReCaS Jupyter Lab instance is based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
+The ReCaS Jupyter Lab instances are based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
 
 ## 2 Installing new Python modules
-To install new Python packages you can use  `pip` .
+`pip` can be used to install new Python packages. 
 
-!!! warning 
-	Remember to put a `!` before the command. 
+Specific lines can be put inside the code, like followings:
 
-You can install Python packages through pip also inside the code.
-
-For example:
-
-```bash
+```python
 # Installation
 ! pip install graphviz
 
 # Import 
 import graphviz
 ```
+
+!!! warning 
+	Remember to put a `!` before the command. 
 
 Alternately you can use also conda (environment named `rapids`) and install packages using the Terminal, accessible opening a new Lancher and selecting `Terminal`. 
 
@@ -94,7 +92,7 @@ Then computation on Dask DataFrame can be executed.
 df.x.sum().compute()  # This now runs on the distributed system
 ```
 
-This guide can not replace the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html), recommended to be read.
+This guide can not replace the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html), that is recommended to be read.
 
 ### 5.2 Enable Dask Resource Usage Dashboards
 
