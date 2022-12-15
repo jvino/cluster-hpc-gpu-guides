@@ -24,7 +24,7 @@ markdown_extensions:
   - attr_list
    
 nav:
-  - Intro: 'index.md'
+  - Overview: 'index.md'
   - Interactive Services: 
     - ReCaS Jupyter Lab (Work in progress): 'interactive_services/jupyter-lab-for-recas-users.md'
     - Custom Jupyter Lab (Work in progress): 'interactive_services/jupyter_lab.md'
