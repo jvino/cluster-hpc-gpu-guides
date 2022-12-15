@@ -119,7 +119,19 @@ This is easily done by clicking the `< >` button on the bottom left, as shown in
 
 ![jupyterlab-monitor-dask-2](images/jupyterlab-monitor-dask-2.png)
 
-Running a code exploiting Dask object, multiple plots can be put inside the windows, showing the progress of the applcation, as shown in the following figure.
+You can see the added code, copied following for convenience.
+
+```python
+from dask.distributed import Client
+
+client = Client("tcp://127.0.0.1:44359")
+client
+
+```
+
+Multiple Dask graphical objects can be enabled and moved inside the window.
+
+If the code exploit Dask objects, during its execution the information about resources usage, application progress, ... are shown in real-time, as shown in the following figure.
 
 ![jupyterlab-monitor-dask-3](images/jupyterlab-monitor-dask-3.png)
 
