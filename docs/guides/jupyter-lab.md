@@ -15,29 +15,43 @@ Uses include: data cleaning and transformation, numerical simulation, statistica
 Jupyter Lab served through this service can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
 
 ## 2 Installing new Python modules
-Addictional lines are needed in the code in order to install Python modules inside the notebook.
+To install new Python packages you can use  `pip` .
 
-Following you can see an example of the `pyarrow` installation..
+!!! warning 
+	Remember to put a `!` before the command. 
+
+You can install Python packages through pip also inside the code.
+
+For example:
 
 ```bash
-import os, sys, site
-if not site.getusersitepackages() in sys.path:
-    sys.path.append(site.getusersitepackages())
+# Installation
+! pip install graphviz
 
-# Installations
-!pip install pyarrow 
-
-# Imports
-import pyarrow
+# Import 
+import graphviz
 ```
 
-## 3 Upload file from local 
+Alternately you can use also conda (environment named `rapids`) and install packages using the Terminal, accessible opening a new Lancher and selecting `Terminal`. 
 
-To Upload files from local to the workspace you can use the specific button shown in the following figure.
+For example:
+
+```bash
+conda activate rapids
+conda install -y mysql
+```
+
+Then return in the notebook and `import mysql`.
+
+When possible, prefer `pip`.
+
+## 3 Upload file from local file system
+
+To Upload files from local file system to the JupyterLab workspace you can use the specific button shown in the following figure.
 
 ![jupyterlab-upload-file](images/jupyterlab-upload-file.png)
 
-## 4 Enable Resources Usage Dashboards
+## 4 Enable Resource Usage Dashboards
 
 It is enable the possibility to monitor in real-time the JupyterLab resources usage.
 
@@ -56,3 +70,10 @@ In the following figure, you can see the "Machine Resources" window put on the r
 Additional charts can be put on the screen.
 
 ![jupyterlab-monitor-resources-3](images/jupyterlab-monitor-resources-3.png)
+
+## 5 Dask
+
+
+
+### 5.1 Enable Dask Resource Usage Dashboards
+
