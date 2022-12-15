@@ -13,17 +13,9 @@ The Jupyter Lab is an open-source web application that allows you to create and 
 Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualization, machine learning, and much more.
 Through Jupyter Lab, you can access your files and directories stored in the ReCaS-Bari GPFS file system and browse graphically, as shown in the following figure.
 
-![jn1](images/jn1.png)
+The ReCaS Jupyter Lab instances are based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
 
-To create a new Lab with Python 3, click on “New” and then select “Python 3”, as shown in the following figure.
-
-![jn2](images/jn2.png)
-
-Finally, the Integrated Development Environment (IDE) is opened, as shown in the figure.
-
-![jn3](images/jn3.png)
-
-The Jupyter Lab instance MUST BE used ONLY for the developing phase. As soon as the code/analysis works, users are encouraged to use the [Job Orchestration service](https://jvino.github.io/cluster-hpc-gpu-guides/job_submission/chronos/).
+The Jupyter Lab instance **MUST BE** used **ONLY** for the developing phase. As soon as the code/analysis works, users are encouraged to use the [Job Orchestration service](https://jvino.github.io/cluster-hpc-gpu-guides/job_submission/chronos/).
 
 !!! note
     Every Jupyter Lab instance on HPC/GPU cluster is allowed **ONLY** for a month. After, the instance will be killed. An email will be sent a week before. To extend the period of usage, create a ticket using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) with title “ReCaS HPC/GPU: Jupyter Lab instance - Time extension request” and describe a valid reason for extension of time.
