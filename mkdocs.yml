@@ -26,7 +26,8 @@ markdown_extensions:
 nav:
   - Intro: 'index.md'
   - Interactive Services: 
-    - Jupyter Lab (WiP): 'interactive_services/jupyter-lab-for-recas-users.md'
+    - ReCaS Jupyter Lab (Work in progress): 'interactive_services/jupyter-lab-for-recas-users.md'
+    - Custom Jupyter Lab (Work in progress): 'interactive_services/jupyter_lab.md'
     - Jupyter Notebook: 'interactive_services/jupyter_notebook.md'
     - RStudio: 'interactive_services/rstudio.md'
   - Job Submission:
