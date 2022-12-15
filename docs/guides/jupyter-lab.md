@@ -83,7 +83,7 @@ Dask gives the possibility to split the workload among multiple workers.
 So the first step concerns the creation of a cluster. 
 Workers can be executed on different machines or on the same machine.
 
-### 5.1 Start Dask cluster
+### 5.1 Start a new Dask cluster
 
 The easiest way to create a Dask cluster is through the following lines:
 
