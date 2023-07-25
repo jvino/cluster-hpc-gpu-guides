@@ -136,7 +136,7 @@ Delete files using Jupyter Lab will create a *.Trash* hidden folder in your HOME
 ## 7) Service request
 Jupyter Lab on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active and the access to the JupyterHub service enabled. Both of them can be request using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2).
 
-The following image shows you the section where is supposed you request the access to JupyterHub
+In the following image you can see how to request the ReCaS account, the access to the JupyterHub and the access to the GPU.
 
 ![jupyterhub-request-gpu](images/jupyterhub-request-gpu.png)
 
