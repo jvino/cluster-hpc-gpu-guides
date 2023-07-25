@@ -30,7 +30,7 @@ JupyterLab instances with NO GPU are available for those with a ReCaS account.
 
 Users willing to use a JupyterLab instances with GPU, should provide a STRONG motivation.
 
-Once clicked on the link, you will see the authentication page, shown in the following image:
+Once you have clicked on the link, the authentication page will be shown:
 
 ![jupyterhub-1-login](images/jupyterhub-1-login.png)
 
