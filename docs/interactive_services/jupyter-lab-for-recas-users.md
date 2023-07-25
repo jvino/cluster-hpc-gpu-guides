@@ -126,7 +126,15 @@ Also consider that you do not have infinite space in the GPFS file system. Use i
 Delete files using Jupyter Lab will create a *.Trash* hidden folder in your HOME directory. To remove completely files, please access using SSH to `frontend.recas.ba.infn.it`. The content of the *.Trash* folder contribute to your quota.
 
 ## 7 Service request TO BE WRITTEN
-Jupyter Lab on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
+Jupyter Lab on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active and the access to the JupyterHub service enabled. Both of them can be request using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2).
+
+The following image shows you the section where is supposed you request the access to JupyterHub
+
+![jupyterhub-request-gpu](images/jupyterhub-request-gpu.png)
+
+The access to JupyterHub is for everyone has a ReCaS Account.
+
+**The use of GPUs i srestricted only for those has a STRONG motivation.**
 
 You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
 
