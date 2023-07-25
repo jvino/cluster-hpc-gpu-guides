@@ -1,6 +1,6 @@
-#Jupyter Lab for ReCaS users
+#JupyterHub for ReCaS users
 
-*Updated on 02Dic2022*
+*Updated on 25Jul2023*
 
 ## 0 User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter support” and then describe your issue.
@@ -18,7 +18,13 @@ Only registered users can access to this service. In the request section you can
 
 ## 2 Access to the service
 
-The ReCaS JupyterHub service is available at this [link](https://hpc.recas.ba.infn.it:10001/)
+The ReCaS JupyterHub service provides a JupyterLab instance:
+- with GPU, accessible at this [link](https://hpc.recas.ba.infn.it:10001/)
+- with NO GPU, accessible at this [link](https://hpc.recas.ba.infn.it:10002/)
+
+JupyterLab instances with NO GPU are available for those belonging a ReCaS account.
+
+JupyterLab instances with GPU are available for those belonging a ReCaS account and a STRONG motivation to use a GPU.
 
 Once clicked on the link, you will see the authentication page, shown in the following image:
 
