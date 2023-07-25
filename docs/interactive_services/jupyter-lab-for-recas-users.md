@@ -26,9 +26,9 @@ The ReCaS JupyterHub service provides a JupyterLab instance:
 
 - with NO GPU, accessible at this [link](https://hpc.recas.ba.infn.it:10002/)
 
-JupyterLab instances with NO GPU are available for those belonging a ReCaS account.
+JupyterLab instances with NO GPU are available for those with a ReCaS account.
 
-JupyterLab instances with GPU are available for those belonging a ReCaS account and a STRONG motivation to use a GPU.
+Users willing to use a JupyterLab instances with GPU, should provide a STRONG motivation.
 
 Once clicked on the link, you will see the authentication page, shown in the following image:
 
