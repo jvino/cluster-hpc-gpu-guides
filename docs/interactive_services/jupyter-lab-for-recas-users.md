@@ -140,9 +140,9 @@ In the following image you can see how to request the ReCaS account, the access 
 
 ![jupyterhub-request-gpu](images/jupyterhub-request-gpu.png)
 
-The access to JupyterHub is for everyone has a ReCaS Account.
+The access to JupyterHub is for everyone with a ReCaS Account.
 
-**The use of GPUs i srestricted only for those has a STRONG motivation.**
+**The use of GPUs is restricted only for those having a STRONG motivation.**
 
 You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
 
