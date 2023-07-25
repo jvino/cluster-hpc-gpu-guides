@@ -21,7 +21,9 @@ Only registered users can access to this service. In the request section you can
 ## 2) Access to the service
 
 The ReCaS JupyterHub service provides a JupyterLab instance:
+
 - with GPU, accessible at this [link](https://hpc.recas.ba.infn.it:10001/)
+
 - with NO GPU, accessible at this [link](https://hpc.recas.ba.infn.it:10002/)
 
 JupyterLab instances with NO GPU are available for those belonging a ReCaS account.
