@@ -99,8 +99,6 @@ After its initialization, the following image shows you the interface you will s
 
 There is a dedicated guide for Jupyter Lab, accessible to this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/jupyter-lab/).
 
-!!! note
-    On the left you can see the mounted home directory. In the system your directory (and all the additional ones you inserted in the respective field) are mounted under `/jupyter-workspace/`, e.g. `/jupyter-workspace/lustrehome/{username}`. Please, use this information to access to your files.
 
 ## 5) Delete you Jupyter instance
 
