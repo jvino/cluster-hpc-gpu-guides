@@ -23,28 +23,46 @@ Specific lines can be put inside the code, like followings:
 
 ```python
 # Installation
-! pip install graphviz
+%pip install graphviz
 
 # Import 
 import graphviz
 ```
 
 !!! warning 
-	Remember to put a `!` before the `pip install` command. 
+	Remember to put a `%` before the `pip install` command. 
 
-Alternately you can use also `conda` (environment named `rapids`) and install packages using the Terminal (you can access to it by opening a new Lancher and selecting `Terminal`). 
+There is a drawback to use `pip install`: when your JupyterLab instance is restarted you will lose all installed Python modules.
 
-The following lines show how to install `mysql` package:
+Alternately you can use also `conda` and install packages using the Terminal (you can access to it by opening a new Lancher and selecting `Terminal`). 
+
+The following lines show how to install `pandas` package in a new conda environment :
 
 ```bash
-conda activate rapids
-conda install -y mysql
+conda create --name my_kernel pandas=2 -y
+conda activate my_kernel
 ```
 
-After the installation, return in the notebook and type  `import mysql`.
+After the installation, return in the notebook and type `python -c 'import pandas; print(pandas.__version__)'`.
 
 !!! note
-    Consider `pip` as first option.
+    Consider `conda` as first option.
+    
+### 2.1 Create new kernel    
+    
+You can also create a new kernel in Jupyter from a conda environment: this ensures you will have always your python module installed even if the JupyterLab instance is restarted. 
+
+Follow this command as example:
+
+```bash
+conda create --name my_kernel pandas=2 ipykernel -y
+conda activate my_kernel
+python -m ipykernel install --name my_kernel --user --display-name Pandas_v2
+```
+
+The reload the browser tab and you will see your new kernel
+
+![jupyterlab-new-kernel](images/jupyterlab-new-kernel.png)
 
 ## 3 Upload file from local file system
 
