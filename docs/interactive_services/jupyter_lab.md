@@ -63,7 +63,7 @@ Open a shell, install the notebook python module (pip3 install notebook) and typ
 
 ```bash
 [root@your-machine ~]# python3
->>> from notebook.auth import passwd
+>>> from jupyter_server.auth import passwd
 >>> passwd()
 Enter password:
 Verify password:
