@@ -55,9 +55,9 @@ You can also create a new kernel in Jupyter from a conda environment: this ensur
 Follow this command as example:
 
 ```bash
-conda create --name my_kernel pandas=2 ipykernel -y
+conda create --name my_kernel -c conda-forge tensorflow=2.12.0 pandas=2 ipykernel -y
 conda activate my_kernel
-python -m ipykernel install --name my_kernel --user --display-name Pandas_v2
+python -m ipykernel install --name my_kernel --user --display-name my_kernel
 ```
 
 The reload the browser tab and you will see your new kernel
