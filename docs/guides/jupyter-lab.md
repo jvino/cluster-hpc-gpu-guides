@@ -47,7 +47,16 @@ After the installation, return in the notebook and type `python -c 'import panda
 
 !!! note
     Consider `conda` as first option.
-    
+
+If conda shows you an "conda init" error, execute the command `conda init` and them execute the command:
+
+```bash
+source /lustrehome/<username>/.bashrc
+```
+
+!!! note
+    You cannot install python packages in the base conda environment, you have to create a new one as described above
+
 ### 2.1 Create new kernel    
     
 You can also create a new kernel in Jupyter from a conda environment: this ensures you will have always your python module installed even if the JupyterLab instance is restarted. 
