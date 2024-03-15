@@ -24,9 +24,29 @@ This is the last launcher version, implemented in ReCaS-Bari JupyterHub
 
 ![jupyterlab-launcher](images/jupyterlab-launcher.png)
 
+### 2.1 Jupyter Kernels
+
 In the first two rows you have all available kernels in your JupyterLab instance.
 
+Beyond Python3 kernel, you will find other two kernels: R and Root.
+
+#### R kernel
+This kernel enables the writing and the execution of simple R codes. 
+
+#### Root kernel
+This kernel enables the writing and the execution of simple root codes. 
+
+Some issues related to the Python binding are known. 
+
+You can use the root in interactive mode using the terminal, after activated the conda environment using the following command:
+
+`conda activate root_kernel`
+
+### 2.2 Utilities
+
 In the third row, you have some utilities, like Terminal (you can use it to execute bash command in the bash shell), text, markdown, python and R file editor.
+
+### 2.3 ReCaS-Bari Services Guides
 
 Below, there are the links to guide for all ReCaS-Bari GPU-cluster services.
 
