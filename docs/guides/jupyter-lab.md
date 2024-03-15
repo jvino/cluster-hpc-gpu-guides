@@ -16,7 +16,22 @@ The ReCaS Jupyter Lab can access your files and directories stored in the ReCaS-
 
 The ReCaS Jupyter Lab instances are based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
 
-## 2 Installing new Python modules
+## 2 JupyterLab Launcher
+
+This is the last launcher version, implemented in ReCaS-Bari JupyterHub
+
+![jupyterlab-launcher](images/jupyterlab-launcher.png)
+
+In the first two rows you have all available kernels in your JupyterLab instance.
+
+In the third row, you have some utilities, like Terminal (you can use it to execute bash command in the bash shell), text, markdown, python and R file editor.
+
+Below, there are the links to guide for all ReCaS-Bari GPU-cluster services.
+
+## 3 Installing new Python modules
+
+### 3.1 pip
+
 `pip` can be used to install new Python packages. 
 
 Specific lines can be put inside the code, like followings:
@@ -30,11 +45,13 @@ import graphviz
 ```
 
 !!! warning 
-	Remember to put a `%` before the `pip install` command. 
+	Remember to put a `%` before the `pip install` command: in this way the python module is directly available in the kernel. Otherwise a restart of the kernel is required. 
 
 There is a drawback to use `pip install`: when your JupyterLab instance is restarted you will lose all installed Python modules.
 
-Alternately you can use also `conda` and install packages using the Terminal (you can access to it by opening a new Lancher and selecting `Terminal`). 
+### 3.2 conda
+
+Alternately you can use also `conda` and install packages using the Terminal. To use the terminal in JupyterLab, open a new tab and select `Terminal` from the launcher.
 
 The following lines show how to install `pandas` package in a new conda environment :
 
@@ -43,28 +60,43 @@ conda create --name my_kernel pandas=2 -y
 conda activate my_kernel
 ```
 
-After the installation, return in the notebook and type `python -c 'import pandas; print(pandas.__version__)'`.
+After the second command, you will notice appearing the `(my_kernel)` in the shell.
+
+To test the installation, execute the following command
+
+```bash
+python -c 'import pandas; print(pandas.__version__)'
+```
+
+Conda allows to install the Pythom modules you need for your code/project in your Home directory in `/lustrehome`, enabling multiple advantages:
+- your conda environment is always available even if your JupyterLab instanza (aka container) is restarted
+- You can create a new Jupyter kernel, so that a notebook could be executed inside a given conda environment
+- It is the first step to submit a notebook to the GPU-cluster in order to execute it in batch
+
 
 !!! note
     Consider `conda` as first option.
 
+### 3.2.1 Troubleshooting
+
+#### conda init
 If conda shows you an "conda init" error, execute the command `conda init` and then execute the command:
 
 ```bash
 source /lustrehome/<username>/.bashrc
 ```
 
-!!! note
-    You cannot install python packages in the `base` conda environment, you have to create a new one as described above
+#### base conda environment
+You cannot install python packages in the `base` conda environment, you have to create a new one as described above
 
-### 2.1 Create new kernel    
+#### 3.2.2 Create new Jupyter kernel    
     
-You can also create a new kernel in Jupyter from a conda environment: this ensures you will have always your python module installed even if the JupyterLab instance is restarted. 
+Starting from a conda environment it is possible to create a Jupyter kernel allowing you to execute a given notebook inside di conda environment linked with the created kernel. 
 
 Follow this command as example:
 
 ```bash
-conda create --name my_kernel -c conda-forge tensorflow=2.12.0 pandas=2 ipykernel -y
+conda create --name my_kernel -c conda-forge pandas=2 ipykernel -y
 conda activate my_kernel
 python -m ipykernel install --name my_kernel --user --display-name my_kernel
 ```
@@ -73,13 +105,17 @@ The reload the browser tab and you will see your new kernel
 
 ![jupyterlab-new-kernel](images/jupyterlab-new-kernel.png)
 
-## 3 Upload file from local file system
+Once the kernel appears in the launcher, it is possible to select it, in the notebook, as shown in the following image.
+
+![jupyterlab-new-kernel-notebook](images/jupyterlab-new-kernel-notebook.png)
+
+## 4 Upload file from local file system
 
 To Upload files from your local file system to the JupyterLab workspace, press the button shown in the following figure and select the files to would like to upload.
 
 ![jupyterlab-upload-file](images/jupyterlab-upload-file.png)
 
-## 4 Enable Resource Usage Dashboards
+## 5 Enable Resource Usage Dashboards
 
 The ReCaS Jupyter Lab gives you the possibility to monitor the resource usage of your application in real-time. 
 
@@ -102,7 +138,7 @@ In the following figure it is shown also the "GPU Resources" plots.
 
 ![jupyterlab-monitor-resources-3](images/jupyterlab-monitor-resources-3.png)
 
-## 5 Dask
+## 6 Dask
 
 Dask is a flexible open-source Python library for parallel computing. Dask scales Python code from multi-core local machines to large distributed clusters in the cloud. Dask provides a familiar user interface by mirroring the APIs of other libraries in the PyData ecosystem including: `Pandas`, `Scikit-learn` and `NumPy`. It also exposes low-level APIs that help programmers run custom algorithms in parallel. (Wikipedia)
 
@@ -110,7 +146,7 @@ Dask gives the possibility to split the workload among multiple workers.
 So the first step concerns the creation of a cluster. 
 Workers can be executed on different machines or on the same machine.
 
-### 5.1 Start a new Dask cluster
+### 6.1 Start a new Dask cluster
 
 The easiest way to create a Dask cluster is through the following lines:
 
@@ -130,7 +166,7 @@ df.x.sum().compute()  # This now runs on the distributed system
 
 It is recommended to read the [official Dask guide](https://distributed.dask.org/en/stable/quickstart.html) to learn all provided capabilities.
 
-### 5.2 Enable Dask Resource Usage Dashboards
+### 6.2 Enable Dask Resource Usage Dashboards
 
 Dash provides additional graphical objects to monitor in real-time application information like resource usage and application progress.
 
@@ -162,7 +198,7 @@ If the code exploit Dask objects, during its execution the information about the
 
 ![jupyterlab-monitor-dask-3](images/jupyterlab-monitor-dask-3.png)
 
-## 6 RAPIDS
+## 7 RAPIDS
 
 The RAPIDS suite of open source software libraries gives you the freedom to execute end-to-end data science and analytics pipelines entirely on GPUs. 
 
@@ -174,7 +210,7 @@ RAPIDS is an open source project. Supported by NVIDIA, it also relies on Numba, 
 
 [Reference](https://rapids.ai/)
 
-## 7 Useful links
+## 8 Useful links
 
 [Dask Webpage](https://www.dask.org/)
 
