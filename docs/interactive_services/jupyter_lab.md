@@ -20,7 +20,11 @@ The Jupyter Lab instance **MUST BE** used **ONLY** for the developing phase. As 
 !!! note
     Every Jupyter Lab instance on HPC/GPU cluster is allowed **ONLY** for a month. After, the instance will be killed. An email will be sent a week before. To extend the period of usage, create a ticket using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) with title “ReCaS HPC/GPU: Jupyter Lab instance - Time extension request” and describe a valid reason for extension of time.
 
-## 2 Service request
+## 2 Who can request this instance?
+
+An instance of JupyterLab with a dedicated GPU, but be requested, and will be accepted only if few and specific projects. 
+
+## 3 Service request
 Jupyter Lab on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
 
 You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
@@ -56,7 +60,7 @@ In the following image, you can see the login web page. Insert your password use
 !!! warning "IMPORTANT" 
     **DO NOT SHARE** your password. People knowning hostname, port and password have access to your home directory with delete permission.
 
-### 2.1 Preparing a hashed password
+### 3.1 Preparing a hashed password
 You can prepare a hashed password manually.
 
 Open a shell, install the notebook python module (pip3 install notebook) and type the following lines in a python shell:
@@ -76,7 +80,7 @@ And provide it among the required information.
 
 For reference, the [official web page](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#preparing-a-hashed-password).
 
-## 3 Important information
+## 4 Important information
 
 Your instance of Jupyter notebook is executed inside a container and **ONLY** the files stored in your HOME directory in the ReCaS-Bari GPFS file system will be preserved if faults occur, namely /lustrehome. Any local file content or module installation are lost if the container is stopped or crashes. So, use the GPFS file system for all your important files.
 

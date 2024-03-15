@@ -28,7 +28,7 @@ nav:
   - Interactive Services: 
     - ReCaS JupyterHub: 'interactive_services/jupyter-lab-for-recas-users.md'
     - Custom Jupyter Lab (To request formally): 'interactive_services/jupyter_lab.md'
-    - Jupyter Notebook (Soon Dismissed): 'interactive_services/jupyter_notebook.md'
+    #- Jupyter Notebook (Soon Dismissed): 'interactive_services/jupyter_notebook.md'
     - RStudio: 'interactive_services/rstudio.md'
   - Job Submission:
     - Chronos: 'job_submission/chronos.md'
