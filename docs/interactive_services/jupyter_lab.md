@@ -1,6 +1,6 @@
 #Custom Jupyter Lab
 
-*Updated on 12Dic2022*
+*Updated on 15Mar2024*
 
 ## 0 User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter Lab support” and then describe your issue.
@@ -22,7 +22,7 @@ The Jupyter Lab instance **MUST BE** used **ONLY** for the developing phase. As 
 
 ## 2 Who can request this instance?
 
-An instance of JupyterLab with a dedicated GPU, but be requested, and will be accepted only if few and specific projects. 
+An instance of JupyterLab with a dedicated GPU but be requested formally, and will be accepted only with a **STRONG** motivation.
 
 ## 3 Service request
 Jupyter Lab on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
