@@ -28,7 +28,7 @@ This is the last launcher version, implemented in ReCaS-Bari JupyterHub
 
 In the first two rows you have all available kernels in your JupyterLab instance.
 
-Beyond Python3 kernel, you will find other two kernels: R and Root.
+Beyond Python3 kernel, you will find other two kernels: R and Root kernels.
 
 #### R kernel
 This kernel enables the writing and the execution of simple R codes. 
@@ -48,7 +48,7 @@ In the third row, you have some utilities, like Terminal (you can use it to exec
 
 ### 2.3 ReCaS-Bari Services Guides
 
-Below, there are the links to guide for all ReCaS-Bari GPU-cluster services.
+In the bottom rows you will find links to guides for all ReCaS-Bari GPU-cluster services.
 
 ## 3 Installing new Python modules
 
@@ -67,7 +67,7 @@ import graphviz
 ```
 
 !!! warning 
-	Remember to put a `%` before the `pip install` command: in this way the python module is directly available in the kernel. Otherwise a restart of the kernel is required. 
+	Remember to put a `%` before the `pip install` command: in this way the python module is directly available in the kernel. Otherwise restart the kernel to use the installed packages.
 
 There is a drawback to use `pip install`: when your JupyterLab instance is restarted you will lose all installed Python modules.
 
@@ -111,13 +111,13 @@ source /lustrehome/<username>/.bashrc
 ```
 
 #### base conda environment
-You cannot install python packages in the `base` conda environment, you have to create a new one as described above
+You cannot install python packages in the `base` conda environment, you have to create a new one as described [above](https://jvino.github.io/cluster-hpc-gpu-guides/guides/jupyter-lab/#32-conda)
 
 ### 3.2.2 Create new Jupyter kernel    
     
-Starting from a conda environment it is possible to create a Jupyter kernel allowing you to execute a given notebook inside di conda environment linked with the created kernel. 
+Starting from a conda environment it is possible to create a Jupyter kernel: this will make easier to execute a given notebook using a particular conda environment.
 
-Follow this command as example:
+Following some commands to create a conda environment and how to create a jupyter kernel linked to it:
 
 ```bash
 conda create --name my_kernel -c conda-forge pandas=2 ipykernel -y
@@ -125,17 +125,17 @@ conda activate my_kernel
 python -m ipykernel install --name my_kernel --user --display-name my_kernel
 ```
 
-The reload the browser tab and you will see your new kernel
+Remind to reload the browser in order to see your new kernel in the Jupyter launcher.
 
 ![jupyterlab-new-kernel](images/jupyterlab-new-kernel.png)
 
-Once the kernel appears in the launcher, it is possible to select it, in the notebook, as shown in the following image.
+Once the kernel appears in the launcher, it is possible to select it inside the notebook, as shown in the following image.
 
 ![jupyterlab-new-kernel-notebook](images/jupyterlab-new-kernel-notebook.png)
 
 ## 4 Upload file from local file system
 
-To Upload files from your local file system to the JupyterLab workspace, press the button shown in the following figure and select the files to would like to upload.
+To upload files from your local file system to the JupyterLab workspace, press the button shown in the following figure and select the files to would like to upload.
 
 ![jupyterlab-upload-file](images/jupyterlab-upload-file.png)
 
