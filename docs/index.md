@@ -1,4 +1,4 @@
-# ReCaS-Bari HPC/GPU Cluster
+# The ReCaS-Bari GPU Cluster
 The GPU-cluster facility belongs to the ReCaS-Bari HPC cluster and provides better performance when GPU-based applications are executed. The cluster makes available 1755 cores, 13.7 TB RAM, 55 TB of disk space and 38 High performance GPU (18 Nvidia A100 and 20 Nvidia V100). Each node belonging to the cluster accesses  the whole ReCaS-Bari GPFS-based storage consisting of 3800 TB in single replica and 180TB in replica two. Node-storage bandwidth is 10 Gbps.
 Applications can be executed only via Docker container, which adds to the cluster easy configuration and customization, reliability, flexibility and security.
 Users can request the deployment of interactive remote IDE GPU-based services (Jupyter Notebook or RStudio) as well as the possibility to submit GPU-based workflow represented as Directed Acyclic Graphs (DAG).
