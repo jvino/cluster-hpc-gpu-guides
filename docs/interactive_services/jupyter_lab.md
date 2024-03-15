@@ -22,7 +22,7 @@ The Jupyter Lab instance **MUST BE** used **ONLY** for the developing phase. As 
 
 ## 2 Who can request a JupyterLab with a dedicated GPU?
 
-An instance of JupyterLab with a dedicated GPU but be requested formally, and will be accepted only with a **STRONG** motivation.
+An instance of JupyterLab with a dedicated GPU but be requested formally and will be accepted only with a **STRONG** motivation.
 
 ## 3 Service request
 Jupyter Lab on HPC/GPU cluster is available only for those users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").
