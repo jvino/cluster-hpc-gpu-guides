@@ -20,7 +20,7 @@ The Jupyter Lab instance **MUST BE** used **ONLY** for the developing phase. As 
 !!! note
     Every Jupyter Lab instance on HPC/GPU cluster is allowed **ONLY** for a month. After, the instance will be killed. An email will be sent a week before. To extend the period of usage, create a ticket using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) with title “ReCaS HPC/GPU: Jupyter Lab instance - Time extension request” and describe a valid reason for extension of time.
 
-## 2 Who can request this instance?
+## 2 Who can request a JupyterLab with a dedicated GPU?
 
 An instance of JupyterLab with a dedicated GPU but be requested formally, and will be accepted only with a **STRONG** motivation.
 
