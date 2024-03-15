@@ -68,11 +68,13 @@ To test the installation, execute the following command
 python -c 'import pandas; print(pandas.__version__)'
 ```
 
-Conda allows to install the Pythom modules you need for your code/project in your Home directory in `/lustrehome`, enabling multiple advantages:
-- your conda environment is always available even if your JupyterLab instanza (aka container) is restarted
-- You can create a new Jupyter kernel, so that a notebook could be executed inside a given conda environment
-- It is the first step to submit a notebook to the GPU-cluster in order to execute it in batch
+Conda will install the Python modules you need for your code/project in your Home directory in `/lustrehome`, enabling multiple advantages:
 
+- your conda environment is always available even if your JupyterLab instanza (aka container) is restarted
+
+- You can create a new Jupyter kernel, so that a notebook could be executed inside a given conda environment
+
+- It is the first step to submit a notebook to the GPU-cluster in order to execute it in batch
 
 !!! note
     Consider `conda` as first option.
