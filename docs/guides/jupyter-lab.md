@@ -1,6 +1,6 @@
 #Jupyter Lab Guide
 
-*Updated on 12Dic2022*
+*Updated on 15Mar2024*
 
 ## 0 User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter Lab support” and then describe your issue.
@@ -89,7 +89,7 @@ source /lustrehome/<username>/.bashrc
 #### base conda environment
 You cannot install python packages in the `base` conda environment, you have to create a new one as described above
 
-#### 3.2.2 Create new Jupyter kernel    
+### 3.2.2 Create new Jupyter kernel    
     
 Starting from a conda environment it is possible to create a Jupyter kernel allowing you to execute a given notebook inside di conda environment linked with the created kernel. 
 
