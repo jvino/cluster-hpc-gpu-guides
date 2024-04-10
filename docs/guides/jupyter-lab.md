@@ -228,9 +228,7 @@ Your JupyterLab instace is started on a Linux Operative System.
 
 Learn how to interact with its Process management it is important to manage aspects of your application executions. 
 
-Please, take a look of the most important commands that you will find useful. 
-
-[Link](https://linuxsimply.com/bash-scripting-tutorial/process-and-signal-handling/process-management/)
+Please, take a look of the most important commands at this [link](https://linuxsimply.com/bash-scripting-tutorial/process-and-signal-handling/process-management/)
 
 
 ## 8 Execute a Jupyter Notebook in background with papermill
