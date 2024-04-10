@@ -222,7 +222,38 @@ If the code exploit Dask objects, during its execution the information about the
 
 ![jupyterlab-monitor-dask-3](images/jupyterlab-monitor-dask-3.png)
 
-## 7 RAPIDS
+## 7 Bash process management
+
+Your JupyterLab instace is started on a Linux Operative System. 
+
+Learn how to interact with its Process management it is important to manage aspects of your application executions. 
+
+Please, take a look of the most important commands that you will find useful. 
+
+[Link](https://linuxsimply.com/bash-scripting-tutorial/process-and-signal-handling/process-management/)
+
+
+## 8 Execute a Jupyter Notebook in background with papermill
+
+Papermill is a tool for parameterizing and executing Jupyter Notebooks.
+
+Papermill lets you:
+
+ - parameterize notebooks
+ 
+ - execute notebooks
+
+Papermill is already installed on your JupyterLab instance.
+
+If you would like to use `papermill` also in your conda environment, please install it using the following command
+
+```bash
+conda install -c conda-forge papermill -y
+```
+
+Please task a look of the [official documentation](https://papermill.readthedocs.io/en/latest/).
+
+## 9 RAPIDS
 
 The RAPIDS suite of open source software libraries gives you the freedom to execute end-to-end data science and analytics pipelines entirely on GPUs. 
 
