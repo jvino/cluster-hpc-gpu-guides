@@ -46,7 +46,7 @@ As you can see, you have the possibility to configure 5 fields.
 
 ### 3.1) Additional paths to mount
 
-By default your personal home directory (usually `/lustrehome/{username}`) is mounted inside your Jupyter Lab instance. 
+By default your personal home directory (usually `/lustrehome/{username}`) is mounted inside your Jupyter Lab instance **DO NOT INSERT YOUR PERSONAL HOME DIRECTORY HERE**. 
 
 This configuration section allows you to mount additional and **ALREADY CREATED** directories, like those used to shared files in a team. 
 
