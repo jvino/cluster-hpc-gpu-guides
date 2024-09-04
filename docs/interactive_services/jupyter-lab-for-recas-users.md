@@ -1,6 +1,6 @@
 #JupyterHub for ReCaS users
 
-*Updated on 25Jul2023*
+*Updated on 26Jul2023*
 
 ## IMPORTANT: User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter support” and then describe your issue.
