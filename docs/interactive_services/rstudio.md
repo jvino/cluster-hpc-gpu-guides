@@ -20,6 +20,19 @@ You can check if the registration is successfully completed by access to the `fr
 
 After that, you can request your personal RStudio instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
 
+### 2.1 GPU request
+
+GPUs are a valuable resource, so we only grant them when strictly necessary and when there is ready-to-use code that runs on CPUs and only needs to be adapted and executed on GPUs.
+
+Only one GPU can be requested at a time. 
+The request must provide a justification for using a GPU and explain why CPUs are not sufficient.
+
+If the GPU request is approved, it will be granted for one month only. 
+At the end of this period, the user must send an additional request (by email) to extend the service usage for another month. 
+If this request is not approved or if the user does not send an email, the instance will be terminated without notice.
+
+### 2.2 Request format
+
 Please provide the following information:
 
 ```bash
@@ -28,9 +41,9 @@ Issue:
 - Name and Surname
 - Username
 - Email
-- number of required CPU
-- number of required GPU
-- amount of RAM
+- number of required CPU: allowed values [1, 2, 4, 8, 16]
+- GPU: allowed values [0, 1]
+- amount of RAM: allowed values [4GB, 8GB, 16GB, 32GB, 64GB]
 - other info, if you believe could be useful
 ```
 
