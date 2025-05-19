@@ -1,6 +1,6 @@
 #JupyterHub for ReCaS users
 
-*Updated on 19mAY2025*
+*Updated on 19 May 2025*
 
 ## IMPORTANT: User Support
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: JupyterHub support” and then describe your issue.
@@ -11,31 +11,31 @@ If you need support for your application, please use this [link](https://www.rec
 Important messages will be sent ONLY using the mailing list.
 
 ## 1) Introduction
-The ReCaS JupyterHub provides Jupyter Lab instances for the ReCaS users. JupyterLabs are open-source web applications that allows you to create and share documents that contain live code, equations, visualisations and narrative text.
+The ReCaS JupyterHub provides JupyterLab instances for ReCaS users. JupyterLabs are open-source web applications that allow you to create and share documents that contain live code, equations, visualisations, and narrative text.
 Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualisation, machine learning, and much more.
 
-Jupyter Lab served through this service can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
+JupyterLab instances served through this service can access your files and directories stored in the ReCaS-Bari storage (based on the GPFS distributed file system) and use high-performance GPUs to speed up the execution of your application.
 
-Only registered users can access to this service. In the request section you can find information how to request the service.
+Only registered users can access this service. In the request section, you can find information on how to request the service.
+
 
 ## 2) Access to the service
+The ReCaS JupyterHub service provides JupyterLab instances with or without GPU Hardware Accelerators, depending on whether you are authorized to use them.
 
-The ReCaS JupyterHub service provides JupyterLab instance with or without GPU Hardware Accelerators depending on if you are enabled to used them or not.
-
-To access to the ReCaS JupyterHub service use the link [https://hub.recas.ba.infn.it](https://hub.recas.ba.infn.it)
+To access the ReCaS JupyterHub service, use the link [https://hub.recas.ba.infn.it](https://hub.recas.ba.infn.it)
 
 !!! note
-    Maybe you need to "Clear cookies and site data"
+    You may need to "Clear cookies and site data".
 
-Users willing to use a JupyterLab instances with GPU, will be provided only a Virtual GPU. 
+Users authorized to use a JupyterLab instance with a GPU will only be provided with a Virtual GPU.
 
-Those interested to used a whole GPU, must provide a STRONG motivation.
+Those interested in using a whole GPU must provide a STRONG motivation.
 
 Once you have clicked on the link, the authentication page will be shown:
 
 ![jupyterhub-1-login](images/jupyterhub-1-login.png)
 
-Here you should insert your personal username and password, created during the registration phase.
+Here you should enter your personal username and password, created during the registration phase.
 
 ## 3) Configuration section
 
@@ -43,111 +43,110 @@ After authenticated, you will have the possibility to configure your jupyterLab 
 
 ![jupyterhub-2-config](images/jupyterhub-2-config-k8s.png)
 
-As you can see, you have the possibility to configure the following fields.
+As you can see, you can configure the following fields.
 
 ### 3.1) CPUs
 
-Here you can select the number of cpus you want associate with your Jupyter Lab instance. 
-The available choices are: 1, 4, 8 and 16.
-If you select a number of cpus greater than 1 ensure that your code is able to use a multicore architecture, otherwise your application will use only 1 cpu. 
+Here you can select the number of CPUs you want to associate with your JupyterLab instance.
+The available choices are: 1, 4, 8, and 16.
+If you select a number of CPUs greater than 1, ensure that your code is able to use a multicore architecture; otherwise, your application will use only one CPU.
 
-If you don't know what select, select 1 cpu. You have always to change it later. 
+If you don't know what to select, choose 1 CPU. You can always change it later.
 
 ### 3.2) Memory (RAM)
 
-Here you can select the amount of RAM memory you want associate with your Jupyter Lab instance. 
-The available choices are: 4, 8, 16 and 32 GB.
-You should select the mininum value that allow your application to run.
+Here you can select the amount of RAM memory you want to associate with your JupyterLab instance.
+The available choices are: 4, 8, 16, and 32 GB.
+You should select the minimum value that allows your application to run.
 
-If you don't know what select, select 8 GB. You have always to change it later. 
+If you don't know what to select, choose 8 GB. You can always change it later.
 
 ### 3.3) User group
 
-Users can have multiple groups, for example because collaborate with different teams (each having own team directory).
+Users can have multiple groups, for example, because they collaborate with different teams (each with its own team directory).
 
-When users want their Jupyter Lab instance can read/write files in this shared directories, the corresponding team group should be selected.
+When users want their JupyterLab instance to be able to read/write files in these shared directories, the corresponding team group should be selected.
 
-If you don't know what select, just leave the default value.
+If you don't know what to select, just leave the default value.
 
 ### 3.4) GPU
 
-You will see this section only if you allowed to use the GPU.
-In this moment only GPU with a dedicated memory of 5GB are available. In the case your application requires a more powerful GPU, please open a ticket with the title “ReCaS HPC/GPU: JupyterHub with powerful GPU” where you can explain the reasons you need a more powerful GPU.
-You should select the GPU only if your application is able to use it. 
+You will see this section only if you are allowed to use a GPU.
+Currently, only GPUs with a dedicated memory of 5GB are available. If your application requires a more powerful GPU, please open a ticket with the title “ReCaS HPC/GPU: JupyterHub with powerful GPU” where you can explain the reasons you need a more powerful GPU.
+You should select a GPU only if your application is able to use it.
 
-In the picture you saw the possibility to select different GPU models and how many of them are used in that moment. You will see only GPU models you have been authorized. 
+The image shows that you can select different GPU models and how many of them are currently in use. You will only see GPU models you have been authorized to use.
 
-Only authorized users can select a GPU, please see below how to request one.
+Only authorized users can select a GPU; please see below how to request one.
 
 ### 3.5) Additional paths to mount
 
-By default your personal home directory (usually `/lustrehome/{username}`) is mounted AUTOMATICALLY inside your Jupyter Lab instance **DO NOT INSERT YOUR PERSONAL HOME DIRECTORY HERE**. 
+By default, your personal home directory (usually `/lustrehome/{username}`) is mounted AUTOMATICALLY inside your JupyterLab instance. **DO NOT INSERT YOUR PERSONAL HOME DIRECTORY HERE**.
 
-This configuration section allows you to mount additional and **ALREADY CREATED** directories, like those used to shared files in a team. 
+This configuration section allows you to mount additional and **ALREADY CREATED** directories, such as those used for sharing files in a team.
 
-Multiple paths can be inserted in this field but they should be separeted using the comma without spaces, e.g. `/lustre/path1,/lustre/path2`. 
+Multiple paths can be inserted in this field, but they should be separated by commas with no spaces, e.g., `/lustre/path1,/lustre/path2`.
 
 !!! note
     These configuration fields are not permanent and can be changed.
     To do that, delete your instance and request a new one using the new configuration.
-    Please, see below how to delete your instance and create a new one.
+    Please see below how to delete your instance and create a new one.
 
 ## 4) JupyterLab
 
-As soon as the configuration phase is terminated, the Jupyter Lab instance is launched. 
-After its initialization, the following image shows you the interface you will see.
+Once the configuration phase is complete, the JupyterLab instance is launched.
+After its initialization, the following image shows the interface you will see.
 
 ![jupyterhub-3-lab](images/jupyterhub-3-lab.png)
 
-There is a dedicated guide for Jupyter Lab, accessible to this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/jupyter-lab/).
+There is a dedicated guide for JupyterLab, accessible at this [link](https://jvino.github.io/cluster-hpc-gpu-guides/guides/jupyter-lab/).
 
+## 5) Deleting your Jupyter instance
 
-## 5) Delete you Jupyter instance
+**The ReCaS datacenter does not have infinite resources.**
 
-**The ReCaS datacenter does not have infinite resources. **
+We appreciate it if you delete your Jupyter instance when you know you won't be using it for a while.
+When you need to use it, you can request a new one with a couple of clicks!
+You can also remove it if you want to change the instance configuration, for example, if you want to add more resources to it.
 
-We apprecciate if you decide to delete your Jupyter instance in the case you know in the near future you will not use it. 
-When you will need to use it, you can request a new one with a couple of clicks!
-You could remove it also in the case you would like to change the instance configuration, for example is you want add more resources to it.
-
-To remove your Jupyter instance, access to `Files -> Hub Control Panel` as shown in the following image:
+To remove your Jupyter instance, access `Files -> Hub Control Panel` as shown in the following image:
 
 ![jupyterhub-4-hub-control-panel](images/jupyterhub-4-hub-control-panel.png)
 
-And then click on the `Stop My Server' red button.
+And then click the `Stop My Server` red button.
 
 ![jupyterhub-5-hub-control-panel-stop-server](images/jupyterhub-5-hub-control-panel-stop-server.png)
 
-After few seconds, your instance will be deleted.
-If you would request a new one, click on the `Start My Server` blue button.
+After a few seconds, your instance will be deleted.
+To request a new one, click the `Start My Server` blue button.
 
-## 6) Additional informations
+## 6) Additional information
 
-Each Jupyter instance is configured to delete it **automatically** if you don't use it for at least a day. 
+Each Jupyter instance is configured to be deleted **automatically** if you don't use it for at least a day.
 
 Please save all important files in your GPFS directories.
 
-Your Jupyter instance is executed inside a container and **ONLY** the files stored in directories in the ReCaS-Bari GPFS file system will be preserved, namely `/lustrehome/{username}` or `/lustre/{some-directory}`. Any local file content or module installation are lost if the container is stopped or crashes. So, use the GPFS file system for all your important files.
+Your Jupyter instance runs inside a container, and **ONLY** the files stored in directories in the ReCaS-Bari GPFS file system will be preserved, namely `/lustrehome/{username}` or `/lustre/{some-directory}`. Any local file content or module installations are lost if the container is stopped or crashes. Therefore, use the GPFS file system for all your important files.
 
-**Containers could crash at any time also during the execution of the code**, partial results CAN NOT be restored and will be lost. To manage this situation, consider storing in your HOME directory in GPFS all partial results.
+**Containers could crash at any time, even during code execution.** Partial results CANNOT be restored and will be lost. To manage this situation, consider storing all partial results in your HOME directory in GPFS.
 
-Also consider that you do not have infinite space in the GPFS file system. Use it wisely.
+Also, consider that you do not have infinite space in the GPFS file system. Use it wisely.
 
-Delete files using Jupyter Lab will create a *.Trash* hidden folder in your HOME directory. To remove completely files, please access using SSH to `frontend.recas.ba.infn.it`. The content of the *.Trash* folder contribute to your quota.
+Deleting files using JupyterLab will create a hidden folder named *.Trash* in your HOME directory. To completely remove files, please access `frontend.recas.ba.infn.it` using SSH. The content of the *.Trash* folder contributes to your quota.
 
 ## 7) Service request
-Jupyter Lab on HPC/GPU cluster is available only for those users with a **ReCaS-Bari HPC/HTC account active** and the access to the **JupyterHub service enabled**. Both of them can be request using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2).
+JupyterLab on the HPC/GPU cluster is available only to users with an **active ReCaS-Bari HPC/HTC account** and **JupyterHub service enabled**. Both can be requested via this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2).
 
-In the following image you can see how to request the ReCaS account, the access to the JupyterHub and the access to the GPU.
+In the following image, you can see how to request the ReCaS account, access to JupyterHub, and access to the GPU.
 
 ![jupyterhub-request-gpu](images/jupyterhub-request-gpu.png)
 
-The access to JupyterHub is for everyone with a ReCaS Account.
+Access to JupyterHub is for everyone with a ReCaS account.
 
-**The use of GPUs is restricted only for those having a STRONG motivation.**
+**The use of GPUs is restricted only to those with a STRONG motivation.**
 
-You can check if the registration is successfully completed by access to the `frontend.recas.ba.infn.it` server via ssh:
+You can check if the registration is successfully completed by connecting to the `frontend.recas.ba.infn.it` server via ssh:
 
 `ssh <username>@frontend.recas.ba.infn.it`
 
-After that, you can request your personal Jupyter Lab instance using this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
+After that, you can request your personal JupyterLab instance via this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
