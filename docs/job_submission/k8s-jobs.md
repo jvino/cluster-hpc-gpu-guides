@@ -1,3 +1,3 @@
-#Job orchestrator with kubernetes 
+#Job submission with Kubernetes 
 
 # COMING SOON

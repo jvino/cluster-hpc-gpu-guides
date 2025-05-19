@@ -28,13 +28,22 @@ This is the last launcher version, implemented in ReCaS-Bari JupyterHub
 
 In the first two rows you have all available kernels in your JupyterLab instance.
 
-Beyond Python3 kernel, you will find other two kernels: R and Root kernels.
+At first, you will find only the Python3 kernel
 
 #### R kernel
-This kernel enables the writing and the execution of simple R codes. 
+If you would like to install the R kernel, please execute the following command
+
+```bash
+conda create --name r_kernel -c r r-irkernel r-essentials r-recommended -y 
+conda activate r_kernel`
+```
 
 #### Root kernel
-This kernel enables the writing and the execution of simple root codes. 
+If you would like to install the Root kernel, please execute the following command
+
+```bash
+conda create -c conda-forge --name root_kernel root ipykernel -y
+```
 
 Some issues related to the Python binding are known. 
 
@@ -263,7 +272,7 @@ RAPIDS is an open source project. Supported by NVIDIA, it also relies on Numba, 
 
 [Reference](https://rapids.ai/)
 
-## 8 Useful links
+## 10 Useful links
 
 [Dask Webpage](https://www.dask.org/)
 
