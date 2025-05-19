@@ -15,8 +15,6 @@ Uses include: data cleaning and transformation, numerical simulation, statistica
 
 The ReCaS JupyterLab can access your files and directories stored in the ReCaS-Bari storage (based on the GPFS distributed file system) and use high-performance GPUs to speed up the execution of your application.
 
-The ReCaS JupyterLab instances are based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
-
 ## 2 JupyterLab Launcher
 
 This is the latest launcher version, implemented in the ReCaS-Bari JupyterHub.
