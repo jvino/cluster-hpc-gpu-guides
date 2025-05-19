@@ -1,37 +1,36 @@
 #Jupyter Lab Guide
 
-*Updated on 15Mar2024*
+*Updated on 19 May 2025*
 
 ## 0 User Support
-If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: Jupyter Lab support” and then describe your issue. 
+If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket titled “ReCaS HPC/GPU: JupyterLab support” and describe your issue.
 
-Please provides all needed information to make easier the solution of you situation, like notebook absolute path, screenshot, and so on. 
-
+Please provide all the necessary information to help us resolve your issue more easily, such as the notebook absolute path, screenshots, and so on.
 
 **It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.**
 
 ## 1 Introduction
-Jupyter Labs are open-source web applications that allows you to create and share documents that contain live code, equations, visualizations and narrative text.
+JupyterLab is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text.
 Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualization, machine learning, and much more.
 
-The ReCaS Jupyter Lab can access your files and directories stored in the ReCaS-Bari storage (based on GPFS distributed file system) and use high performance GPUs to speed up the execution of your application. 
+The ReCaS JupyterLab can access your files and directories stored in the ReCaS-Bari storage (based on the GPFS distributed file system) and use high-performance GPUs to speed up the execution of your application.
 
-The ReCaS Jupyter Lab instances are based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
+The ReCaS JupyterLab instances are based on the [RAPIDS Docker container](https://hub.docker.com/r/rapidsai/rapidsai/).
 
 ## 2 JupyterLab Launcher
 
-This is the last launcher version, implemented in ReCaS-Bari JupyterHub
+This is the latest launcher version, implemented in the ReCaS-Bari JupyterHub.
 
 ![jupyterlab-launcher](images/jupyterlab-launcher.png)
 
 ### 2.1 Jupyter Kernels
 
-In the first two rows you have all available kernels in your JupyterLab instance.
+The first two rows show all the available kernels in your JupyterLab instance.
 
-At first, you will find only the Python3 kernel
+Initially, you will find only the Python 3 kernel.
 
 #### R kernel
-If you would like to install the R kernel, please execute the following command
+To install the R kernel, please execute the following command:
 
 ```bash
 conda create --name r_kernel -c r r-irkernel r-essentials r-recommended -y 
@@ -39,25 +38,25 @@ conda activate r_kernel`
 ```
 
 #### Root kernel
-If you would like to install the Root kernel, please execute the following command
+To install the ROOT kernel, please execute the following command:
 
 ```bash
 conda create -c conda-forge --name root_kernel root ipykernel -y
 ```
 
-Some issues related to the Python binding are known. 
+Some issues related to the Python bindings are known.
 
-You can use the root in interactive mode using the terminal, after activated the conda environment using the following command:
+You can use ROOT in interactive mode using the Terminal, after activating the conda environment with the following command:
 
 `conda activate root_kernel`
 
 ### 2.2 Utilities
 
-In the third row, you have some utilities, like Terminal (you can use it to execute bash command in the bash shell), text, markdown, python and R file editor.
+The third row contains several utilities, such as Terminal (you can use it to execute bash commands in the Bash shell), and text, Markdown, Python, and R file editors.
 
 ### 2.3 ReCaS-Bari Services Guides
 
-In the bottom rows you will find links to guides for all ReCaS-Bari GPU-cluster services.
+In the bottom rows, you will find links to guides for all ReCaS-Bari GPU cluster services.
 
 ## 3 Installing new Python modules
 
@@ -78,7 +77,7 @@ import graphviz
 !!! warning 
 	Remember to put a `%` before the `pip install` command: in this way the python module is directly available in the kernel. Otherwise restart the kernel to use the installed packages.
 
-There is a drawback to use `pip install`: when your JupyterLab instance is restarted you will lose all installed Python modules.
+There is a drawback to use `pip install`: when your JupyterLab instance is restarted, you will lose all installed Python packages.
 
 ### 3.2 conda
 
@@ -101,14 +100,14 @@ python -c 'import pandas; print(pandas.__version__)'
 
 Conda will install the Python modules you need for your code/project in your Home directory in `/lustrehome`, enabling multiple advantages:
 
-- your conda environment is always available even if your JupyterLab instanza (aka container) is restarted
+- Your conda environment is always available even if your JupyterLab instance (also known as a container) is stopped or restarted.
 
-- You can create a new Jupyter kernel, so that a notebook could be executed inside a given conda environment
+- You can create a new Jupyter kernel, allowing a notebook to be executed within a specific conda environment.
 
-- It is the first step to submit a notebook to the GPU-cluster in order to execute it in batch
+- It is the first step to submit a notebook to the GPU cluster for batch execution.
 
 !!! note
-    Consider `conda` as first option.
+    Consider `mamba` instead of conda.
 
 ### 3.2.1 Troubleshooting
 
@@ -150,24 +149,24 @@ To upload files from your local file system to the JupyterLab workspace, press t
 
 ## 5 Enable Resource Usage Dashboards
 
-The ReCaS Jupyter Lab gives you the possibility to monitor the resource usage of your application in real-time. 
+The ReCaS JupyterLab allows you to monitor the resource usage of your application in real-time.
 
-Few simple steps are needed to build your personal dashboard.
+A few simple steps are needed to create your personal dashboard.
 
-First, click in the third tab on the left, named "System Dashboards", as shown in the following figure.
+First, click the third tab on the left, named "System Dashboards", as shown in the figure below.
 
 ![jupyterlab-monitor-resources-1](images/jupyterlab-monitor-resources-1.png)
 
-Second, double click on the favorite blue button and it will be places as a tab, near the notebook one.
-Grab and move it and select your favorite position.
+Second, double-click the desired blue button, and it will be placed as a tab near the notebook tab.
+Drag and move it to select your preferred position.
 
-In the following figure it is shown the "Machine Resources" plots.
+The following figure shows the "Machine Resources" plots.
 
 ![jupyterlab-monitor-resources-2](images/jupyterlab-monitor-resources-2.png)
 
-Additional plots can be put on the screen.
+Additional plots can be displayed on the screen.
 
-In the following figure it is shown also the "GPU Resources" plots.
+The following figure also shows the "GPU Resources" plots.
 
 ![jupyterlab-monitor-resources-3](images/jupyterlab-monitor-resources-3.png)
 
@@ -175,9 +174,9 @@ In the following figure it is shown also the "GPU Resources" plots.
 
 Dask is a flexible open-source Python library for parallel computing. Dask scales Python code from multi-core local machines to large distributed clusters in the cloud. Dask provides a familiar user interface by mirroring the APIs of other libraries in the PyData ecosystem including: `Pandas`, `Scikit-learn` and `NumPy`. It also exposes low-level APIs that help programmers run custom algorithms in parallel. (Wikipedia)
 
-Dask gives the possibility to split the workload among multiple workers. 
-So the first step concerns the creation of a cluster. 
-Workers can be executed on different machines or on the same machine.
+Dask allows you to split the workload among multiple workers.
+So, the first step involves creating a cluster.
+Workers can be run on different machines or on the same machine.
 
 ### 6.1 Start a new Dask cluster
 
