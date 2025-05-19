@@ -26,12 +26,14 @@ markdown_extensions:
 nav:
   - Overview: 'index.md'
   - Interactive Services: 
-    - ReCaS JupyterHub: 'interactive_services/jupyter-lab-for-recas-users.md'
+    - ReCaS JupyterHub: 'interactive_services/jupyter-lab-for-recas-users-k8s.md'
+    - ReCaS JupyterHub (DEPRECATED): 'interactive_services/jupyter-lab-for-recas-users.md'
     - Custom Jupyter Lab (To request formally): 'interactive_services/jupyter_lab.md'
     #- Jupyter Notebook (Soon Dismissed): 'interactive_services/jupyter_notebook.md'
     - RStudio: 'interactive_services/rstudio.md'
   - Job Submission:
-    - Chronos: 'job_submission/chronos.md'
+    # - Chronos: 'job_submission/chronos.md'
+    - Using Kubernetes (COMING SOON): 'job_submission/k8s-jobs.md'
   - Guides:
     - Docker and Dockerfile: 'guides/docker_and_dockerfile.md'
     - JupyterLab: 'guides/jupyter-lab.md'
