@@ -45,18 +45,18 @@ Please provide the following information:
 
 ## 3) Configuring access to the Kubernetes cluster
 
-This section explains how to set up the **kubectl** command-line tool to access the ReCaS HPC/GPU Kubernetes cluster, after your access request has been approved—that is, once you’ve received a positive response to the ticket titled "**ReCaS HPC/GPU: request to access HPC/GPU K8s cluster**" as described in [Section 0](#0-request-access-to-the-hpcgpu-recas-kubernetes-k8s-cluster).
+This section explains how to set up the **kubectl** command-line tool to access the ReCaS HPC/GPU Kubernetes cluster, after your access request has been approved—that is, once you’ve received a positive response to the ticket titled "**ReCaS HPC/GPU: request to access HPC/GPU K8s cluster**" as described in [Section 2](#2-access-to-the-service).
 
 ### 3.1) kubectl
 
-Interaction with a Kubernetes (K8s) cluster happens through an API server. Any action you perform—whether monitoring resources, deploying workloads, or checking logs—ultimately goes through this server, which listens for HTTPS requests.
+Interaction with a Kubernetes (K8s) cluster happens through an API server. Any action you perform — whether monitoring resources, deploying workloads or checking logs — ultimately goes through this server, which listens for HTTPS requests.
 
 While you could technically interact with the API server using tools like **curl**, it's far easier and more efficient to use a dedicated CLI tool: [kubectl](https://kubernetes.io/docs/reference/kubectl/).  
-**kubectl** is the official Kubernetes client, designed to communicate with the cluster's API server in a user-friendly way. It offers commands for inspecting resources, deploying applications, scaling workloads and more.
+**kubectl** is the official Kubernetes command line client, designed to communicate with the cluster's API server in a user-friendly way. It offers commands for inspecting resources, deploying applications, scaling workloads and more.
 
-The tool is already installed on the ReCaS frontend (**frontend.recas.ba.infn.it**) and can also be [easily installed on your local machine](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) if needed.
+The tool is already installed on the ReCaS frontend (**frontend.recas.ba.infn.it**) and can also be [easily installed on your local machine](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) if needed. Please note that, in case of local installation, you should use **version 1.30.0** to ensure compatibility. Using a different version may lead to issues.
 
-To configure **kubectl** for access to the ReCaS Kubernetes cluster—either from the frontend or from your own system—you’ll need to create a configuration file with the correct cluster and authentication details.  
+To configure **kubectl** for access to the ReCaS Kubernetes cluster — either from the frontend or from your own system — you’ll need to create a configuration file with the correct cluster and authentication details.  
 
 Start by opening your favorite text editor (**vim**, **nano**, **emacs**, etc.) and copy the following template:
 
@@ -163,11 +163,7 @@ That’s it! Your configuration is now complete.
 > Please note that your token is **strictly personal**. You are fully responsible for any operations performed using your personal token.  
 If you are using **kubectl** directly on the ReCaS HTCondor cluster frontend, ensure that your Kubernetes configuration file (which contains your token) has restrictive permissions—accessible only by you.
 To enforce this, simply run the following command:   
-
-
 `chmod 700 <path/to/kubectl/conf>`  
-
-
 This sets the file permissions to allow read, write, and execute access only for your user.
 
 ### 3.3) Verifying your setup
@@ -202,7 +198,7 @@ This section explains how to submit a containerized workload as a Kubernetes Job
 ### 4.1) Jobs limitation
 
 By default, users are subject to resource quotas, which limit the total amount of CPU cores, RAM and GPUs that can be requested. These limits apply across all your active jobs combined, not just to individual jobs.  
-Currently, **each user is limited to a maximum of 80 CPU cores, 300 GB of RAM, and 2 GPUs across all active jobs**.  
+Currently, **each user is limited to a maximum of 80 CPU cores, 300 GB of RAM and 2 GPUs across all active jobs**.  
 Additionally, **each individual job can run for a maximum of one week (24*7 hours)**. If the job exceeds this runtime, it will be automatically terminated by the system.  
 If you believe your workload requires an exception to any of these limits, please [contact us](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) and describe your use case.
 
@@ -238,6 +234,9 @@ spec:
         image: <container-image>
         command: ["sh", "-c", "echo Just an example...; sleep 3600"]
         resources:
+          requests:
+            cpu: "0.2"
+            memory: "100Mi"
           limits:
             cpu: "<integer>"
             memory: "<integer>Gi"
@@ -328,6 +327,9 @@ spec:
         image: busybox
         command: ["sh", "-c", "echo Starting job...; sleep 3600"]
         resources:
+          requests:
+            cpu: "0.2"
+            memory: "100Mi"        
           limits:
             cpu: "2"
             memory: "4Gi"
@@ -371,6 +373,9 @@ spec:
         image: busybox
         command: ["sh", "-c", "echo Starting job...; sleep 60"]
         resources:
+          requests:
+            cpu: "0.2"
+            memory: "100Mi"        
           limits:
             cpu: "2"
             memory: "4Gi"
@@ -442,13 +447,13 @@ In the Job manifest file, you might have noticed the following section:
 ```
 
 
-This configuration ensures that the shared storage available on the ReCaS HTC/HPC cluster frontend (**frontend.recas.ba.infn.it**) is also mounted inside your container.  
+This configuration ensures that the shared storage available on the ReCaS frontend (**frontend.recas.ba.infn.it**) is also mounted inside your container.  
 As a result, all the files you see on the frontend (under **/lustre** and **/lustrehome**) will also be accessible from within your running container—automatically.  
-Any changes you make to files within these mounted paths from inside the container—such as creating, editing, or deleting files—will be immediately reflected on the actual storage on the frontend.
+Any changes you make to files within these mounted paths from inside the container — such as creating, editing, or deleting files — will be immediately reflected on the actual storage on the frontend.
 In practice, it’s as if you were working directly on the frontend itself, but within an isolated container environment.
 
 > **Note**  
-> Proper file permissions and access control are enforced. So don’t try anything sneaky—you will only be able to access files and directories you are authorized to.
+> Proper file permissions and access control are enforced. So don’t try anything sneaky — you will only be able to access files and directories you are authorized to.
 
 ### 4.4) Monitoring and Debugging Submitted Jobs
 
@@ -484,7 +489,7 @@ These commands will help you identify what went wrong, whether the container fai
 
 ### 4.5) Opening a terminal into a container
 
-If your job is running and you want to interact directly with the container—for example to run commands, inspect files, or debug issues—you can run a command inside it using:  
+If your job is running and you want to interact directly with the container — for example to run commands, inspect files or debug issues — you can run a command inside it using:  
 
 
 `kubectl exec -it <podName> -- <command>`  
@@ -531,7 +536,7 @@ e.g.
 Both of these approaches will also delete the associated Pod(s) created by that Job.  
 
 > **Note**  
-> Of course, deleting a Job does not delete any files that may have been written to the shared volumes like **/lustre** or **/lustrehome**. Any data you write to these directories from within the container is persisted—just as if you were working directly on the frontend.
+> Of course, deleting a Job does not delete any files that may have been written to the shared volumes like **/lustre** or **/lustrehome**. Any data you write to these directories from within the container is persisted — just as if you were working directly on the frontend.
 
 
 
