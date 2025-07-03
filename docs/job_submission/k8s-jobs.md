@@ -1,4 +1,6 @@
-# 0. Request access to the HPC/GPU ReCaS Kubernetes (K8s) Cluster 
+# Job submission using Kubernetes
+
+## 0. Request access to the HPC/GPU ReCaS Kubernetes (K8s) Cluster 
 
 Access to our HPC/GPU Kubernetes Cluster is available only for users with a ReCaS-Bari HPC/HTC account active. Users without such an account **MUST** register using [this link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").  
 Once your request has been submitted, it must be approved by the service manager. This process typically takes a couple of working days. You will receive an automatic email notification as soon as your account is activated.
@@ -19,7 +21,7 @@ Please provide the following information:
 
    <br>
 
-# 1. User Support
+## 1. User Support
 
 If you need support, please use [this link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to submit a ticket with title “ReCaS HPC/GPU: Kubernetes support” and then describe your issue.
 
@@ -27,7 +29,7 @@ If you need support, please use [this link](https://www.recas-bari.it/index.php/
 
 <br>
 
-# 2. Introduction
+## 2. Introduction
 
 Kubernetes is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.
 
@@ -38,7 +40,7 @@ You can run a third party container or you can build your custom one. Please ref
 
 <br>
 
-# 3. Configuring access to the Kubernetes cluster
+## 3. Configuring access to the Kubernetes cluster
 
 This section explains how to set up the **kubectl** command-line tool to access the ReCaS HPC/GPU Kubernetes cluster, after your access request has been approved—that is, once you’ve received a positive response to the ticket titled "**ReCaS HPC/GPU: request to access HPC/GPU K8s cluster**" as described in [Section 0](#0-request-access-to-the-hpcgpu-recas-kubernetes-k8s-cluster).
 
@@ -97,7 +99,7 @@ In case this last step is not really clear to you (check [this guide](https://ww
 
 Either way, now **kubectl** will use this file by default whenever you run commands.
 
-## 3.2. Access token
+### 3.2. Access token
 
 As you probably noticed, the last field of the text file you edited is an empty field called **token**. This field needs to be filled with a personal access token (of weekly expiration), which is required for authentication. 
 
@@ -132,7 +134,7 @@ To enforce this, simply run the following command:
 `chmod 700 <path/to/kubectl/conf>`  
 This sets the file permissions to allow read, write, and execute access only for your user.
 
-## 3.3. Verifying your setup
+### 3.3. Verifying your setup
 
 After your token is in place, for the next week (that is, until the token expires) you can directly interact with the Kubernetes cluster using **kubectl**.  
 To check that everything is configured correctly, run:  
@@ -146,11 +148,11 @@ then there might be a misconfiguration. Double-check the steps above, and if the
 
 <br>
 
-# 4. Jobs submission
+## 4. Jobs submission
 
 This section explains how to submit a containerized workload as a Kubernetes Job to the ReCaS HPC/GPU cluster.
 
-## 4.1 Jobs limitation
+### 4.1 Jobs limitation
 
 By default, users are subject to resource quotas, which limit the total amount of CPU cores, RAM and GPUs that can be requested. These limits apply across all your active jobs combined, not just to individual jobs.  
 Currently, **each user is limited to a maximum of 80 CPU cores, 300 GB of RAM, and 2 GPUs across all active jobs**.  
@@ -238,7 +240,7 @@ Please note that your request can end up in error if you
 
 For reference, here are two fully avvalorated examples for a Job not requesting a GPU (first manifest) and a Job requesting 2 NVIDIA A100 GPUs:
 
-### Example Job NOT requesting a GPU
+#### Example Job NOT requesting a GPU
 ```
 apiVersion: batch/v1
 kind: Job
@@ -278,7 +280,7 @@ spec:
 #        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB
 ```
 
-### Example Job requesting 2 NVIDIA A100 GPUs
+#### Example Job requesting 2 NVIDIA A100 GPUs
 ```
 apiVersion: batch/v1
 kind: Job
@@ -332,7 +334,7 @@ A Job, in turn, is a controller that manages the lifecycle of one or more Pods a
 In practical terms: when you submit a Job to the cluster, Kubernetes creates a Pod, and that Pod runs the container you defined for your workload.  
 We won’t dive deeper into the details of Pods in this guide, as they’re not essential for day-to-day usage. However, if you're curious, you can read more in the [official Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/). 
 
-## 4.3 Shared storage
+### 4.3 Shared storage
 
 In the Job manifest file, you might have noticed the following section:
 ```
@@ -359,7 +361,7 @@ In practice, it’s as if you were working directly on the frontend itself, but 
 > **Note**  
 > Proper file permissions and access control are enforced. So don’t try anything sneaky—you will only be able to access files and directories you are authorized to.
 
-## 4.4 Monitoring and Debugging Submitted Jobs
+### 4.4 Monitoring and Debugging Submitted Jobs
 
 Just because your **kubectl apply** command doesn't return an error doesn't mean the Job actually ran successfully.   
 To monitor the state of your Job and the underlying Pod, use the following commands: 
@@ -376,7 +378,7 @@ To monitor the state of your Job and the underlying Pod, use the following comma
 
 These commands will help you identify what went wrong, whether the container failed to start, exited early or encountered runtime errors.
 
-## 4.5 Opening a terminal into a container
+### 4.5 Opening a terminal into a container
 
 If your job is running and you want to interact directly with the container—for example to run commands, inspect files, or debug issues—you can run a command inside it using:  
 `kubectl exec -it <podName> -- <command>`  
@@ -390,7 +392,7 @@ A common use case may be running a terminal inside your container. If the **bash
 if instead **bash** is not present in the image you can try with  
 `kubectl exec -it <podName> -- sh`  
 
-## 4.6 Deleting a job
+### 4.6 Deleting a job
 
 If you submitted a job by mistake, or if you noticed there is something wrong with your workload, you can delete a Job manually to free up cluster resources and keep your environment clean.  
 
