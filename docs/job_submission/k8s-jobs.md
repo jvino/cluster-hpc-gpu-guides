@@ -33,11 +33,14 @@ After that, you can request access to the Kubernetes service using [this link](h
 
 Please provide the following information:
 
+
+```
    Title: “ReCaS HPC/GPU: request to access HPC/GPU K8s cluster”  
    Issue:
    - Name and Surname
    - HTC/HPC service username
    - Email  
+```
 
 
 ## 3) Configuring access to the Kubernetes cluster
@@ -262,25 +265,37 @@ spec:
 
 
 You’ll need to replace these placeholder values: 
-- **metadata.name**: A unique name for your Job;
-- **spec.template.spec.containers.name**: Arbitrary name for your container. In Kubernetes, a Job is an object that wraps one or more containers: that's why you need to specify both a name for the Job object and one for the container(s) the Job launches;
-- **spec.template.spec.containers.image**: Container image. In case it is a public one directly  from DockerHub you only need to specify the image name or link, so for example  
 
-  `image: ubuntu`  
+**metadata.name**: A unique name for your Job;
+
+
+**spec.template.spec.containers.name**: Arbitrary name for your container. In Kubernetes, a Job is an object that wraps one or more containers: that's why you need to specify both a name for the Job object and one for the container(s) the Job launches;
+
+
+**spec.template.spec.containers.image**: Container image. In case it is a public one directly  from DockerHub you only need to specify the image name or link, so for example  
+
+`image: ubuntu`  
+
 or
 
-  `image: gcr.io/google-containers/pause:3.9`    
-otherwise if you are launching a container with a custom image pushed in our private image registry, you need to specify it like  
+`image: gcr.io/google-containers/pause:3.9`  
 
-  `image: registry-clustergpu.recas.ba.infn.it/{yourUsername}/{yourImage}`    
-  
-  So, for example  
+Otherwise, if you are launching a container with a custom image pushed in our private image registry, you need to specify it like  
 
-  `image: registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1`
+`image: registry-clustergpu.recas.ba.infn.it/{yourUsername}/{yourImage}`    
 
-- **spec.template.spec.containers.resources.limits.cpu**, **spec.template.spec.containers.resources.limits.memory** and **spec.template.spec.containers.resources.limits.nvidia.com/gpu**: limits to the number of CPU cores, RAM in terms of Gibibytes (≈ Gigabytes) and number of GPU(s); 
-- **spec.template.spec.containers.command**: overrides the image 'ENTRYPOINT' field;
-- **spec.template.spec.containers.args**: overrides the image 'CMD' field.
+So, for example  
+
+`image: registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1`
+
+
+**spec.template.spec.containers.resources.limits.cpu**, **spec.template.spec.containers.resources.limits.memory** and **spec.template.spec.containers.resources.limits.nvidia.com/gpu**: limits to the number of CPU cores, RAM in terms of Gibibytes (≈ Gigabytes) and number of GPU(s); 
+
+
+**spec.template.spec.containers.command**: overrides the image 'ENTRYPOINT' field;
+
+
+**spec.template.spec.containers.args**: overrides the image 'CMD' field.
 
 
 > **Note**  
@@ -289,7 +304,8 @@ otherwise if you are launching a container with a custom image pushed in our pri
 
 If your workload does not require a GPU, please leave `spec.runtimeClassName` and the entire `spec.nodeSelector` section commented out.  
 If, instead, your workload does require the use of GPUs, change the `nvidia.com/gpu` limit and uncomment (just remove the '#' from the manifest and leave indentation as is) the `spec.runtimeClassName` field, the `nodeSelector:` line and **JUST** its subfield regarding the kind of GPU you are interested in using (whether a NVIDIA V100/A100/H100).  
-Please note that your request can end up in error if you  
+Please note that your request can end up in error if you:  
+
 - are not allowed to use that given kind of GPU;  
 - are requesting GPUs and leaving the `runtimeClassName` and `nodeSelector` fields commented out.
 
@@ -442,27 +458,27 @@ To monitor the state of your Job and the underlying Pod, use the following comma
 - List your pods:   
 
 
-  `kubectl get pod`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`kubectl get pod`
 
 - Describe a specific pod (helpful to debug scheduling issues or container errors): 
 
 
-  `kubectl describe pod <podName>`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `kubectl describe pod <podName>`
 
 - Check logs from the pod (only available after the container starts running): 
 
 
-  `kubectl logs <podName>`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `kubectl logs <podName>`
 
 - List your jobs:  
 
 
-  `kubectl get job`  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `kubectl get job`  
 
 - Inspect job details:  
 
 
-  `kubectl describe job <jobName>`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `kubectl describe job <jobName>`
 
 These commands will help you identify what went wrong, whether the container failed to start, exited early or encountered runtime errors.
 
