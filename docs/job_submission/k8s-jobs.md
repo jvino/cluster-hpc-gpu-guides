@@ -288,7 +288,8 @@ So, for example
 `image: registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1`
 
 
-**spec.template.spec.containers.resources.limits.cpu**, **spec.template.spec.containers.resources.limits.memory** and **spec.template.spec.containers.resources.limits.nvidia.com/gpu**: limits to the number of CPU cores, RAM in terms of Gibibytes (≈ Gigabytes) and number of GPU(s); 
+**spec.template.spec.containers.resources.limits.cpu**, **spec.template.spec.containers.resources.limits.memory** and **spec.template.spec.containers.resources.limits.nvidia.com/gpu**: limits to the number of CPU cores, RAM in terms of Gibibytes (≈ Gigabytes) and number of GPU(s).  
+The parameters under **resources.requests**, instead, define the minimum guaranteed amount of resources that the container will receive. For most use cases, the default values we have provided should be sufficient and typically don’t require adjustment.
 
 
 **spec.template.spec.containers.command**: overrides the image 'ENTRYPOINT' field;
