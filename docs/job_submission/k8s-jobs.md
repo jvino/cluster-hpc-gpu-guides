@@ -82,19 +82,38 @@ users:
 ```
 
 The only part that needs to be edited in this manifest is the section **contexts.name.context.namespace**. Replace **\<your-frontend-username\>** with your actual cluster username. So, for example, if you connect to the cluster with  
+
+
 `ssh fdebiase@frontend.recas.ba.infn.it`  
 then the namespace should be:  
+
+
 `namespace: batch-fdebiase`
 
+
 Once you've saved the file (e.g. **/lustrehome/fdebiase/kubeconfig.yaml**), you need to tell **kubectl** where to find it. Add the following line to your **~/.bashrc** file (or **~/.zshrc**, depending on your shell):  
+
+
 `export KUBECONFIG=/path/to/kubeconfig`  
+
+
 e.g.  
+
+
 `export KUBECONFIG=/lustrehome/fdebiase/kubeconfig.yaml`  
+
+
 Then apply the changes with:  
+
+
 `source ~/.bashrc`  
+
+
 or open a new terminal window.   
 
 In case this last step is not really clear to you (check [this guide](https://www.digitalocean.com/community/tutorials/bashrc-file-in-linux) if you wanna know more on the topic), you can just run (replacing the path with the actual location of your configuration file):  
+
+
 `echo 'export KUBECONFIG=/path/to/config/file' >> ~/.bashrc && source ~/.bashrc`  
 
 Either way, now **kubectl** will use this file by default whenever you run commands.
@@ -127,23 +146,41 @@ That’s it! Your configuration is now complete.
 > **Note**  
 > **Tokens are valid for 7 days**. When your token expires, **kubectl** commands will stop working with an error. To fix this, simply log in again at the URL above, retrieve a new token, and replace it in the config file. 
 
+
+
 > **Note**  
 > Please note that your token is **strictly personal**. You are fully responsible for any operations performed using your personal token.  
 If you are using **kubectl** directly on the ReCaS HTCondor cluster frontend, ensure that your Kubernetes configuration file (which contains your token) has restrictive permissions—accessible only by you.
 To enforce this, simply run the following command:   
+
+
 `chmod 700 <path/to/kubectl/conf>`  
+
+
 This sets the file permissions to allow read, write, and execute access only for your user.
 
 ### 3.3. Verifying your setup
 
 After your token is in place, for the next week (that is, until the token expires) you can directly interact with the Kubernetes cluster using **kubectl**.  
 To check that everything is configured correctly, run:  
+
+
 `kubectl get pod`  
+
+
 If everything is working, you’ll see:  
+
+
 `No resources found in batch-{yourUsername} namespace `  
+
+
 This means your token is valid and kubectl can communicate with the cluster.   
 Otherwise, if you get an error like:  
+
+
 `Error from server (Forbidden): pods is forbidden: User "{yourUsername}" cannot list resource "pods" in API group "" in the namespace "batch-{yourUsername}"`  
+
+
 then there might be a misconfiguration. Double-check the steps above, and if the issue persists, [reach out to support](#1-user-support).
 
 <br>
@@ -218,13 +255,21 @@ You’ll need to replace these placeholder values:
 - **metadata.name**: A unique name for your Job;
 - **spec.template.spec.containers.name**: Arbitrary name for your container. In Kubernetes, a Job is an object that wraps one or more containers: that's why you need to specify both a name for the Job object and one for the container(s) the Job launches;
 - **spec.template.spec.containers.image**: Container image. In case it is a public one directly  from DockerHub you only need to specify the image name or link, so for example  
+
 `image: ubuntu`  
+
 or  
+
 `image: gcr.io/google-containers/pause:3.9`    
+
 otherwise if you are launching a container with a custom image pushed in our private image registry, you need to specify it like  
+
 `image: registry-clustergpu.recas.ba.infn.it/{yourUsername}/{yourImage}`    
+
 so for example  
+
 `image: registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1`
+
 - **spec.template.spec.containers.resources.limits.cpu**, **spec.template.spec.containers.resources.limits.memory** and **spec.template.spec.containers.resources.limits.nvidia.com/gpu**: limits to the number of CPU cores, RAM in terms of Gibibytes (≈ Gigabytes) and number of GPU(s); 
 - **spec.template.spec.containers.command**: overrides the image 'ENTRYPOINT' field;
 - **spec.template.spec.containers.args**: overrides the image 'CMD' field.
@@ -321,8 +366,11 @@ spec:
 ```
 
 Once your manifest is ready and saved (e.g. as **my-job.yaml**), submit it to the Kubernetes cluster with:  
+
 `kubectl apply -f /path/to/file`  
+
 so, for example  
+
 `kubectl apply -f my-job.yaml`
 
 Kubernetes will validate the manifest and either start the job immediately (if resources are available), queue it for execution when the required resources become free or return an error if the file is incorrectly written.
@@ -365,14 +413,19 @@ In practice, it’s as if you were working directly on the frontend itself, but 
 
 Just because your **kubectl apply** command doesn't return an error doesn't mean the Job actually ran successfully.   
 To monitor the state of your Job and the underlying Pod, use the following commands: 
+
 - List your pods:   
 `kubectl get pod`
+
 - Describe a specific pod (helpful to debug scheduling issues or container errors):  
 `kubectl describe pod <podName>`
+
 - Check logs from the pod (only available after the container starts running):  
 `kubectl logs <podName>`
+
 - List your jobs:  
 `kubectl get job`  
+
 - Inspect job details:  
 `kubectl describe job <jobName>`
 
