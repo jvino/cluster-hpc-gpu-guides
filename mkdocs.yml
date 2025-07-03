@@ -27,7 +27,7 @@ nav:
   - Overview: 'index.md'
   - Interactive Services: 
     - ReCaS JupyterHub: 'interactive_services/jupyter-lab-for-recas-users-k8s.md'
-    - ReCaS JupyterHub with powerful GPUs: 'interactive_services/jupyter_with_gpu.md'
+    - ReCaS JupyterHub with more resources: 'interactive_services/jupyter_with_gpu.md'
     - RStudio: 'interactive_services/rstudio.md'
   - Job Submission:
     - Using Kubernetes: 'job_submission/k8s-jobs.md'

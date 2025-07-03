@@ -1,4 +1,4 @@
-#Custom Jupyter Lab
+#ReCaS JupyterHub with more Resources
 
 *Updated on 03Jul2025*
 
