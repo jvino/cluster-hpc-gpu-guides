@@ -3,7 +3,7 @@
 *Updated on 19 May 2025*
 
 ## 0 User Support
-If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket titled “ReCaS HPC/GPU: JupyterLab support” and describe your issue.
+If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create ag ticket titled “ReCaS HPC/GPU: JupyterLab support” and describe your issue.
 
 Please provide all the necessary information to help us resolve your issue more easily, such as the notebook absolute path, screenshots, and so on.
 
