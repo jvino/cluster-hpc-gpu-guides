@@ -226,13 +226,14 @@ kind: Job
 metadata:
   name: <job-name>
 spec:
+  backoffLimit: 0
   template:
     spec:
 #      runtimeClassName: nvidia
       containers:
       - name: <container-name>
         image: <container-image>
-        command: ["sh", "-c", "echo Just an example...; sleep 3600"]
+        command: ["sh", "-c", "<command_1>; <command_2>; <command_3>; ..."]
         resources:
           requests:
             cpu: "0.2"
@@ -267,9 +268,18 @@ You’ll need to replace these placeholder values:
 
 **metadata.name**: A unique name for your Job;
 
+<br>
+
+**spec.backoffLimit**:  Specifies the number of retry attempts Kubernetes will make if the Job fails before giving up.  
+Once the number of failures reaches this limit, the Job is marked as failed and will not be retried further.  
+For most jobs, it makes sense to leave `backoffLimit: 0` as is — no need to restart the job upon failure.  
+If needed, you can increase this value up to a maximum of 6 retry attempts. If the field is omitted, it will default to 6.
+
+<br>
 
 **spec.template.spec.containers.name**: Arbitrary name for your container. In Kubernetes, a Job is an object that wraps one or more containers: that's why you need to specify both a name for the Job object and one for the container(s) the Job launches;
 
+<br>
 
 **spec.template.spec.containers.image**: Container image. In case it is a public one directly  from DockerHub you only need to specify the image name or link, so for example  
 
@@ -287,12 +297,20 @@ So, for example
 
 `image: registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1`
 
+<br>
 
 **spec.template.spec.containers.resources.limits.cpu**, **spec.template.spec.containers.resources.limits.memory** and **spec.template.spec.containers.resources.limits.nvidia.com/gpu**: limits to the number of CPU cores, RAM in terms of Gibibytes (≈ Gigabytes) and number of GPU(s).  
 The parameters under **resources.requests**, instead, define the minimum guaranteed amount of resources that the container will receive. For most use cases, the default values we have provided should be sufficient and typically don’t require adjustment.
 
+<br>
 
-**spec.template.spec.containers.command**: overrides the image 'ENTRYPOINT' field;
+
+**spec.template.spec.containers.command**: overrides the image 'ENTRYPOINT' field; This is typically where you want to put the command(s) to start the container with.  
+For example, to execute `echo Starting job...` followed by `sleep 3600`:
+
+`command: ["sh", "-c", "echo Starting job...; sleep 3600"]`  
+
+<br>
 
 
 **spec.template.spec.containers.args**: overrides the image 'CMD' field.
@@ -301,6 +319,7 @@ The parameters under **resources.requests**, instead, define the minimum guarant
 > **Note**  
 > For a quick overview on the 'CMD' and 'ENTRYPOINT' fields of a container image, please check [this link](https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/).
 
+<br>
 
 If your workload does not require a GPU, please leave `spec.runtimeClassName` and the entire `spec.nodeSelector` section commented out.  
 If, instead, your workload does require the use of GPUs, change the `nvidia.com/gpu` limit and uncomment (just remove the '#' from the manifest and leave indentation as is) the `spec.runtimeClassName` field, the `nodeSelector:` line and **JUST** its subfield regarding the kind of GPU you are interested in using (whether a NVIDIA V100/A100/H100).  
@@ -311,6 +330,8 @@ Please note that your request can end up in error if you:
 
 For reference, here are two fully avvalorated examples for a Job not requesting a GPU (first manifest) and a Job requesting 2 NVIDIA A100 GPUs:
 
+<br>
+
 #### Example Job NOT requesting a GPU
 
 
@@ -320,6 +341,7 @@ kind: Job
 metadata:
   name: documentazione-job
 spec:
+  backoffLimit: 0
   template:
     spec:
 #      runtimeClassName: nvidia
@@ -355,7 +377,7 @@ spec:
 #        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3
 #        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB
 ```
-
+<br>
 
 #### Example Job requesting 2 NVIDIA A100 GPUs
 
@@ -366,6 +388,7 @@ kind: Job
 metadata:
   name: documentazione-job
 spec:
+  backoffLimit: 0
   template:
     spec:
       runtimeClassName: nvidia
