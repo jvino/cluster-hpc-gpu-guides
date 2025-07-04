@@ -185,10 +185,10 @@ This means your token is valid and kubectl can communicate with the cluster.
 Otherwise, if you get an error like:  
 
 
-`Error from server (Forbidden): pods is forbidden: User "{yourUsername}" cannot list resource "pods" in API group "" in the namespace "batch-{yourUsername}"`  
+```Error from server (Forbidden): pods is forbidden: User "{yourUsername}" cannot list resource "pods" in API group "" in the namespace "batch-{yourUsername}"```  
 
 
-then there might be a misconfiguration. Double-check the steps above, and if the issue persists, [reach out to support](#1-user-support).
+then there might be a misconfiguration. Double-check the steps above; if the issue persists, [reach out to support](#important-user-support).
 
 
 ## 4) Jobs submission
@@ -211,9 +211,9 @@ No need for manual retries: just submit your job and let the system handle the r
 Submitting a job is simple and flexible, but assumes your application is packaged as a Docker container.   
 You can use third-party public images (e.g. from DockerHub) or build and push your own image to our private container image registry, as explained in [this guide](https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/#2-building-custom-docker-containers-in-recas-bari).  
 
- Please note that, once the job is running, you’ll be able to open a terminal inside the container, just like SSH access—allowing for full interaction with your running workloads.
+ Please note that, once the job is running, you’ll be able to open a terminal inside the container, just like SSH access, allowing for full interaction with your running workloads.
 
-### Enough chit-chat, let's submit our Jobs!
+#### Enough chit-chat, let's submit our Jobs!
 
 Before submitting any job, ensure that you have configured **kubectl** and your access token is valid. See [Section 3: Configuring Access](#3-configuring-access-to-the-kubernetes-cluster) for details.
 
@@ -311,7 +311,7 @@ Please note that your request can end up in error if you:
 
 For reference, here are two fully avvalorated examples for a Job not requesting a GPU (first manifest) and a Job requesting 2 NVIDIA A100 GPUs:
 
-### Example Job NOT requesting a GPU
+#### Example Job NOT requesting a GPU
 
 
 ```
@@ -357,7 +357,7 @@ spec:
 ```
 
 
-### Example Job requesting 2 NVIDIA A100 GPUs
+#### Example Job requesting 2 NVIDIA A100 GPUs
 
 
 ```
