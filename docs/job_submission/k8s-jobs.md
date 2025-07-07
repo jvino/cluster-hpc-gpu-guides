@@ -206,6 +206,7 @@ kind: Job
 metadata:
   name: <job-name>
 spec:
+  ttlSecondsAfterFinished: 604800
   backoffLimit: 0
   template:
     spec:
@@ -254,6 +255,12 @@ You’ll need to replace these placeholder values:
 Once the number of failures reaches this limit, the Job is marked as failed and will not be retried further.  
 For most jobs, it makes sense to leave `backoffLimit: 0` as is — no need to restart the job upon failure.  
 If needed, you can increase this value up to a maximum of 6 retry attempts. If the field is omitted, it will default to 6.
+
+<br>
+
+**spec.ttlSecondsAfterFinished**: Duration in seconds to retain the Job object in the cluster after it completes execution, either successfully or with an error. After this period, the Job is automatically deleted by the TTL controller.  
+In this manifest, the value is set to one week (604800 seconds).  
+This setting only affects the Job controller object, not the container lifecycle. The Pods created by the Job will still terminate as usual upon completion, the containers will not continue running during this TTL period. However, logs and information regarding the terminated Pods and Jobs remain accessible for as long as specified in this field.
 
 <br>
 
@@ -409,13 +416,13 @@ spec:
 Once your manifest is ready and saved (e.g. as **my-job.yaml**), submit it to the Kubernetes cluster with:  
 
 
-`kubectl apply -f /path/to/file`  
+`kubectl create -f /path/to/file`  
 
 
 so, for example  
 
 
-`kubectl apply -f my-job.yaml`
+`kubectl create -f my-job.yaml`
 
 
 Kubernetes will validate the manifest and either start the job immediately (if resources are available), queue it for execution when the required resources become free or return an error if the file is incorrectly written.
@@ -427,7 +434,21 @@ A Job, in turn, is a controller that manages the lifecycle of one or more Pods a
 In practical terms: when you submit a Job to the cluster, Kubernetes creates a Pod, and that Pod runs the container you defined for your workload.  
 We won’t dive deeper into the details of Pods in this guide, as they’re not essential for day-to-day usage. However, if you're curious, you can read more in the [official Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/). 
 
-### 4.3) Shared storage
+
+### 4.3) Submitting more than a Job / Resubmitting the same job
+
+In Kubernetes, the unique identifier for an object is its name, combined with the namespace it resides in. Since each user operates within their own dedicated namespace, only one object of a given type (e.g., a Job) with a specific name can exist at a time within that namespace.
+
+This means that in order to submit multiple Jobs starting from the same manifest file, you must either change the **metadata.name** field of the Job in the YAML definition for each submission, ensuring uniqueness, or delete the previous Job before re-submitting a new one with the same name:
+
+
+```
+kubectl delete -f /path/to/job/definition.yaml
+kubectl create -f /path/to/job/definition.yaml
+```
+
+
+### 4.4) Shared storage
 
 In the Job manifest file, you might have noticed the following section:
 
@@ -459,9 +480,9 @@ In practice, it’s as if you were working directly on the frontend itself, but 
 > **Note**  
 > Proper file permissions and access control are enforced. So don’t try anything sneaky — you will only be able to access files and directories you are authorized to.
 
-### 4.4) Monitoring and Debugging Submitted Jobs
+### 4.5) Monitoring and Debugging Submitted Jobs
 
-Just because your **kubectl apply** command doesn't return an error doesn't mean the Job actually ran successfully.   
+Just because your **kubectl create** command doesn't return an error doesn't mean the Job actually ran successfully.   
 To monitor the state of your Job and the underlying Pod, use the following commands: 
 
 - List your pods:   
@@ -491,7 +512,7 @@ To monitor the state of your Job and the underlying Pod, use the following comma
 
 These commands will help you identify what went wrong, whether the container failed to start, exited early or encountered runtime errors.
 
-### 4.5) Opening a terminal into a container
+### 4.6) Opening a terminal into a container
 
 If your job is running and you want to interact directly with the container — for example to run commands, inspect files or debug issues — you can run a command inside it using:  
 
@@ -515,7 +536,7 @@ if instead **bash** is not present in the image you can try with
 `kubectl exec -it <podName> -- sh`  
 
 
-### 4.6) Deleting a job
+### 4.7) Deleting a job
 
 If you submitted a job by mistake, or if you noticed there is something wrong with your workload, you can delete a Job manually to free up cluster resources and keep your environment clean.  
 
