@@ -258,7 +258,7 @@ If needed, you can increase this value up to a maximum of 6 retry attempts. If t
 
 <br>
 
-**spec.ttlSecondsAfterFinished**: Duration in seconds to retain the Job object in the cluster after it completes execution, either successfully or with an error. After this period, the Job is automatically deleted by the TTL controller.  
+**spec.ttlSecondsAfterFinished**: Duration in seconds to retain the Job object in the cluster after it completes execution, either successfully or with an error. After this period of time, the Job is automatically deleted by the TTL controller.  
 In this manifest, the value is set to one week (604800 seconds).  
 This setting only affects the Job controller object, not the container lifecycle. The Pods created by the Job will still terminate as usual upon completion, the containers will not continue running during this TTL period. However, logs and information regarding the terminated Pods and Jobs remain accessible for as long as specified in this field.
 
