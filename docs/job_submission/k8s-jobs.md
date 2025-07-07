@@ -58,7 +58,13 @@ The tool is already installed on the ReCaS frontend (**frontend.recas.ba.infn.it
 
 To configure **kubectl** for access to the ReCaS Kubernetes cluster — either from the frontend or from your own system — you’ll need to create a configuration file with the correct cluster and authentication details.  
 
-Start by opening your favorite text editor (**vim**, **nano**, **emacs**, etc.) and copy the following template:
+**kubectl** is configured to look for its configuration file at the path **.kube/config** within the home directory of the user executing the command. To set this up, begin by creating the **.kube** directory:
+
+
+`mkdir ~/.kube`
+
+
+Then, using your preferred text editor (**vim**, **nano**, **emacs**, etc.),  create the **~/.kube/config** file and paste the following template into it:
 
 
 ```
@@ -96,33 +102,7 @@ then the namespace should be:
 `namespace: batch-fdebiase`
 
 
-Once you've saved the file (e.g. **/lustrehome/fdebiase/kubeconfig.yaml**), you need to tell **kubectl** where to find it. Add the following line to your **~/.bashrc** file (or **~/.zshrc**, depending on your shell):  
-
-
-`export KUBECONFIG=/path/to/kubeconfig`  
-
-
-e.g.  
-
-
-`export KUBECONFIG=/lustrehome/fdebiase/kubeconfig.yaml`  
-
-
-Then apply the changes with:  
-
-
-`source ~/.bashrc`  
-
-
-or open a new terminal window.   
-
-In case this last step is not really clear to you (check [this guide](https://www.digitalocean.com/community/tutorials/bashrc-file-in-linux) if you wanna know more on the topic), you can just run (replacing the path with the actual location of your configuration file):  
-
-
-`echo 'export KUBECONFIG=/path/to/config/file' >> ~/.bashrc && source ~/.bashrc`  
-
-
-Either way, now **kubectl** will use this file by default whenever you run commands.
+Once you’ve made these changes and saved the file, kubectl will automatically use this configuration by default whenever you run commands.
 
 ### 3.2) Access token
 
@@ -154,17 +134,17 @@ users:
 That’s it! Your configuration is now complete.
 
 
+> **⚠️ IMPORTANT NOTE**  
+> Your access token is **strictly personal**. You are fully responsible for any operations performed using your personal token.  
+If you are using **kubectl** directly on the ReCaS HTCondor cluster frontend, ensure that your Kubernetes configuration file (which contains your token) has restrictive permissions—accessible only by you.
+To enforce this, simply run the following command:   
+`chmod 700 ~/.kube/config`  
+This sets the file permissions to allow read, write, and execute access only for your user.
+
+
 > **Note**  
 > **Tokens are valid for 7 days**. When your token expires, **kubectl** commands will stop working with an error. To fix this, simply log in again at the URL above, retrieve a new token, and replace it in the config file. 
 
-
-
-> **Note**  
-> Please note that your token is **strictly personal**. You are fully responsible for any operations performed using your personal token.  
-If you are using **kubectl** directly on the ReCaS HTCondor cluster frontend, ensure that your Kubernetes configuration file (which contains your token) has restrictive permissions—accessible only by you.
-To enforce this, simply run the following command:   
-`chmod 700 <path/to/kubectl/conf>`  
-This sets the file permissions to allow read, write, and execute access only for your user.
 
 ### 3.3) Verifying your setup
 
