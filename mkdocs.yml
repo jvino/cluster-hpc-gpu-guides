@@ -1,4 +1,4 @@
-site_name: ReCaS-Bari HPC/GPU Cluster
+site_name: ReCaS-Bari Computing Services (Kubernetes and HTCondor Job Orchestrators)
 repo_url: https://github.com/jvino/cluster-hpc-gpu-guides
 site_author: Gioacchino Vino - gioacchino.vino@ba.infn.it
 theme:
