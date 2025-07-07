@@ -328,6 +328,7 @@ kind: Job
 metadata:
   name: documentazione-job
 spec:
+  ttlSecondsAfterFinished: 604800
   backoffLimit: 0
   template:
     spec:
@@ -375,6 +376,7 @@ kind: Job
 metadata:
   name: documentazione-job
 spec:
+  ttlSecondsAfterFinished: 604800
   backoffLimit: 0
   template:
     spec:
