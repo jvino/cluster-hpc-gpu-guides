@@ -31,6 +31,7 @@ nav:
     - RStudio: 'interactive_services/rstudio.md'
   - Job Submission:
     - Using Kubernetes: 'job_submission/k8s-jobs.md'
+    - Using HTCondor: 'job_submission/htcondor.md'
   - Guides:
     - Docker and Dockerfile: 'guides/docker_and_dockerfile.md'
     - JupyterLab: 'guides/jupyter-lab.md'
