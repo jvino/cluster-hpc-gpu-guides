@@ -21,7 +21,7 @@ You can run a third party container or you can build your custom one. Please ref
 ## 2) Access to the service 
 
 Access to our HPC/GPU Kubernetes Cluster is available only for users with a ReCaS-Bari HPC/HTC account active. Users without such an account **MUST** register using [this link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2) (check the box "**Account for access to ReCas-Bari compute services (HTC/HPC)**").  
-Once your request has been submitted, it must be approved by the service manager. This process typically takes a couple of working days. You will receive an automatic email notification as soon as your account is activated.
+Once your request has been submitted, it must be approved by the service manager. This process usually takes a few working days. You will receive an automatic email notification as soon as your account is activated.
 
 Once activated, you can verify if the registration is successfully completed by accessing the **frontend.recas.ba.infn.it** server via ssh:
 
@@ -45,7 +45,7 @@ Please provide the following information:
 
 ## 3) Configuring access to the Kubernetes cluster
 
-This section explains how to set up the **kubectl** command-line tool to access the ReCaS HPC/GPU Kubernetes cluster, after your access request has been approved—that is, once you’ve received a positive response to the ticket titled "**ReCaS HPC/GPU: request to access HPC/GPU K8s cluster**" as described in [Section 2](#2-access-to-the-service).
+This section explains how to set up the **kubectl** command-line tool to access the ReCaS HPC/GPU Kubernetes cluster after your access request has been approved—that is, once you’ve received a positive response to the ticket titled "**ReCaS HPC/GPU: request to access HPC/GPU K8s cluster**" as described in [Section 2](#2-access-to-the-service).
 
 ### 3.1) kubectl
 
@@ -92,10 +92,12 @@ users:
 ```
 
 
-The only part that needs to be edited in this manifest is the section **contexts.name.context.namespace**. Replace **\<your-frontend-username\>** with your actual cluster username. So, for example, if you connect to the cluster with  
+The only part that needs to be edited in this manifest is the section **contexts.name.context.namespace**. Replace **<your-frontend-username\>** with your actual cluster username. So, for example, if you connect to the cluster with  
 
 
 `ssh fdebiase@frontend.recas.ba.infn.it`  
+
+
 then the namespace should be:  
 
 
@@ -247,7 +249,7 @@ spec:
 
 You’ll need to replace these placeholder values: 
 
-**metadata.name**: A unique name for your Job;
+**metadata.name**: A <ins>unique</ins> name for your Job;
 
 <br>
 
@@ -260,7 +262,8 @@ If needed, you can increase this value up to a maximum of 6 retry attempts. If t
 
 **spec.ttlSecondsAfterFinished**: Duration in seconds to retain the Job object in the cluster after it completes execution, either successfully or with an error. After this period of time, the Job is automatically deleted by the TTL controller.  
 In this manifest, the value is set to one week (604800 seconds).  
-This setting only affects the Job controller object, not the container lifecycle. The Pods created by the Job will still terminate as usual upon completion, the containers will not continue running during this TTL period. However, logs and information regarding the terminated Pods and Jobs remain accessible for as long as specified in this field.
+This setting only affects the Job controller object, not the container lifecycle. The Pods created by the Job will still terminate as usual upon completion, the containers will not continue running during this TTL period. However, logs and information regarding the terminated Pods and Jobs remain accessible for as long as specified in this field.  
+Feel free to adjust this parameter as preferred, up to a maximum of 3 months (67737600 seconds).  
 
 <br>
 
@@ -497,7 +500,7 @@ To monitor the state of your Job and the underlying Pod, use the following comma
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `kubectl describe pod <podName>`
 
-- Check logs from the pod (only available after the container starts running): 
+- Check logs from the pod (only available after the container has started running; shows the standard output and error streams of the software running inside the container, useful for debugging and viewing runtime logs): 
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `kubectl logs <podName>`
@@ -513,6 +516,19 @@ To monitor the state of your Job and the underlying Pod, use the following comma
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  `kubectl describe job <jobName>`
 
 These commands will help you identify what went wrong, whether the container failed to start, exited early or encountered runtime errors.
+
+
+> **Note**
+> Logs and information about completed (or failed) Jobs and their Pods are only available for as long as specified by the **ttlSecondsAfterFinished** setting in the Job manifest. After this time, the Job is automatically deleted and its related data is no longer accessible.  
+If you want to keep logs and other information permanently, you have two options. One is to remove the **ttlSecondsAfterFinished** field from the Job manifest, which would prevent the Job from being automatically deleted. However, <ins>this is not recommended</ins>, as over time your namespace would fill up with old completed Jobs, making it harder to manage and requiring manual cleanup.   
+<ins>The recommended approach</ins> is instead to save the information you need—such as pod descriptions or logs—to a file using commands like 
+`kubectl describe pod <podName> > /path/where/to/store/the/log/file`  
+and, similarly, for all the other commands listed above.  
+This way, you can retain any important details without cluttering the cluster. 
+
+
+
+
 
 ### 4.6) Opening a terminal into a container
 
