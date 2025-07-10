@@ -518,13 +518,13 @@ To monitor the state of your Job and the underlying Pod, use the following comma
 These commands will help you identify what went wrong, whether the container failed to start, exited early or encountered runtime errors.
 
 
-> **Note**
+> **Note**  
 > Logs and information about completed (or failed) Jobs and their Pods are only available for as long as specified by the **ttlSecondsAfterFinished** setting in the Job manifest. After this time, the Job is automatically deleted and its related data is no longer accessible.  
 If you want to keep logs and other information permanently, you have two options. One is to remove the **ttlSecondsAfterFinished** field from the Job manifest, which would prevent the Job from being automatically deleted. However, <ins>this is not recommended</ins>, as over time your namespace would fill up with old completed Jobs, making it harder to manage and requiring manual cleanup.   
-<ins>The recommended approach</ins> is instead to save the information you need—such as pod descriptions or logs—to a file using commands like 
+<ins>The recommended approach</ins> is instead to save the information you need—such as pod descriptions or logs—to a file using commands like  
 `kubectl describe pod <podName> > /path/where/to/store/the/log/file`  
 and, similarly, for all the other commands listed above.  
-This way, you can retain any important details without cluttering the cluster. 
+This way, you can retain any important details without cluttering the cluster.  
 
 
 
