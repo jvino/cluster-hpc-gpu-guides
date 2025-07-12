@@ -260,10 +260,12 @@ If needed, you can increase this value up to a maximum of 6 retry attempts. If t
 
 <br>
 
-**spec.ttlSecondsAfterFinished**: Duration in seconds to retain the Job object in the cluster after it completes execution, either successfully or with an error. After this period of time, the Job is automatically deleted by the TTL controller.  
+**spec.ttlSecondsAfterFinished**: Duration in seconds to retain the Job object in the cluster <ins>after it completes execution</ins>, either successfully or with an error. After this period of time, the Job is automatically deleted by the TTL controller.  
+Put simply, this setting controls how long the system keeps logs and related job information after the job has finished or failed.  
 In this manifest, the value is set to one week (604800 seconds).  
 This setting only affects the Job controller object, not the container lifecycle. The Pods created by the Job will still terminate as usual upon completion, the containers will not continue running during this TTL period. However, logs and information regarding the terminated Pods and Jobs remain accessible for as long as specified in this field.  
 Feel free to adjust this parameter as preferred, up to a maximum of 3 months (67737600 seconds).  
+
 
 <br>
 
@@ -335,7 +337,7 @@ spec:
   backoffLimit: 0
   template:
     spec:
-#      runtimeClassName: nvidia
+#      runtimeClassName: nvidia       # <<< 🔴 Commented out
       containers:
       - name: documentazione-job
         image: busybox
@@ -347,7 +349,7 @@ spec:
           limits:
             cpu: "2"
             memory: "4Gi"
-            nvidia.com/gpu: 0
+            nvidia.com/gpu: 0         # <<< 🔴 Set to 0
         volumeMounts:
         - name: lustre
           mountPath: /lustre
@@ -363,10 +365,10 @@ spec:
         hostPath:
           path: /lustrehome
           type: Directory
-#      nodeSelector:
-#        nvidia.com/gpu.product: Tesla-V100-PCIE-32GB
-#        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3
-#        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB
+#      nodeSelector:                                          # <<< 🔴 Commented out
+#        nvidia.com/gpu.product: Tesla-V100-PCIE-32GB         # <<< 🔴 Commented out
+#        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3        # <<< 🔴 Commented out
+#        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB        # <<< 🔴 Commented out
 ```
 <br>
 
@@ -380,10 +382,10 @@ metadata:
   name: documentazione-job
 spec:
   ttlSecondsAfterFinished: 604800
-  backoffLimit: 0
+  backoffLimit: 0                     
   template:
     spec:
-      runtimeClassName: nvidia
+      runtimeClassName: nvidia        # <<< 🟢 Uncommented
       containers:
       - name: documentazione-job
         image: busybox
@@ -395,7 +397,7 @@ spec:
           limits:
             cpu: "2"
             memory: "4Gi"
-            nvidia.com/gpu: 2
+            nvidia.com/gpu: 2         # <<< 🟢 Set to integer
         volumeMounts:
         - name: lustre
           mountPath: /lustre
@@ -411,10 +413,10 @@ spec:
         hostPath:
           path: /lustrehome
           type: Directory
-      nodeSelector:
-#        nvidia.com/gpu.product: Tesla-V100-PCIE-32GB
-#        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3
-        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB
+      nodeSelector:                                           # <<< 🟢 Uncommented    
+#        nvidia.com/gpu.product: Tesla-V100-PCIE-32GB         # <<< 🔴 Commented out (I want 2 A100)
+#        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3        # <<< 🔴 Commented out (I want 2 A100)
+        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB         # <<< 🟢 Uncommented
 ```
 
 
