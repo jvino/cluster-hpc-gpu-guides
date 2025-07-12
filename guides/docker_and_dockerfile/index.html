@@ -1,0 +1,1055 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Gioacchino Vino - gioacchino.vino@ba.infn.it">
+      
+      
+      
+        <link rel="prev" href="../../job_submission/htcondor/">
+      
+      
+        <link rel="next" href="../jupyter-lab/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Docker and Dockerfile - ReCaS-Bari Computing Services</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#docker-containers-and-dockerfile" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-header__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ReCaS-Bari Computing Services
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker and Dockerfile
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-nav__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    ReCaS-Bari Computing Services
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Interactive Services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Interactive Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter-lab-for-recas-users-k8s/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter_with_gpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub with more resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RStudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Job Submission
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Job Submission
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../job_submission/k8s-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Kubernetes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../job_submission/htcondor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External Service - HTCondor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Docker and Dockerfile
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Docker and Dockerfile
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-building-custom-docker-containers-in-recas-bari" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Building custom Docker containers in ReCaS-Bari
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-docker-most-important-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Docker most important commands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Docker most important commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-docker-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Docker pull
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-docker-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Docker run
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-docker-ps" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Docker ps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-docker-container-rm" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 Docker container rm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-docker-exec" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 Docker exec
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-docker-port-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 Docker port mapping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-recas-docker-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 ReCaS Docker registry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 Dockerfile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Dockerfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-from-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 FROM Statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-user-creation-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 User creation section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-user-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 USER Statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-python-module-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 Python module installation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-docker-container-building-and-pushing" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 Docker container building and pushing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-use-case-use-a-custom-docker-image-with-chronos" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 Use case: use a custom docker image with Chronos
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jupyter-lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JupyterLab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="docker-containers-and-dockerfile">Docker containers and Dockerfile<a class="headerlink" href="#docker-containers-and-dockerfile" title="Permanent link">&para;</a></h1>
+<h2 id="1-introduction">1 Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>Docker is an open source project that automates the deployment of software applications inside <strong>containers</strong> by providing an additional layer of abstraction and automation of OS-level virtualization on Linux. A Docker container packages an application with all of its dependencies into a standardized unit for software development.</p>
+<h2 id="2-building-custom-docker-containers-in-recas-bari">2 Building custom Docker containers in ReCaS-Bari<a class="headerlink" href="#2-building-custom-docker-containers-in-recas-bari" title="Permanent link">&para;</a></h2>
+<p>The ReCaS Bari data center makes available a dedicated machine where to develop containers to be deployed on the HPC/GPU Cluster.</p>
+<p>This machine is accessible only to users with a ReCaS-Bari HPC/HTC account active. Users without such an account should register using this <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2">link</a> (check the box "<strong>Account for access to ReCas-Bari compute services (HTC/HPC)</strong>").</p>
+<p>In order to access the machine, first access to the frontend using SSH in a command prompt/shell (Linux, Mac, and Windows ≥10) and insert your password when prompted.</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>&lt;username&gt;@frontend.recas.ba.infn.it
+</code></pre></div>
+<p>After that, access the dedicated machine:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>&lt;username&gt;@tesla02.recas.ba.infn.it
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you facing the “Too Many Authentication Failures” error, use the following command <code>ssh -o IdentitiesOnly=yes &lt;username&gt;@tesla02.recas.ba.infn.it</code></p>
+</div>
+<h2 id="3-docker-most-important-commands">3 Docker most important commands<a class="headerlink" href="#3-docker-most-important-commands" title="Permanent link">&para;</a></h2>
+<p>In this document, the most important aspects of Docker will be covered.</p>
+<h3 id="31-docker-pull">3.1 Docker pull<a class="headerlink" href="#31-docker-pull" title="Permanent link">&para;</a></h3>
+<p>The <code>pull</code> command fetches an image from the Docker registry (a place where the docker images are stored and can be downloaded/pulled) and saves it to a host for using it.</p>
+<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>ubuntu:20.04
+</code></pre></div>
+Output:
+<div class="highlight"><pre><span></span><code><span class="m">20</span>.04:<span class="w"> </span>Pulling<span class="w"> </span>from<span class="w"> </span>library/ubuntu
+345e3491a907:<span class="w"> </span>Pull<span class="w"> </span><span class="nb">complete</span>
+57671312ef6f:<span class="w"> </span>Pull<span class="w"> </span><span class="nb">complete</span>
+5e9250ddb7d0:<span class="w"> </span>Pull<span class="w"> </span><span class="nb">complete</span>
+Digest:<span class="w"> </span>sha256:cf31af331f38d1d7158470e095b132acd126a7180a54f263d386da88eb681d93
+Status:<span class="w"> </span>Downloaded<span class="w"> </span>newer<span class="w"> </span>image<span class="w"> </span><span class="k">for</span><span class="w"> </span>ubuntu:20.04
+docker.io/library/ubuntu:20.04
+</code></pre></div></p>
+<p>You can use the <code>docker image ls</code> command to list all images on your system.</p>
+<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span>image<span class="w"> </span>ls
+</code></pre></div>
+Output:
+<div class="highlight"><pre><span></span><code>REPOSITORY<span class="w">   </span>TAG<span class="w">    </span>IMAGE<span class="w"> </span>ID<span class="w">      </span>CREATED<span class="w">         </span>SIZE
+ubuntu<span class="w">      </span><span class="m">20</span>.04<span class="w">   </span>7e0aa2d69a15<span class="w">   </span><span class="m">3</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">   </span><span class="m">72</span>.7MB
+</code></pre></div></p>
+<h3 id="32-docker-run">3.2 Docker run<a class="headerlink" href="#32-docker-run" title="Permanent link">&para;</a></h3>
+<p>Now that the <code>ubuntu:20.04</code> Docker image is on your host, you are able to run it using the command:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>ubuntu:20.04
+</code></pre></div>
+<p>As you can see, this command does nothing. When you execute <code>docker run</code>, the Docker client finds the image (ubuntu:20.04 in this case), loads up the container and then runs a command in that container. When we ran <code>docker run ubuntu:20.04</code>, we didn't provide a command, so the container booted up, ran an empty command and then exited.</p>
+<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>ubuntu:20.04<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;My first command in a container&quot;</span>
+</code></pre></div>
+Output:
+<div class="highlight"><pre><span></span><code>My<span class="w"> </span>first<span class="w"> </span><span class="nb">command</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>a<span class="w"> </span>container
+</code></pre></div></p>
+<p>As you can see, an output has been printed.</p>
+<p>If you want to execute multiple commands inside the container, it is possible open a terminal inside it.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>ubuntu:20.04<span class="w"> </span>/bin/bash
+ls<span class="w"> </span>/
+bin<span class="w">  </span>boot<span class="w">  </span>dev<span class="w">  </span>etc<span class="w">  </span>home<span class="w">  </span>lib<span class="w">  </span>lib32<span class="w">  </span>lib64<span class="w">  </span>libx32<span class="w">  </span>media<span class="w">  </span>mnt<span class="w">  </span>opt<span class="w">  </span>proc<span class="w">  </span>root<span class="w">  </span>run<span class="w">  </span>sbin<span class="w">  </span>srv<span class="w">  </span>sys<span class="w">  </span>tmp<span class="w">  </span>usr<span class="w">  </span>var
+uptime
+<span class="m">15</span>:37:57<span class="w"> </span>up<span class="w">  </span><span class="m">7</span>:20,<span class="w">  </span><span class="m">0</span><span class="w"> </span>users,<span class="w">  </span>load<span class="w"> </span>average:<span class="w"> </span><span class="m">0</span>.00,<span class="w"> </span><span class="m">0</span>.03,<span class="w"> </span><span class="m">0</span>.05
+<span class="nb">exit</span>
+</code></pre></div>
+<h3 id="33-docker-ps">3.3 Docker ps<a class="headerlink" href="#33-docker-ps" title="Permanent link">&para;</a></h3>
+<p>The <code>docker ps</code> command shows you all containers that are currently running.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps
+CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">    </span>COMMAND<span class="w">   </span>CREATED<span class="w">   </span>STATUS<span class="w">  </span>PORTS<span class="w">   </span>NAMES
+</code></pre></div>
+<p>Since no containers are running, we see a blank line. Let's try a more useful variant:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps<span class="w"> </span>-a
+CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">        </span>COMMAND<span class="w">                 </span>CREATED<span class="w">         </span>STATUS<span class="w">                      </span>PORTS<span class="w">   </span>NAMES
+afcac6f85b26<span class="w">   </span>ubuntu:20.04<span class="w">   </span><span class="s2">&quot;bash&quot;</span><span class="w">                </span><span class="m">3</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>Exited<span class="w"> </span><span class="o">(</span><span class="m">130</span><span class="o">)</span><span class="w"> </span><span class="m">4</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">          </span>blissful<span class="se">\_</span>chaum
+ee288eeb2a67<span class="w">   </span>ubuntu:20.04<span class="w">   </span><span class="s2">&quot;echo &#39;My first comm…&quot;</span><span class="w">   </span><span class="m">4</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>Exited<span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="m">4</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">             </span>flamboyant<span class="se">\_</span>spence
+fac38035f7bc<span class="w">   </span>ubuntu:20.04<span class="w">   </span><span class="s2">&quot;/bin/bash&quot;</span><span class="w">           </span><span class="m">6</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">   </span>Exited<span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">            </span>peaceful<span class="se">\_</span>kepler
+</code></pre></div>
+<p>The <code>-a</code> flag is used to show all the containers (while the default shows just the ones currently running), so what we see above is a list of all containers that we ran (and not deleted) up to now. Please notice that the STATUS column shows that these containers exited a few minutes ago.</p>
+<h3 id="34-docker-container-rm">3.4 Docker container rm<a class="headerlink" href="#34-docker-container-rm" title="Permanent link">&para;</a></h3>
+<p>To remove non-running containers, use this command:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>container<span class="w"> </span>rm<span class="w"> </span>afcac6f85b26<span class="w"> </span>ee288eeb2a67<span class="w"> </span>fac38035f7bc
+afcac6f85b26
+ee288eeb2a67
+fac38035f7bc
+</code></pre></div>
+<p>You can check using <code>docker ps -a</code> that the selected container is not on the host anymore</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps<span class="w"> </span>-a
+CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">    </span>COMMAND<span class="w">   </span>CREATED<span class="w">   </span>STATUS<span class="w">  </span>PORTS<span class="w">   </span>NAMES
+</code></pre></div>
+<p>If you want remove a container immediately after having executed some commands inside it you can use the <code>--rm</code> flag:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>ubuntu:20.04<span class="w"> </span>/bin/bash
+ls<span class="w"> </span>/
+bin<span class="w">  </span>boot<span class="w">  </span>dev<span class="w">  </span>etc<span class="w">  </span>home<span class="w">  </span>lib<span class="w">  </span>lib32<span class="w">  </span>lib64<span class="w">  </span>libx32<span class="w">  </span>media<span class="w">  </span>mnt<span class="w">  </span>opt<span class="w">  </span>proc<span class="w">  </span>root<span class="w">  </span>run<span class="w">  </span>sbin<span class="w">  </span>srv<span class="w">  </span>sys<span class="w">  </span>tmp<span class="w">  </span>usr<span class="w">  </span>var
+<span class="nb">exit</span>
+
+docker<span class="w"> </span>ps<span class="w"> </span>-a
+CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">    </span>COMMAND<span class="w">   </span>CREATED<span class="w">   </span>STATUS<span class="w">  </span>PORTS<span class="w">   </span>NAMES
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Periodical clean up of docker images</p>
+<p>The machine <code>tesla02.recas.ba.infn.it</code> is used <strong>ONLY</strong> to test container to be deployed on the HPC/GPU Cluster. Periodically all saved container images will be removed. Be aware of it.</p>
+</div>
+<h3 id="35-docker-exec">3.5 Docker exec<a class="headerlink" href="#35-docker-exec" title="Permanent link">&para;</a></h3>
+<p>Docker gives the possibility to force a container in the background even if no command is passed.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>-it<span class="w"> </span>ubuntu:20.04
+048f685e181b2064538d482fa48fc553aa6821b5f51d254e79aca8a5b6069834
+</code></pre></div>
+<p>The <code>-d</code> flag tells Docker to DETACH the container and run it in background and to print its ID. Since the container is still running, <code>docker ps</code> prints its information</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>ps
+CONTAINER<span class="w"> </span>ID<span class="w">   </span>IMAGE<span class="w">        </span>COMMAND<span class="w">     </span>CREATED<span class="w">         </span>STATUS<span class="w">      </span>PORTS<span class="w">   </span>NAMES
+048f685e181b<span class="w">   </span>ubuntu:20.04<span class="w">   </span><span class="s2">&quot;/bin/bash&quot;</span><span class="w">   </span><span class="m">4</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">   </span>Up<span class="w"> </span><span class="m">3</span><span class="w"> </span>seconds<span class="w">            </span>laughing_proskuriakova
+</code></pre></div>
+<p>Using <code>docker exec</code> is possible to enter inside the container with a shell:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>048f685e181b<span class="w"> </span>/bin/bash
+hostname
+048f685e181b
+</code></pre></div>
+<h3 id="36-docker-port-mapping">3.6 Docker port mapping<a class="headerlink" href="#36-docker-port-mapping" title="Permanent link">&para;</a></h3>
+<p>If inside the container there is a service exposing a specific port, you need to map that port (inside the container) to a port on the host where the container is run. In order to do that, use the <code>-p</code> flag in <code>docker run</code>:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">11111</span>:12345<span class="w"> </span>python:3<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="m">12345</span>
+</code></pre></div>
+<p>The above command executes a http server using the container image <code>python:3</code>. The server is linked to the port 12345 <strong>inside</strong> the container. Using -p 11111:12345, you are mapping the port 11111 on the host to the port 12345 of the container. So, in order to access the served web page you need to connect to <code>tesla02.recas.ba.infn.it:11111</code> using your browser.</p>
+<h3 id="4-recas-docker-registry">4 ReCaS Docker registry<a class="headerlink" href="#4-recas-docker-registry" title="Permanent link">&para;</a></h3>
+<p>ReCaS provides a dedicated Docker registry for containers to be used on the GPU cluster.</p>
+<p>On the <code>tesla02</code> machine, login to the docker registry using the following command:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>login<span class="w"> </span>registry-clustergpu.recas.ba.infn.it
+Username:<span class="w"> </span>&lt;<span class="nb">type</span><span class="w"> </span>your<span class="w"> </span>ReCaS-Bari<span class="w"> </span>HPC/HTC<span class="w"> </span>account<span class="w"> </span>username&gt;
+Password:<span class="w"> </span>&lt;<span class="nb">type</span><span class="w"> </span>your<span class="w"> </span>ReCaS-Bari<span class="w"> </span>HPC/HTC<span class="w"> </span>account<span class="w"> </span>password&gt;
+Login<span class="w"> </span>Succeeded
+</code></pre></div>
+<p>The followings commands allow to store an official Docker image from Docker Hub (the official and public Docker registry) to the local ReCaS Docker registry:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>ubuntu
+docker<span class="w"> </span>image<span class="w"> </span>tag<span class="w"> </span>ubuntu<span class="w"> </span>registry-clustergpu.recas.ba.infn.it/&lt;your<span class="w"> </span>username&gt;/myubuntu:0.1
+docker<span class="w"> </span>push<span class="w"> </span>registry-clustergpu.recas.ba.infn.it/&lt;your<span class="w"> </span>username&gt;/myubuntu:0.1
+docker<span class="w"> </span>pull<span class="w"> </span>registry-clustergpu.recas.ba.infn.it/&lt;your<span class="w"> </span>username&gt;/myubuntu:0.1
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Storage quota</p>
+<p>Each user has a storage quota on the ReCaS-Bari container registry. There is a limit of number of different container images you can save.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Using the same name (such as <code>myubuntu:0.1</code>) the pushing docker image will overwrite the existing one.</p>
+</div>
+<h2 id="5-dockerfile">5 Dockerfile<a class="headerlink" href="#5-dockerfile" title="Permanent link">&para;</a></h2>
+<p>Using the commands <code>docker run -d</code> and <code>docker exec</code> is possible to execute a container in detached mode and execute commands inside it, e.g. to create files or install packages. Docker also gives the possibility to save this customized container. Unfortunately this kind of containers can not be deployed in the ReCaS GPU cluster. Dockerfile is the solution for this issue.</p>
+<p>A Dockerfile is a simple text file that contains a list of commands that the Docker client calls while creating an image. It's a simple way to automate the image creation process. An advantage is that the commands you write in a Dockerfile are almost identical to their equivalent Linux commands. This makes Dockerfiles easier to write.</p>
+<p>Let’s start with an example. The goal is to customize the Docker image <code>python:3.9.9-slim</code> in order to make it run with your ReCaS account user, needed in order to access your personal directory on ReCaS GPFS, and your desired python module.</p>
+<p>In order to do so, access  the <code>tesla02.recas.ba.infn.it</code> machine, create a dedicated directory:</p>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>/home/&lt;username&gt;/my_python3.9
+<span class="nb">cd</span><span class="w"> </span>/home/&lt;username&gt;/my_python3.9
+</code></pre></div>
+<p>Use your favorite editor and create a file named <code>requirements</code> and copy this content inside.</p>
+<div class="highlight"><pre><span></span><code>pandas
+numpy
+tables
+matplotlib
+</code></pre></div>
+<p>In this file you should put a list of python modules you want to install in the container.</p>
+<p>Now, create another file named <code>Dockerfile</code> and copy the following content inside it.</p>
+<div class="highlight"><pre><span></span><code>FROM<span class="w"> </span>python:3.9.9-slim
+<span class="c1"># User section (Mandatory)</span>
+ENV<span class="w"> </span><span class="nv">USERNAME</span><span class="o">=</span>&lt;your<span class="w"> </span>username&gt;
+ENV<span class="w"> </span><span class="nv">USERID</span><span class="o">=</span>&lt;your<span class="w"> </span>user-id&gt;
+ENV<span class="w"> </span><span class="nv">GROUPID</span><span class="o">=</span>&lt;your<span class="w"> </span>group-id&gt;
+
+RUN<span class="w"> </span>groupadd<span class="w"> </span>-g<span class="w"> </span><span class="nv">$GROUPID</span><span class="w"> </span><span class="nv">$USERNAME</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>--uid<span class="w"> </span><span class="nv">$USERID</span><span class="w"> </span>--gid<span class="w"> </span><span class="nv">$GROUPID</span><span class="w"> </span><span class="nv">$USERNAME</span>
+
+USER<span class="w"> </span><span class="nv">$USERNAME</span>
+<span class="c1"># python modules installation</span>
+ADD<span class="w"> </span>requirements<span class="w"> </span>/home/<span class="nv">$USERNAME</span>/requirements
+RUN<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>/home/<span class="nv">$USERNAME</span>/requirements
+</code></pre></div>
+<p>Let’s explain the Dockerfile.</p>
+<h3 id="51-from-statement">5.1 FROM Statement<a class="headerlink" href="#51-from-statement" title="Permanent link">&para;</a></h3>
+<p><code>FROM python:3.9.9-slim</code></p>
+<p>The <code>FROM</code> statement defines the Docker image to be used as a starting point. Every Dockerfile starts with the <code>FROM</code> statement.</p>
+<h3 id="52-user-creation-section">5.2 User creation section<a class="headerlink" href="#52-user-creation-section" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># User section (Mandatory)</span>
+ENV<span class="w"> </span><span class="nv">USERNAME</span><span class="o">=</span>&lt;your<span class="w"> </span>username&gt;
+ENV<span class="w"> </span><span class="nv">USERID</span><span class="o">=</span>&lt;your<span class="w"> </span>user-id&gt;
+ENV<span class="w"> </span><span class="nv">GROUPID</span><span class="o">=</span>&lt;your<span class="w"> </span>group-id&gt;
+RUN<span class="w"> </span>groupadd<span class="w"> </span>-g<span class="w"> </span><span class="nv">$GROUPID</span><span class="w"> </span><span class="nv">$USERNAME</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>adduser<span class="w"> </span>--disabled-password<span class="w"> </span>--gecos<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>--uid<span class="w"> </span><span class="nv">$USERID</span><span class="w"> </span>--gid<span class="w"> </span><span class="nv">$GROUPID</span><span class="w"> </span><span class="nv">$USERNAME</span>
+</code></pre></div>
+<p>The above section is <strong>MANDATORY</strong> and creates your user inside the container in order to access your data on the ReCaS-Bari GPFS file system. (/lustre/home and /lustrehome directories).</p>
+<p>If you don’t know your userid and/or groupid, execute the following command on <code>tesla02.recas.ba.infn.it</code>:</p>
+<p><code>id &lt;username&gt;</code></p>
+<p>And get the numbers, not names/words.</p>
+<h3 id="53-user-statement">5.3 USER Statement<a class="headerlink" href="#53-user-statement" title="Permanent link">&para;</a></h3>
+<p><code>USER $USERNAME</code></p>
+<p>The <code>USER</code> statement sets the username for any commands that follow it in the Dockerfile.</p>
+<h3 id="54-python-module-installation">5.4 Python module installation<a class="headerlink" href="#54-python-module-installation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>ADD<span class="w"> </span>requirements<span class="w"> </span>/home/<span class="nv">$USERNAME</span>/requirements
+RUN<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>/home/<span class="nv">$USERNAME</span>/requirements
+</code></pre></div>
+<p>In above lines, the <code>requirements</code> file is copied in the container using the <code>ADD</code> statement and the python modules listed inside it are installed.</p>
+<h3 id="55-docker-container-building-and-pushing">5.5 Docker container building and pushing<a class="headerlink" href="#55-docker-container-building-and-pushing" title="Permanent link">&para;</a></h3>
+<p>Now all files have been written and you are ready to build your customized tensorflow docker image using the following command</p>
+<p><code>docker build -t registry-clustergpu.recas.ba.infn.it/&lt;username&gt;/mypython3.9:0.1 .</code></p>
+<p>Finally, upload the image to the docker registry:</p>
+<p><code>docker push registry-clustergpu.recas.ba.infn.it/&lt;username&gt;/mypython3.9:0.1</code></p>
+<h2 id="6-use-case-use-a-custom-docker-image-with-chronos">6 Use case: use a custom docker image with Chronos<a class="headerlink" href="#6-use-case-use-a-custom-docker-image-with-chronos" title="Permanent link">&para;</a></h2>
+<p>Prefer to this <a href="https://jvino.github.io/cluster-hpc-gpu-guides/job_submission/chronos/">guide</a> for more details on Chronos.</p>
+<p>Create a JSON file in your HOME directory in the ReCaS-Bari Storage (e.g. <code>/lustrehome/&lt;username&gt;/my-python3.9-job.json</code>) containing:</p>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;-my-python3.9-job&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;command&quot;</span>:<span class="w"> </span><span class="s2">&quot;python3 /lustrehome/&lt;username&gt;/my_script.py &gt; /lustrehome/&lt;username&gt;/my_script.output&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;shell&quot;</span>:<span class="w"> </span>true,
+<span class="w">  </span><span class="s2">&quot;retries&quot;</span>:<span class="w"> </span><span class="m">4</span>,
+<span class="w">  </span><span class="s2">&quot;description&quot;</span>:<span class="w"> </span><span class="s2">&quot;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;cpus&quot;</span>:<span class="w"> </span><span class="m">1</span>,
+<span class="w">  </span><span class="s2">&quot;disk&quot;</span>:<span class="w"> </span><span class="m">0</span>,
+<span class="w">  </span><span class="s2">&quot;mem&quot;</span>:<span class="w"> </span><span class="m">1024</span>,
+<span class="w">  </span><span class="s2">&quot;gpus&quot;</span>:<span class="w"> </span><span class="m">0</span>,
+<span class="w">  </span><span class="s2">&quot;environmentVariables&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">  </span><span class="s2">&quot;arguments&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">  </span><span class="s2">&quot;runAsUser&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;owner&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;ownerName&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;container&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span><span class="s2">&quot;mesos&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;image&quot;</span>:<span class="w"> </span><span class="s2">&quot;registry-clustergpu.recas.ba.infn.it/&lt;username&gt;/mypython3.9:0.1&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;volumes&quot;</span>:<span class="w"> </span><span class="o">[{</span><span class="s2">&quot;containerPath&quot;</span>:<span class="w"> </span><span class="s2">&quot;/lustrehome/&lt;username&gt;&quot;</span>,<span class="w"> </span><span class="s2">&quot;hostPath&quot;</span>:<span class="w"> </span><span class="s2">&quot;/lustrehome/&lt;username&gt;&quot;</span>,<span class="w"> </span><span class="s2">&quot;mode&quot;</span>:<span class="w"> </span><span class="s2">&quot;RW&quot;</span><span class="o">}]</span>
+<span class="w">  </span><span class="o">}</span>,
+<span class="w">  </span><span class="s2">&quot;schedule&quot;</span>:<span class="w"> </span><span class="s2">&quot;R1//P1Y&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>Create a python script in your HOME directory in the ReCaS-Bari Storage (e.g. <code>/lustrehome/&lt;username&gt;/my_script.py</code>) containing: </p>
+<div class="highlight"><pre><span></span><code>import<span class="w"> </span>pandas<span class="w"> </span>as<span class="w"> </span>pd
+<span class="nv">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s1">&#39;apples&#39;</span>:<span class="w"> </span><span class="o">[</span><span class="m">3</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;oranges&#39;</span>:<span class="w"> </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="m">7</span>,<span class="w"> </span><span class="m">2</span><span class="o">]</span>
+<span class="o">}</span>
+<span class="nv">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>pd.DataFrame<span class="o">(</span>data<span class="o">)</span>
+print<span class="o">(</span>df.shape<span class="o">)</span>
+</code></pre></div>
+<p>Finally, you can submit the job using the folling command:</p>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>submit_chronos<span class="w"> </span>/lustrehome/&lt;username&gt;/my-python3.9-job.json
+</code></pre></div>
+<p>Wait few seconds and the file <code>/lustrehome/&lt;username&gt;/my_script.output</code> should appear in your directory. Watch it using:</p>
+<p><code>cat /lustrehome/&lt;username&gt;/my_script.output</code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 INFN
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
