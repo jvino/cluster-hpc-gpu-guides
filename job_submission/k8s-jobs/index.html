@@ -1,0 +1,1258 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Gioacchino Vino - gioacchino.vino@ba.infn.it">
+      
+      
+      
+        <link rel="prev" href="../../interactive_services/rstudio/">
+      
+      
+        <link rel="next" href="../htcondor/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Using Kubernetes - ReCaS-Bari Computing Services</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#job-submission-using-kubernetes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-header__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ReCaS-Bari Computing Services
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Using Kubernetes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-nav__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    ReCaS-Bari Computing Services
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Interactive Services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Interactive Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter-lab-for-recas-users-k8s/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter_with_gpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub with more resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RStudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Job Submission
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Job Submission
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Using Kubernetes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Using Kubernetes
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#important-user-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      IMPORTANT: User Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1) Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-access-to-the-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      2) Access to the service
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-configuring-access-to-the-kubernetes-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      3) Configuring access to the Kubernetes cluster
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) Configuring access to the Kubernetes cluster">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-kubectl" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1) kubectl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-access-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2) Access token
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2) Access token">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requesting-the-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requesting the token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-kubectl-to-use-the-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configure kubectl to use the token
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-verifying-your-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3) Verifying your setup
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-jobs-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      4) Jobs submission
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) Jobs submission">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-jobs-limitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1) Jobs limitation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-submit-your-first-kubernetes-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2) Submit your first Kubernetes Job
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2) Submit your first Kubernetes Job">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enough-chit-chat-lets-submit-our-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enough chit-chat, let's submit our Jobs!
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-job-not-requesting-a-gpu" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Job NOT requesting a GPU
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-job-requesting-2-nvidia-a100-gpus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Job requesting 2 NVIDIA A100 GPUs
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-submitting-more-than-a-job-resubmitting-the-same-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3) Submitting more than a Job / Resubmitting the same job
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-shared-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.4) Shared storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-monitoring-and-debugging-submitted-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.5) Monitoring and Debugging Submitted Jobs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-opening-a-terminal-into-a-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.6) Opening a terminal into a container
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-deleting-a-job" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.7) Deleting a job
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htcondor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External Service - HTCondor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/docker_and_dockerfile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker and Dockerfile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/jupyter-lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JupyterLab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="job-submission-using-kubernetes">Job submission using Kubernetes<a class="headerlink" href="#job-submission-using-kubernetes" title="Permanent link">&para;</a></h1>
+<p><em>Updated on 15Jul2025</em></p>
+<h2 id="important-user-support">IMPORTANT: User Support<a class="headerlink" href="#important-user-support" title="Permanent link">&para;</a></h2>
+<p>If you need support, please use <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request">this link</a> to submit a ticket with title “ReCaS HPC/GPU: Kubernetes support” and then describe your issue.</p>
+<p><strong>It is STRONGLY advised to subscribe to the recas-hpc-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.</strong></p>
+<p>Important messages will be sent ONLY using the mailing list.</p>
+<h2 id="1-introduction">1) Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>Kubernetes (K8s) is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+<strong>ONLY</strong> containers can be executed in the cluster.</p>
+</blockquote>
+<p>You can run a third party container or you can build your custom one. Please refer to the guide at <a href="https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/">this link</a> for more details on the latter.</p>
+<h2 id="2-access-to-the-service">2) Access to the service<a class="headerlink" href="#2-access-to-the-service" title="Permanent link">&para;</a></h2>
+<p>Access to our HPC/GPU Kubernetes Cluster is available only for users with a ReCaS-Bari HPC/HTC account active. Users without such an account <strong>MUST</strong> register using <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2">this link</a> (check the box "<strong>Account for access to ReCas-Bari compute services (HTC/HPC)</strong>").<br />
+Once your request has been submitted, it must be approved by the service manager. This process usually takes a few working days. You will receive an automatic email notification as soon as your account is activated.</p>
+<p>Once activated, you can verify if the registration is successfully completed by accessing the <strong>frontend.recas.ba.infn.it</strong> server via ssh:</p>
+<p><code>ssh &lt;your-username&gt;@frontend.recas.ba.infn.it</code></p>
+<p>After that, you can request access to the Kubernetes service using <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request">this link</a>.</p>
+<p>Please provide the following information:</p>
+<div class="highlight"><pre><span></span><code>   Title: “ReCaS HPC/GPU: request to access HPC/GPU K8s cluster”  
+   Issue:
+   - Name and Surname
+   - HTC/HPC service username
+   - Email  
+</code></pre></div>
+<h2 id="3-configuring-access-to-the-kubernetes-cluster">3) Configuring access to the Kubernetes cluster<a class="headerlink" href="#3-configuring-access-to-the-kubernetes-cluster" title="Permanent link">&para;</a></h2>
+<p>This section explains how to set up the <strong>kubectl</strong> command-line tool to access the ReCaS HPC/GPU Kubernetes cluster after your access request has been approved—that is, once you’ve received a positive response to the ticket titled "<strong>ReCaS HPC/GPU: request to access HPC/GPU K8s cluster</strong>" as described in <a href="#2-access-to-the-service">Section 2</a>.</p>
+<h3 id="31-kubectl">3.1) kubectl<a class="headerlink" href="#31-kubectl" title="Permanent link">&para;</a></h3>
+<p>Interaction with a Kubernetes (K8s) cluster happens through an API server. Any action you perform — whether monitoring resources, deploying workloads or checking logs — ultimately goes through this server, which listens for HTTPS requests.</p>
+<p>While you could technically interact with the API server using tools like <strong>curl</strong>, it's far easier and more efficient to use a dedicated CLI tool: <a href="https://kubernetes.io/docs/reference/kubectl/">kubectl</a>.<br />
+<strong>kubectl</strong> is the official Kubernetes command line client, designed to communicate with the cluster's API server in a user-friendly way. It offers commands for inspecting resources, deploying applications, scaling workloads and more.</p>
+<p>The tool is already installed on the ReCaS frontend (<strong>frontend.recas.ba.infn.it</strong>) and can also be <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/">easily installed on your local machine</a> if needed. Please note that, in case of local installation, you should use <strong>version 1.30.0</strong> to ensure compatibility. Using a different version may lead to issues.</p>
+<p>To configure <strong>kubectl</strong> for access to the ReCaS Kubernetes cluster — either from the frontend or from your own system — you’ll need to create a configuration file with the correct cluster and authentication details.  </p>
+<p><strong>kubectl</strong> is configured to look for its configuration file at the path <strong>.kube/config</strong> within the home directory of the user executing the command. To set this up, begin by creating the <strong>.kube</strong> directory:</p>
+<p><code>mkdir ~/.kube</code></p>
+<p>Then, using your preferred text editor (<strong>vim</strong>, <strong>nano</strong>, <strong>emacs</strong>, etc.),  create the <strong>~/.kube/config</strong> file and paste the following template into it:</p>
+<div class="highlight"><pre><span></span><code>apiVersion: v1
+kind: Config
+preferences: {}
+clusters:
+- name: default
+  cluster:
+    server: https://k8s.recas.ba.infn.it:443
+
+contexts:
+- name: oidc-user-context
+  context:
+    cluster: default
+    user: oidc-user
+    namespace: batch-&lt;your-frontend-username&gt;
+
+current-context: oidc-user-context
+
+users:
+- name: oidc-user
+  user:
+    token: 
+</code></pre></div>
+<p>The only part that needs to be edited in this manifest is the section <strong>contexts.name.context.namespace</strong>. Replace <strong>&lt;your-frontend-username&gt;</strong> with your actual cluster username. So, for example, if you connect to the cluster with  </p>
+<p><code>ssh fdebiase@frontend.recas.ba.infn.it</code>  </p>
+<p>then the namespace should be:  </p>
+<p><code>namespace: batch-fdebiase</code></p>
+<p>Once you’ve made these changes and saved the file, kubectl will automatically use this configuration by default whenever you run commands.</p>
+<h3 id="32-access-token">3.2) Access token<a class="headerlink" href="#32-access-token" title="Permanent link">&para;</a></h3>
+<p>As you probably noticed, the last field of the text file you edited is an empty field called <strong>token</strong>. This field needs to be filled with a personal access token (of weekly expiration), which is required for authentication. </p>
+<h4 id="requesting-the-token">Requesting the token<a class="headerlink" href="#requesting-the-token" title="Permanent link">&para;</a></h4>
+<p>In order to get this token, you have to login using your frontend (HTC/HPC service) credentials at<br />
+<a href="https://auth-k8s.recas.ba.infn.it">https://auth-k8s.recas.ba.infn.it</a></p>
+<p>After the authentication procedure is complete, you will see on your browser page (see image below) a token string: it is an encoded object (JWT) with all the information Kubernetes needs to know in order to authenticate you whenever you try to make a request to the API server(s) using the <strong>kubectl</strong> tool.</p>
+<p><img alt="Login" src="../images/token.png" /></p>
+<h4 id="configure-kubectl-to-use-the-token">Configure kubectl to use the token<a class="headerlink" href="#configure-kubectl-to-use-the-token" title="Permanent link">&para;</a></h4>
+<p>Now that you have your token, update the <strong>token:</strong> field in the <strong>users</strong> section of your <strong>kubectl</strong> config file.  </p>
+<p>So, supposing your token is '<strong>JALPFNGBQLBVaaaQG</strong>' the configuration file has to look like:</p>
+<div class="highlight"><pre><span></span><code>users:
+- name: oidc-user
+  user:
+    token: JALPFNGBQLBVaaaQG
+</code></pre></div>
+<p>That’s it! Your configuration is now complete.</p>
+<blockquote>
+<p><strong>⚠️ IMPORTANT NOTE</strong><br />
+Your access token is <strong>strictly personal</strong>. You are fully responsible for any operations performed using your personal token.<br />
+If you are using <strong>kubectl</strong> directly on the ReCaS HTCondor cluster frontend, ensure that your Kubernetes configuration file (which contains your token) has restrictive permissions—accessible only by you.
+To enforce this, simply run the following command: <br />
+<code>chmod 700 ~/.kube/config</code><br />
+This sets the file permissions to allow read, write, and execute access only for your user.</p>
+<p><strong>Note</strong><br />
+<strong>Tokens are valid for 7 days</strong>. When your token expires, <strong>kubectl</strong> commands will stop working with an error. To fix this, simply log in again at the URL above, retrieve a new token, and replace it in the config file. </p>
+</blockquote>
+<h3 id="33-verifying-your-setup">3.3) Verifying your setup<a class="headerlink" href="#33-verifying-your-setup" title="Permanent link">&para;</a></h3>
+<p>After your token is in place, for the next week (that is, until the token expires) you can directly interact with the Kubernetes cluster using <strong>kubectl</strong>.<br />
+To check that everything is configured correctly, run:  </p>
+<p><code>kubectl get pod</code>  </p>
+<p>If everything is working, you’ll see:  </p>
+<p><code>No resources found in batch-{yourUsername} namespace</code>  </p>
+<p>This means your token is valid and kubectl can communicate with the cluster. <br />
+Otherwise, if you get an error like:  </p>
+<p><code>Error from server (Forbidden): pods is forbidden: User "{yourUsername}" cannot list resource "pods" in API group "" in the namespace "batch-{yourUsername}"</code>  </p>
+<p>then there might be a misconfiguration. Double-check the steps above; if the issue persists, <a href="#important-user-support">reach out to support</a>.</p>
+<h2 id="4-jobs-submission">4) Jobs submission<a class="headerlink" href="#4-jobs-submission" title="Permanent link">&para;</a></h2>
+<p>This section explains how to submit a containerized workload as a Kubernetes Job to the ReCaS HPC/GPU cluster.</p>
+<h3 id="41-jobs-limitation">4.1) Jobs limitation<a class="headerlink" href="#41-jobs-limitation" title="Permanent link">&para;</a></h3>
+<p>By default, users are subject to resource quotas, which limit the total amount of CPU cores, RAM and GPUs that can be requested. These limits apply across all your active jobs combined, not just to individual jobs.<br />
+Currently, <strong>each user is limited to a maximum of 80 CPU cores, 300 GB of RAM and 2 GPUs across all active jobs</strong>.<br />
+Additionally, <strong>each individual job can run for a maximum of one week (24*7 hours)</strong>. If the job exceeds this runtime, it will be automatically terminated by the system.<br />
+If you believe your workload requires an exception to any of these limits, please <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request">contact us</a> and describe your use case.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+The cluster has a large — but still finite — pool of computing resources. If all available GPUs or other resources are already in use by other users, your job will not start immediately. Instead, Kubernetes will automatically schedule and launch it as soon as resources become available.
+No need for manual retries: just submit your job and let the system handle the rest.   </p>
+</blockquote>
+<h3 id="42-submit-your-first-kubernetes-job">4.2) Submit your first Kubernetes Job<a class="headerlink" href="#42-submit-your-first-kubernetes-job" title="Permanent link">&para;</a></h3>
+<p>Submitting a job is simple and flexible, but assumes your application is packaged as a Docker container. <br />
+You can use third-party public images (e.g. from DockerHub) or build and push your own image to our private container image registry, as explained in <a href="https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/#2-building-custom-docker-containers-in-recas-bari">this guide</a>.  </p>
+<p>Please note that, once the job is running, you’ll be able to open a terminal inside the container, just like SSH access, allowing for full interaction with your running workloads.</p>
+<h4 id="enough-chit-chat-lets-submit-our-jobs">Enough chit-chat, let's submit our Jobs!<a class="headerlink" href="#enough-chit-chat-lets-submit-our-jobs" title="Permanent link">&para;</a></h4>
+<p>Before submitting any job, ensure that you have configured <strong>kubectl</strong> and your access token is valid. See <a href="#3-configuring-access-to-the-kubernetes-cluster">Section 3: Configuring Access</a> for details.</p>
+<p>Create a text file (e.g., <strong>my-job.yaml</strong>) with the following content:</p>
+<div class="highlight"><pre><span></span><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: &lt;job-name&gt;
+spec:
+  ttlSecondsAfterFinished: 604800
+  backoffLimit: 0
+  template:
+    spec:
+#      runtimeClassName: nvidia
+      containers:
+      - name: &lt;container-name&gt;
+        image: &lt;container-image&gt;
+        command: [&quot;sh&quot;, &quot;-c&quot;, &quot;&lt;command_1&gt;; &lt;command_2&gt;; &lt;command_3&gt;; ...&quot;]
+        resources:
+          requests:
+            cpu: &quot;0.2&quot;
+            memory: &quot;100Mi&quot;
+          limits:
+            cpu: &quot;&lt;integer&gt;&quot;
+            memory: &quot;&lt;integer&gt;Gi&quot;
+            nvidia.com/gpu: 0
+        volumeMounts:
+        - name: lustre
+          mountPath: /lustre
+        - name: lustrehome
+          mountPath: /lustrehome
+      restartPolicy: Never
+      volumes:
+      - name: lustre
+        hostPath:
+          path: /lustre
+          type: Directory
+      - name: lustrehome
+        hostPath:
+          path: /lustrehome
+          type: Directory
+#      nodeSelector:
+#        nvidia.com/gpu.product: Tesla-V100-PCIE-32GB
+#        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB
+#        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3
+</code></pre></div>
+<p>You’ll need to replace these placeholder values: </p>
+<p><strong>metadata.name</strong>: A <ins>unique</ins> name for your Job;</p>
+<p><br></p>
+<p><strong>spec.backoffLimit</strong>:  Specifies the number of retry attempts Kubernetes will make if the Job fails before giving up.<br />
+Once the number of failures reaches this limit, the Job is marked as failed and will not be retried further.<br />
+For most jobs, it makes sense to leave <code>backoffLimit: 0</code> as is — no need to restart the job upon failure.<br />
+If needed, you can increase this value up to a maximum of 6 retry attempts. If the field is omitted, it will default to 6.</p>
+<p><br></p>
+<p><strong>spec.ttlSecondsAfterFinished</strong>: Duration in seconds to retain the Job object in the cluster <ins>after it completes execution</ins>, either successfully or with an error. After this period of time, the Job is automatically deleted by the TTL controller.<br />
+Put simply, this setting controls how long the system keeps logs and related job information after the job has finished or failed.<br />
+In this manifest, the value is set to one week (604800 seconds).<br />
+This setting only affects the Job controller object, not the container lifecycle. The Pods created by the Job will still terminate as usual upon completion, the containers will not continue running during this TTL period. However, logs and information regarding the terminated Pods and Jobs remain accessible for as long as specified in this field.<br />
+Feel free to adjust this parameter as preferred, up to a maximum of 3 months (67737600 seconds).  </p>
+<p><br></p>
+<p><strong>spec.template.spec.containers.name</strong>: Arbitrary name for your container. In Kubernetes, a Job is an object that wraps one or more containers: that's why you need to specify both a name for the Job object and one for the container(s) the Job launches;</p>
+<p><br></p>
+<p><strong>spec.template.spec.containers.image</strong>: Container image. In case it is a public one directly  from DockerHub you only need to specify the image name or link, so for example  </p>
+<p><code>image: ubuntu</code>  </p>
+<p>or</p>
+<p><code>image: gcr.io/google-containers/pause:3.9</code>  </p>
+<p>Otherwise, if you are launching a container with a custom image pushed in our private image registry, you need to specify it like  </p>
+<p><code>image: registry-clustergpu.recas.ba.infn.it/{yourUsername}/{yourImage}</code>    </p>
+<p>So, for example  </p>
+<p><code>image: registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1</code></p>
+<p><br></p>
+<p><strong>spec.template.spec.containers.resources.limits.cpu</strong>, <strong>spec.template.spec.containers.resources.limits.memory</strong> and <strong>spec.template.spec.containers.resources.limits.nvidia.com/gpu</strong>: limits to the number of CPU cores, RAM in terms of Gibibytes (≈ Gigabytes) and number of GPU(s).<br />
+The parameters under <strong>resources.requests</strong>, instead, define the minimum guaranteed amount of resources that the container will receive. For most use cases, the default values we have provided should be sufficient and typically don’t require adjustment.</p>
+<p><br></p>
+<p><strong>spec.template.spec.containers.command</strong>: overrides the image 'ENTRYPOINT' field; This is typically where you want to put the command(s) to start the container with.<br />
+For example, to execute <code>echo Starting job...</code> followed by <code>sleep 3600</code>:</p>
+<p><code>command: ["sh", "-c", "echo Starting job...; sleep 3600"]</code>  </p>
+<p><br></p>
+<p><strong>spec.template.spec.containers.args</strong>: overrides the image 'CMD' field.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+For a quick overview on the 'CMD' and 'ENTRYPOINT' fields of a container image, please check <a href="https://www.docker.com/blog/docker-best-practices-choosing-between-run-cmd-and-entrypoint/">this link</a>.</p>
+</blockquote>
+<p><br></p>
+<p>If your workload does not require a GPU, please leave <code>spec.runtimeClassName</code> and the entire <code>spec.nodeSelector</code> section commented out.<br />
+If, instead, your workload does require the use of GPUs, change the <code>nvidia.com/gpu</code> limit and uncomment (just remove the '#' from the manifest and leave indentation as is) the <code>spec.runtimeClassName</code> field, the <code>nodeSelector:</code> line and <strong>JUST</strong> its subfield regarding the kind of GPU you are interested in using (whether a NVIDIA V100/A100/H100).<br />
+Please note that your request can end up in error if you:  </p>
+<ul>
+<li>are not allowed to use that given kind of GPU;  </li>
+<li>are requesting GPUs and leaving the <code>runtimeClassName</code> and <code>nodeSelector</code> fields commented out.</li>
+</ul>
+<p>For reference, here are two fully avvalorated examples for a Job not requesting a GPU (first manifest) and a Job requesting 2 NVIDIA A100 GPUs:</p>
+<p><br></p>
+<h4 id="example-job-not-requesting-a-gpu">Example Job NOT requesting a GPU<a class="headerlink" href="#example-job-not-requesting-a-gpu" title="Permanent link">&para;</a></h4>
+<p><div class="highlight"><pre><span></span><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: documentazione-job
+spec:
+  ttlSecondsAfterFinished: 604800
+  backoffLimit: 0
+  template:
+    spec:
+#      runtimeClassName: nvidia       # &lt;&lt;&lt; 🔴 Commented out
+      containers:
+      - name: documentazione-job
+        image: busybox
+        command: [&quot;sh&quot;, &quot;-c&quot;, &quot;echo Starting job...; sleep 3600&quot;]
+        resources:
+          requests:
+            cpu: &quot;0.2&quot;
+            memory: &quot;100Mi&quot;        
+          limits:
+            cpu: &quot;2&quot;
+            memory: &quot;4Gi&quot;
+            nvidia.com/gpu: 0         # &lt;&lt;&lt; 🔴 Set to 0
+        volumeMounts:
+        - name: lustre
+          mountPath: /lustre
+        - name: lustrehome
+          mountPath: /lustrehome
+      restartPolicy: Never
+      volumes:
+      - name: lustre
+        hostPath:
+          path: /lustre
+          type: Directory
+      - name: lustrehome
+        hostPath:
+          path: /lustrehome
+          type: Directory
+#      nodeSelector:                                          # &lt;&lt;&lt; 🔴 Commented out
+#        nvidia.com/gpu.product: Tesla-V100-PCIE-32GB         # &lt;&lt;&lt; 🔴 Commented out
+#        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3        # &lt;&lt;&lt; 🔴 Commented out
+#        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB        # &lt;&lt;&lt; 🔴 Commented out
+</code></pre></div>
+<br></p>
+<h4 id="example-job-requesting-2-nvidia-a100-gpus">Example Job requesting 2 NVIDIA A100 GPUs<a class="headerlink" href="#example-job-requesting-2-nvidia-a100-gpus" title="Permanent link">&para;</a></h4>
+<div class="highlight"><pre><span></span><code>apiVersion: batch/v1
+kind: Job
+metadata:
+  name: documentazione-job
+spec:
+  ttlSecondsAfterFinished: 604800
+  backoffLimit: 0                     
+  template:
+    spec:
+      runtimeClassName: nvidia        # &lt;&lt;&lt; 🟢 Uncommented
+      containers:
+      - name: documentazione-job
+        image: busybox
+        command: [&quot;sh&quot;, &quot;-c&quot;, &quot;echo Starting job...; sleep 60&quot;]
+        resources:
+          requests:
+            cpu: &quot;0.2&quot;
+            memory: &quot;100Mi&quot;        
+          limits:
+            cpu: &quot;2&quot;
+            memory: &quot;4Gi&quot;
+            nvidia.com/gpu: 2         # &lt;&lt;&lt; 🟢 Set to integer
+        volumeMounts:
+        - name: lustre
+          mountPath: /lustre
+        - name: lustrehome
+          mountPath: /lustrehome
+      restartPolicy: Never
+      volumes:
+      - name: lustre
+        hostPath:
+          path: /lustre
+          type: Directory
+      - name: lustrehome
+        hostPath:
+          path: /lustrehome
+          type: Directory
+      nodeSelector:                                           # &lt;&lt;&lt; 🟢 Uncommented    
+#        nvidia.com/gpu.product: Tesla-V100-PCIE-32GB         # &lt;&lt;&lt; 🔴 Commented out (I want 2 A100)
+#        nvidia.com/gpu.product: NVIDIA-H100-80GB-HBM3        # &lt;&lt;&lt; 🔴 Commented out (I want 2 A100)
+        nvidia.com/gpu.product: NVIDIA-A100-PCIE-40GB         # &lt;&lt;&lt; 🟢 Uncommented
+</code></pre></div>
+<p>Once your manifest is ready and saved (e.g. as <strong>my-job.yaml</strong>), submit it to the Kubernetes cluster with:  </p>
+<p><code>kubectl create -f /path/to/file</code>  </p>
+<p>so, for example  </p>
+<p><code>kubectl create -f my-job.yaml</code></p>
+<p>Kubernetes will validate the manifest and either start the job immediately (if resources are available), queue it for execution when the required resources become free or return an error if the file is incorrectly written.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+So far, we've simplified things by saying that a Kubernetes <strong>Job</strong> is a wrapper around a container. That’s not entirely accurate.<br />
+In Kubernetes, the smallest deployable unit is the <strong>Pod</strong>—not the container itself. A Pod typically wraps one container (or sometimes more) and provides the execution environment for it.
+A Job, in turn, is a controller that manages the lifecycle of one or more Pods and ensures that a specified task completes successfully. For example, it can enforce a maximum runtime for the underlying Pod.<br />
+In practical terms: when you submit a Job to the cluster, Kubernetes creates a Pod, and that Pod runs the container you defined for your workload.<br />
+We won’t dive deeper into the details of Pods in this guide, as they’re not essential for day-to-day usage. However, if you're curious, you can read more in the <a href="https://kubernetes.io/docs/concepts/workloads/pods/">official Kubernetes documentation</a>. </p>
+</blockquote>
+<h3 id="43-submitting-more-than-a-job-resubmitting-the-same-job">4.3) Submitting more than a Job / Resubmitting the same job<a class="headerlink" href="#43-submitting-more-than-a-job-resubmitting-the-same-job" title="Permanent link">&para;</a></h3>
+<p>In Kubernetes, the unique identifier for an object is its name, combined with the namespace it resides in. Since each user operates within their own dedicated namespace, only one object of a given type (e.g., a Job) with a specific name can exist at a time within that namespace.</p>
+<p>This means that in order to submit multiple Jobs starting from the same manifest file, you must either change the <strong>metadata.name</strong> field of the Job in the YAML definition for each submission, ensuring uniqueness, or delete the previous Job before re-submitting a new one with the same name:</p>
+<div class="highlight"><pre><span></span><code>kubectl delete -f /path/to/job/definition.yaml
+kubectl create -f /path/to/job/definition.yaml
+</code></pre></div>
+<h3 id="44-shared-storage">4.4) Shared storage<a class="headerlink" href="#44-shared-storage" title="Permanent link">&para;</a></h3>
+<p>In the Job manifest file, you might have noticed the following section:</p>
+<div class="highlight"><pre><span></span><code>        volumeMounts:
+        - name: lustre
+          mountPath: /lustre
+        - name: lustrehome
+          mountPath: /lustrehome
+      restartPolicy: Never
+      volumes:
+      - name: lustre
+        hostPath:
+          path: /lustre
+          type: Directory
+      - name: lustrehome
+        hostPath:
+          path: /lustrehome
+          type: Directory
+</code></pre></div>
+<p>This configuration ensures that the shared storage available on the ReCaS frontend (<strong>frontend.recas.ba.infn.it</strong>) is also mounted inside your container.<br />
+As a result, all the files you see on the frontend (under <strong>/lustre</strong> and <strong>/lustrehome</strong>) will also be accessible from within your running container—automatically.<br />
+Any changes you make to files within these mounted paths from inside the container — such as creating, editing, or deleting files — will be immediately reflected on the actual storage on the frontend.
+In practice, it’s as if you were working directly on the frontend itself, but within an isolated container environment.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+Proper file permissions and access control are enforced. So don’t try anything sneaky — you will only be able to access files and directories you are authorized to.</p>
+</blockquote>
+<h3 id="45-monitoring-and-debugging-submitted-jobs">4.5) Monitoring and Debugging Submitted Jobs<a class="headerlink" href="#45-monitoring-and-debugging-submitted-jobs" title="Permanent link">&para;</a></h3>
+<p>Just because your <strong>kubectl create</strong> command doesn't return an error doesn't mean the Job actually ran successfully. <br />
+To monitor the state of your Job and the underlying Pod, use the following commands: </p>
+<ul>
+<li>List your pods:   </li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>kubectl get pod</code></p>
+<ul>
+<li>Describe a specific pod (helpful to debug scheduling issues or container errors): </li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>kubectl describe pod &lt;podName&gt;</code></p>
+<ul>
+<li>Check logs from the pod (only available after the container has started running; shows the standard output and error streams of the software running inside the container, useful for debugging and viewing runtime logs): </li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>kubectl logs &lt;podName&gt;</code></p>
+<ul>
+<li>List your jobs:  </li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>kubectl get job</code>  </p>
+<ul>
+<li>Inspect job details:  </li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <code>kubectl describe job &lt;jobName&gt;</code></p>
+<p>These commands will help you identify what went wrong, whether the container failed to start, exited early or encountered runtime errors.</p>
+<blockquote>
+<p><strong>Note</strong><br />
+Logs and information about completed (or failed) Jobs and their Pods are only available for as long as specified by the <strong>ttlSecondsAfterFinished</strong> setting in the Job manifest. After this time, the Job is automatically deleted and its related data is no longer accessible.<br />
+If you want to keep logs and other information permanently, you have two options. One is to remove the <strong>ttlSecondsAfterFinished</strong> field from the Job manifest, which would prevent the Job from being automatically deleted. However, <ins>this is not recommended</ins>, as over time your namespace would fill up with old completed Jobs, making it harder to manage and requiring manual cleanup. <br />
+<ins>The recommended approach</ins> is instead to save the information you need—such as pod descriptions or logs—to a file using commands like<br />
+<code>kubectl describe pod &lt;podName&gt; &gt; /path/where/to/store/the/log/file</code><br />
+and, similarly, for all the other commands listed above.<br />
+This way, you can retain any important details without cluttering the cluster.  </p>
+</blockquote>
+<h3 id="46-opening-a-terminal-into-a-container">4.6) Opening a terminal into a container<a class="headerlink" href="#46-opening-a-terminal-into-a-container" title="Permanent link">&para;</a></h3>
+<p>If your job is running and you want to interact directly with the container — for example to run commands, inspect files or debug issues — you can run a command inside it using:  </p>
+<p><code>kubectl exec -it &lt;podName&gt; -- &lt;command&gt;</code>  </p>
+<blockquote>
+<p><strong>Note</strong><br />
+If your pod has more than one container, you will also need to specify which container you want to access:<br />
+<code>kubectl exec -it &lt;podName&gt; -c &lt;containerName&gt; -- &lt;command&gt;</code></p>
+</blockquote>
+<p>A common use case may be running a terminal inside your container. If the <strong>bash</strong> shell is installed inside the container:  </p>
+<p><code>kubectl exec -it &lt;podName&gt; -- bash</code>   </p>
+<p>if instead <strong>bash</strong> is not present in the image you can try with  </p>
+<p><code>kubectl exec -it &lt;podName&gt; -- sh</code>  </p>
+<h3 id="47-deleting-a-job">4.7) Deleting a job<a class="headerlink" href="#47-deleting-a-job" title="Permanent link">&para;</a></h3>
+<p>If you submitted a job by mistake, or if you noticed there is something wrong with your workload, you can delete a Job manually to free up cluster resources and keep your environment clean.  </p>
+<p>There are two main ways to delete a Job:  </p>
+<p><code>kubectl delete job &lt;job-name&gt;</code>  </p>
+<p>or  </p>
+<p><code>kubectl delete -f /path/to/Job/definitionFile</code>  </p>
+<p>e.g.  </p>
+<p><code>kubectl delete -f my-job.yaml</code></p>
+<p>Both of these approaches will also delete the associated Pod(s) created by that Job.  </p>
+<blockquote>
+<p><strong>Note</strong><br />
+Of course, deleting a Job does not delete any files that may have been written to the shared volumes like <strong>/lustre</strong> or <strong>/lustrehome</strong>. Any data you write to these directories from within the container is persisted — just as if you were working directly on the frontend.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 INFN
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
