@@ -1,5 +1,7 @@
 # Job submission using Kubernetes
 
+*Updated on 15Jul2025*
+
 ## IMPORTANT: User Support
 If you need support, please use [this link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to submit a ticket with title “ReCaS HPC/GPU: Kubernetes support” and then describe your issue.
 
