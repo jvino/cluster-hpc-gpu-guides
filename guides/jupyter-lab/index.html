@@ -1,0 +1,1053 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Gioacchino Vino - gioacchino.vino@ba.infn.it">
+      
+      
+      
+        <link rel="prev" href="../docker_and_dockerfile/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>JupyterLab - ReCaS-Bari Computing Services</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jupyter-lab-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-header__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ReCaS-Bari Computing Services
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              JupyterLab
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-nav__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    ReCaS-Bari Computing Services
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Interactive Services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Interactive Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter-lab-for-recas-users-k8s/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter_with_gpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub with more resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RStudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Job Submission
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Job Submission
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../job_submission/k8s-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Kubernetes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../job_submission/htcondor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External Service - HTCondor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker_and_dockerfile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker and Dockerfile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    JupyterLab
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    JupyterLab
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-user-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      0 User Support
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-jupyterlab-launcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 JupyterLab Launcher
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 JupyterLab Launcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-jupyter-kernels" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Jupyter Kernels
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Jupyter Kernels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#r-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      R kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#root-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Root kernel
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-utilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Utilities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-recas-bari-services-guides" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 ReCaS-Bari Services Guides
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-installing-new-python-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Installing new Python modules
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Installing new Python modules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-pip" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 pip
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-conda" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 conda
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#321-troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.1 Troubleshooting
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2.1 Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conda-init" class="md-nav__link">
+    <span class="md-ellipsis">
+      conda init
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-conda-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      base conda environment
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-create-new-jupyter-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.2 Create new Jupyter kernel
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-upload-file-from-local-file-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Upload file from local file system
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-enable-resource-usage-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 Enable Resource Usage Dashboards
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-dask" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 Dask
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Dask">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-start-a-new-dask-cluster" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Start a new Dask cluster
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-enable-dask-resource-usage-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Enable Dask Resource Usage Dashboards
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-bash-process-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      7 Bash process management
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-execute-a-jupyter-notebook-in-background-with-papermill" class="md-nav__link">
+    <span class="md-ellipsis">
+      8 Execute a Jupyter Notebook in background with papermill
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-useful-links" class="md-nav__link">
+    <span class="md-ellipsis">
+      9 Useful links
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="jupyter-lab-guide">Jupyter Lab Guide<a class="headerlink" href="#jupyter-lab-guide" title="Permanent link">&para;</a></h1>
+<p><em>Updated on 19 May 2025</em></p>
+<h2 id="0-user-support">0 User Support<a class="headerlink" href="#0-user-support" title="Permanent link">&para;</a></h2>
+<p>If you need support for your application, please use this <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request">link</a> to create ag ticket titled “ReCaS HPC/GPU: JupyterLab support” and describe your issue.</p>
+<p>Please provide all the necessary information to help us resolve your issue more easily, such as the notebook absolute path, screenshots, and so on.</p>
+<p><strong>It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.</strong></p>
+<h2 id="1-introduction">1 Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>JupyterLab is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations, and narrative text.
+Uses include: data cleaning and transformation, numerical simulation, statistical modelling, data visualization, machine learning, and much more.</p>
+<p>The ReCaS JupyterLab can access your files and directories stored in the ReCaS-Bari storage (based on the GPFS distributed file system) and use high-performance GPUs to speed up the execution of your application.</p>
+<h2 id="2-jupyterlab-launcher">2 JupyterLab Launcher<a class="headerlink" href="#2-jupyterlab-launcher" title="Permanent link">&para;</a></h2>
+<p>This is the latest launcher version, implemented in the ReCaS-Bari JupyterHub.</p>
+<p><img alt="jupyterlab-launcher" src="../images/jupyterlab-launcher.png" /></p>
+<h3 id="21-jupyter-kernels">2.1 Jupyter Kernels<a class="headerlink" href="#21-jupyter-kernels" title="Permanent link">&para;</a></h3>
+<p>The first two rows show all the available kernels in your JupyterLab instance.</p>
+<p>Initially, you will find only the Python 3 kernel.</p>
+<h4 id="r-kernel">R kernel<a class="headerlink" href="#r-kernel" title="Permanent link">&para;</a></h4>
+<p>To install the R kernel, please execute the following command:</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>r_kernel<span class="w"> </span>-c<span class="w"> </span>r<span class="w"> </span>r-irkernel<span class="w"> </span>r-essentials<span class="w"> </span>r-recommended<span class="w"> </span>-y<span class="w"> </span>
+conda<span class="w"> </span>activate<span class="w"> </span>r_kernel<span class="sb">`</span>
+</code></pre></div>
+<h4 id="root-kernel">Root kernel<a class="headerlink" href="#root-kernel" title="Permanent link">&para;</a></h4>
+<p>To install the ROOT kernel, please execute the following command:</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>--name<span class="w"> </span>root_kernel<span class="w"> </span>root<span class="w"> </span>ipykernel<span class="w"> </span>-y
+</code></pre></div>
+<p>Some issues related to the Python bindings are known.</p>
+<p>You can use ROOT in interactive mode using the Terminal, after activating the conda environment with the following command:</p>
+<p><code>conda activate root_kernel</code></p>
+<h3 id="22-utilities">2.2 Utilities<a class="headerlink" href="#22-utilities" title="Permanent link">&para;</a></h3>
+<p>The third row contains several utilities, such as Terminal (you can use it to execute bash commands in the Bash shell), and text, Markdown, Python, and R file editors.</p>
+<h3 id="23-recas-bari-services-guides">2.3 ReCaS-Bari Services Guides<a class="headerlink" href="#23-recas-bari-services-guides" title="Permanent link">&para;</a></h3>
+<p>In the bottom rows, you will find links to guides for all ReCaS-Bari GPU cluster services.</p>
+<h2 id="3-installing-new-python-modules">3 Installing new Python modules<a class="headerlink" href="#3-installing-new-python-modules" title="Permanent link">&para;</a></h2>
+<h3 id="31-pip">3.1 pip<a class="headerlink" href="#31-pip" title="Permanent link">&para;</a></h3>
+<p><code>pip</code> can be used to install new Python packages. </p>
+<p>Specific lines can be put inside the code, like followings:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Installation</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="n">graphviz</span>
+
+<span class="c1"># Import </span>
+<span class="kn">import</span> <span class="nn">graphviz</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Remember to put a <code>%</code> before the <code>pip install</code> command: in this way the python module is directly available in the kernel. Otherwise restart the kernel to use the installed packages.</p>
+</div>
+<p>There is a drawback to use <code>pip install</code>: when your JupyterLab instance is restarted, you will lose all installed Python packages.</p>
+<h3 id="32-conda">3.2 conda<a class="headerlink" href="#32-conda" title="Permanent link">&para;</a></h3>
+<p>Alternately you can use also <code>conda</code> and install packages using the Terminal. To use the terminal in JupyterLab, open a new tab and select <code>Terminal</code> from the launcher.</p>
+<p>The following lines show how to install <code>pandas</code> package in a new conda environment :</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>my_kernel<span class="w"> </span><span class="nv">pandas</span><span class="o">=</span><span class="m">2</span><span class="w"> </span>-y
+conda<span class="w"> </span>activate<span class="w"> </span>my_kernel
+</code></pre></div>
+<p>After the second command, you will notice appearing the <code>(my_kernel)</code> in the shell.</p>
+<p>To test the installation, execute the following command</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;import pandas; print(pandas.__version__)&#39;</span>
+</code></pre></div>
+<p>Conda will install the Python modules you need for your code/project in your Home directory in <code>/lustrehome</code>, enabling multiple advantages:</p>
+<ul>
+<li>
+<p>Your conda environment is always available even if your JupyterLab instance (also known as a container) is stopped or restarted.</p>
+</li>
+<li>
+<p>You can create a new Jupyter kernel, allowing a notebook to be executed within a specific conda environment.</p>
+</li>
+<li>
+<p>It is the first step to submit a notebook to the GPU cluster for batch execution.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Consider <code>mamba</code> instead of conda.</p>
+</div>
+<h3 id="321-troubleshooting">3.2.1 Troubleshooting<a class="headerlink" href="#321-troubleshooting" title="Permanent link">&para;</a></h3>
+<h4 id="conda-init">conda init<a class="headerlink" href="#conda-init" title="Permanent link">&para;</a></h4>
+<p>If conda shows you an "conda init" error, execute the command <code>conda init</code> and then execute the command:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>/lustrehome/&lt;username&gt;/.bashrc
+</code></pre></div>
+<h4 id="base-conda-environment">base conda environment<a class="headerlink" href="#base-conda-environment" title="Permanent link">&para;</a></h4>
+<p>You cannot install python packages in the <code>base</code> conda environment, you have to create a new one as described <a href="https://jvino.github.io/cluster-hpc-gpu-guides/guides/jupyter-lab/#32-conda">above</a></p>
+<h3 id="322-create-new-jupyter-kernel">3.2.2 Create new Jupyter kernel<a class="headerlink" href="#322-create-new-jupyter-kernel" title="Permanent link">&para;</a></h3>
+<p>Starting from a conda environment it is possible to create a Jupyter kernel: this will make easier to execute a given notebook using a particular conda environment.</p>
+<p>Following some commands to create a conda environment and how to create a jupyter kernel linked to it:</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>my_kernel<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span><span class="nv">pandas</span><span class="o">=</span><span class="m">2</span><span class="w"> </span>ipykernel<span class="w"> </span>-y
+conda<span class="w"> </span>activate<span class="w"> </span>my_kernel
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--name<span class="w"> </span>my_kernel<span class="w"> </span>--user<span class="w"> </span>--display-name<span class="w"> </span>my_kernel
+</code></pre></div>
+<p>Remind to reload the browser in order to see your new kernel in the Jupyter launcher.</p>
+<p><img alt="jupyterlab-new-kernel" src="../images/jupyterlab-new-kernel.png" /></p>
+<p>Once the kernel appears in the launcher, it is possible to select it inside the notebook, as shown in the following image.</p>
+<p><img alt="jupyterlab-new-kernel-notebook" src="../images/jupyterlab-new-kernel-notebook.png" /></p>
+<h2 id="4-upload-file-from-local-file-system">4 Upload file from local file system<a class="headerlink" href="#4-upload-file-from-local-file-system" title="Permanent link">&para;</a></h2>
+<p>To upload files from your local file system to the JupyterLab workspace, press the button shown in the following figure and select the files to would like to upload.</p>
+<p><img alt="jupyterlab-upload-file" src="../images/jupyterlab-upload-file.png" /></p>
+<h2 id="5-enable-resource-usage-dashboards">5 Enable Resource Usage Dashboards<a class="headerlink" href="#5-enable-resource-usage-dashboards" title="Permanent link">&para;</a></h2>
+<p>The ReCaS JupyterLab allows you to monitor the resource usage of your application in real-time.</p>
+<p>A few simple steps are needed to create your personal dashboard.</p>
+<p>First, click the third tab on the left, named "System Dashboards", as shown in the figure below.</p>
+<p><img alt="jupyterlab-monitor-resources-1" src="../images/jupyterlab-monitor-resources-1.png" /></p>
+<p>Second, double-click the desired blue button, and it will be placed as a tab near the notebook tab.
+Drag and move it to select your preferred position.</p>
+<p>The following figure shows the "Machine Resources" plots.</p>
+<p><img alt="jupyterlab-monitor-resources-2" src="../images/jupyterlab-monitor-resources-2.png" /></p>
+<p>Additional plots can be displayed on the screen.</p>
+<p>The following figure also shows the "GPU Resources" plots.</p>
+<p><img alt="jupyterlab-monitor-resources-3" src="../images/jupyterlab-monitor-resources-3.png" /></p>
+<h2 id="6-dask">6 Dask<a class="headerlink" href="#6-dask" title="Permanent link">&para;</a></h2>
+<p>Dask is a flexible open-source Python library for parallel computing. Dask scales Python code from multi-core local machines to large distributed clusters in the cloud. Dask provides a familiar user interface by mirroring the APIs of other libraries in the PyData ecosystem including: <code>Pandas</code>, <code>Scikit-learn</code> and <code>NumPy</code>. It also exposes low-level APIs that help programmers run custom algorithms in parallel. (Wikipedia)</p>
+<p>Dask allows you to split the workload among multiple workers.
+So, the first step involves creating a cluster.
+Workers can be run on different machines or on the same machine.</p>
+<h3 id="61-start-a-new-dask-cluster">6.1 Start a new Dask cluster<a class="headerlink" href="#61-start-a-new-dask-cluster" title="Permanent link">&para;</a></h3>
+<p>The easiest way to create a Dask cluster is through the following lines:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">LocalCluster</span>
+<span class="n">cluster</span> <span class="o">=</span> <span class="n">LocalCluster</span><span class="p">()</span>  <span class="c1"># Launches a scheduler and workers locally</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">cluster</span><span class="p">)</span>  <span class="c1"># Connect to distributed cluster and override default</span>
+</code></pre></div>
+<p>After that, computation on Dask DataFrames can be executed. </p>
+<p>In the following line is shown the evaluation of the sum of the column <code>x</code> of the dataframe <code>df</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>  <span class="c1"># This now runs on the distributed system</span>
+</code></pre></div>
+<p>It is recommended to read the <a href="https://distributed.dask.org/en/stable/quickstart.html">official Dask guide</a> to learn all provided capabilities.</p>
+<h3 id="62-enable-dask-resource-usage-dashboards">6.2 Enable Dask Resource Usage Dashboards<a class="headerlink" href="#62-enable-dask-resource-usage-dashboards" title="Permanent link">&para;</a></h3>
+<p>Dash provides additional graphical objects to monitor in real-time application information like resource usage and application progress.</p>
+<p>Firstly, the creation of a Dask cluster through the Jupyter Lab interface. </p>
+<p>This is done by selecting the forth tabs on the left, the <code>Dask</code> Tab, and create a new cluster by clicking on the <code>NEW</code> button, as shown in the following figure.</p>
+<p><img alt="jupyterlab-monitor-dask-1" src="../images/jupyterlab-monitor-dask-1.png" /></p>
+<p>Secondly, the importing of the created cluster in the code.</p>
+<p>This is easily done by clicking the <code>&lt; &gt;</code> button on the bottom left after having selected the cell inside the notebook, as shown in the following figure.</p>
+<p><img alt="jupyterlab-monitor-dask-2" src="../images/jupyterlab-monitor-dask-2.png" /></p>
+<p>Following it is copied the generated code for convenience.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="s2">&quot;tcp://127.0.0.1:44359&quot;</span><span class="p">)</span>
+<span class="n">client</span>
+</code></pre></div>
+<p>Multiple Dask graphical objects can be enabled and moved inside the window.</p>
+<p>If the code exploit Dask objects, during its execution the information about the application (resources usage, application progress, ...) are shown in real-time, as shown in the following figure.</p>
+<p><img alt="jupyterlab-monitor-dask-3" src="../images/jupyterlab-monitor-dask-3.png" /></p>
+<h2 id="7-bash-process-management">7 Bash process management<a class="headerlink" href="#7-bash-process-management" title="Permanent link">&para;</a></h2>
+<p>Your JupyterLab instace is started on a Linux Operative System. </p>
+<p>Learn how to interact with its Process management it is important to manage aspects of your application executions. </p>
+<p>Please, take a look of the most important commands at this <a href="https://linuxsimply.com/bash-scripting-tutorial/process-and-signal-handling/process-management/">link</a></p>
+<h2 id="8-execute-a-jupyter-notebook-in-background-with-papermill">8 Execute a Jupyter Notebook in background with papermill<a class="headerlink" href="#8-execute-a-jupyter-notebook-in-background-with-papermill" title="Permanent link">&para;</a></h2>
+<p>Papermill is a tool for parameterizing and executing Jupyter Notebooks.</p>
+<p>Papermill lets you:</p>
+<ul>
+<li>
+<p>parameterize notebooks</p>
+</li>
+<li>
+<p>execute notebooks</p>
+</li>
+</ul>
+<p>Papermill is already installed on your JupyterLab instance.</p>
+<p>If you would like to use <code>papermill</code> also in your conda environment, please install it using the following command</p>
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>papermill<span class="w"> </span>-y
+</code></pre></div>
+<p>Please task a look of the <a href="https://papermill.readthedocs.io/en/latest/">official documentation</a>.</p>
+<h2 id="9-useful-links">9 Useful links<a class="headerlink" href="#9-useful-links" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.dask.org/">Dask Webpage</a></p>
+<p><a href="https://github.com/dask/dask">Dask GitHub page</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 INFN
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

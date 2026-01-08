@@ -1,0 +1,760 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Gioacchino Vino - gioacchino.vino@ba.infn.it">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Job orchestrator with Chronos - ReCaS-Bari Computing Services</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#job-orchestrator-with-chronos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-header__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ReCaS-Bari Computing Services
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Job orchestrator with Chronos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="ReCaS-Bari Computing Services" class="md-nav__button md-logo" aria-label="ReCaS-Bari Computing Services" data-md-component="logo">
+      
+  <img src="../../assets/logo_infn.png" alt="logo">
+
+    </a>
+    ReCaS-Bari Computing Services
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/jvino/cluster-hpc-gpu-guides" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Interactive Services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Interactive Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter-lab-for-recas-users-k8s/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/jupyter_with_gpu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ReCaS JupyterHub with more resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../interactive_services/rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RStudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Job Submission
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Job Submission
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../k8s-jobs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Kubernetes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../htcondor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External Service - HTCondor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/docker_and_dockerfile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker and Dockerfile
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/jupyter-lab/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    JupyterLab
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="job-orchestrator-with-chronos">Job orchestrator with Chronos<a class="headerlink" href="#job-orchestrator-with-chronos" title="Permanent link">&para;</a></h1>
+<p><em>Updated on 04Oct2022</em></p>
+<h2 id="0-user-support">0 User Support<a class="headerlink" href="#0-user-support" title="Permanent link">&para;</a></h2>
+<p>If you need support for your application, please use this <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request">link</a> to create a ticket with title “ReCaS HPC/GPU: Chronos instance support” and then describe your issue.</p>
+<p><strong>It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.</strong></p>
+<h2 id="1-introduction">1 Introduction<a class="headerlink" href="#1-introduction" title="Permanent link">&para;</a></h2>
+<p>Chronos is the tool used to submit jobs to the ReCaS-Bari HPC/GPU cluster.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>ONLY</strong> Docker containers can be executed in the cluster.</p>
+</div>
+<p>You can run a third party Docker container or you can build your custom one. Please refer to the guide at this <a href="https://jvino.github.io/cluster-hpc-gpu-guides/guides/docker_and_dockerfile/">link</a> for more details.</p>
+<h2 id="2-request-your-personal-recas-chronos-instance">2 Request your personal ReCaS Chronos instance<a class="headerlink" href="#2-request-your-personal-recas-chronos-instance" title="Permanent link">&para;</a></h2>
+<p>Chronos is available only for users with a ReCaS-Bari HPC/HTC account active. Users without such an account MUST register using this <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/richiesta-credenziali-2">link</a> (check the box "<strong>Account for access to ReCas-Bari compute services (HTC/HPC)</strong>").</p>
+<p>You can verify if the registration is successfully completed by access to the <strong>frontend.recas.ba.infn.it</strong> server via ssh:</p>
+<div class="highlight"><pre><span></span><code><span class="w">   </span>ssh<span class="w"> </span>&lt;your-username&gt;@frontend.recas.ba.infn.it
+</code></pre></div>
+<p>After that, you can request your personal Chronos instance using this <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request">link</a>.</p>
+<p>Please provide the following information:</p>
+<div class="highlight"><pre><span></span><code><span class="w">   </span>Title:<span class="w"> </span>“ReCaS<span class="w"> </span>HPC/GPU:<span class="w"> </span>new<span class="w"> </span>Chronos<span class="w"> </span>instance<span class="w"> </span>request”
+<span class="w">   </span>Issue:
+<span class="w">   </span>-<span class="w"> </span>Name<span class="w"> </span>and<span class="w"> </span>Surname
+<span class="w">   </span>-<span class="w"> </span>Username
+<span class="w">   </span>-<span class="w"> </span>Email
+</code></pre></div>
+<h2 id="3-chronos-web-interface">3 Chronos Web Interface<a class="headerlink" href="#3-chronos-web-interface" title="Permanent link">&para;</a></h2>
+<p>Chronos provdes a simple and fast web interface as shown in the following figure.</p>
+<p><img alt="inital_screen" src="../images/inital_screen.png" /></p>
+<p>Through the web interface is possible to verify your job status. Moreover, it can be used to submit scheduled or dependent jobs.</p>
+<h2 id="31-submit-a-job-using-the-web-interface">3.1 Submit a job using the Web Interface<a class="headerlink" href="#31-submit-a-job-using-the-web-interface" title="Permanent link">&para;</a></h2>
+<p>The web interface provides the possibility to submit a job by clicking on the “ADD JOB”. The following figure shows the box where you can insert all job parameters.</p>
+<p><img alt="graphical_job_submission" src="../images/graphical_job_submission.png" /></p>
+<p>After adding the job, if the requested resources are available, the job is started. Otherwise the job is put in the queued state.</p>
+<p>The following image shows the status of a job.</p>
+<p><img alt="job_state" src="../images/job_state.png" /></p>
+<p>The boxes on the right allow to start again the job, edit the job description, stop and delete a job, respectively.</p>
+<h2 id="32-submit-the-job-using-the-terminal">3.2 Submit the job using the terminal<a class="headerlink" href="#32-submit-the-job-using-the-terminal" title="Permanent link">&para;</a></h2>
+<p>Although submitting jobs through the web interface might seem easier at first, it could be not comfortable, scalable and fast. Submitting jobs using the terminal is <strong>RECOMMENDED</strong>.</p>
+<p>This method requires a JSON file containing all the job information and the execution of a command that transmits the job information to your personal Chronos instance. Following an example of a JSON file. Insert the information of your specific job and save the file.</p>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;detailed-and-unique-job-name&gt;&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;command&quot;</span>:<span class="w"> </span><span class="s2">&quot;python3.6 &lt;/lustre/path/to/your/code&gt;&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;shell&quot;</span>:<span class="w"> </span>true,
+<span class="w">    </span><span class="s2">&quot;retries&quot;</span>:<span class="w"> </span><span class="m">2</span>,
+<span class="w">    </span><span class="s2">&quot;description&quot;</span>:<span class="w"> </span><span class="s2">&quot;&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;cpus&quot;</span>:<span class="w"> </span><span class="m">4</span>,
+<span class="w">    </span><span class="s2">&quot;disk&quot;</span>:<span class="w"> </span><span class="m">10</span>,
+<span class="w">    </span><span class="s2">&quot;mem&quot;</span>:<span class="w"> </span><span class="m">8192</span>,
+<span class="w">    </span><span class="s2">&quot;gpus&quot;</span>:<span class="w"> </span><span class="m">1</span>,
+<span class="w">    </span><span class="s2">&quot;environmentVariables&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">    </span><span class="s2">&quot;arguments&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">    </span><span class="s2">&quot;runAsUser&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;your-username&gt;&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;owner&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;your-username&gt;&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;ownerName&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;your-username&gt;&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;container&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s2">&quot;forcePullImage&quot;</span>:<span class="w"> </span>true,
+<span class="w">        </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span><span class="s2">&quot;mesos&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;image&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;your-container-image&gt;&quot;</span>,
+<span class="w">        </span><span class="s2">&quot;volumes&quot;</span>:<span class="w"> </span><span class="o">[{</span><span class="s2">&quot;containerPath&quot;</span>:<span class="w"> </span><span class="s2">&quot;/lustre/path/to/your/home-directory&gt;&quot;</span>,<span class="w"> </span>
+<span class="w">                     </span><span class="s2">&quot;hostPath&quot;</span>:<span class="w"> </span><span class="s2">&quot;/lustre/path/to/your/home-directory&quot;</span>,<span class="w"> </span>
+<span class="w">                     </span><span class="s2">&quot;mode&quot;</span>:<span class="w"> </span><span class="s2">&quot;RW&quot;</span><span class="o">}]</span>
+<span class="w">    </span><span class="o">}</span>,
+<span class="w">    </span><span class="s2">&quot;schedule&quot;</span>:<span class="w"> </span><span class="s2">&quot;R1//P1Y&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>It’s important to insert an unique <strong>name</strong> for each submitted job, this will be important during the debugging phase. The name should <strong>ALWAYS</strong> start with your <strong>username</strong>. Insert dash ( - ) between words. Es “myuser-test-job-1-date-2020-09-34”.</li>
+<li>The <strong>command</strong> field is specific for each application, what written in the example will not work in your use case. Absolute path is preferred.</li>
+<li><strong>&lt;your-username&gt;</strong> is the user created during the registration.</li>
+<li><strong>&lt;your-container-image&gt;</strong> is the container image name to use for your application.</li>
+<li>The <strong>schedule</strong> field is used to type how many times you want to execute the job and the period among execution, please refer to this <a href="https://mesos.github.io/chronos/docs/api.html">guide</a> (Adding a Scheduled Job - section) if you need it otherwise leave it as you see in the example.</li>
+</ul>
+</div>
+<p>The command used to submit the job is based on CURL. On a machine with a Linux OS, open a file editor and copy the following lines inside and save it (e.g. with the “submit-to-chronos” name).</p>
+<div class="highlight"><pre><span></span><code><span class="w">   </span><span class="c1">#!/bin/bash</span>
+<span class="w">   </span><span class="nv">FILE</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">   </span><span class="nv">USERNAME</span><span class="o">=</span>&lt;your-username&gt;
+<span class="w">   </span><span class="nv">PASSWORD</span><span class="o">=</span>&lt;chronos-instance-password&gt;
+<span class="w">   </span><span class="nv">HOSTNAME</span><span class="o">=</span>&lt;chronos-instance-hostname&gt;
+<span class="w">   </span><span class="nv">PORT</span><span class="o">=</span>&lt;chronos-instance-port&gt;
+<span class="w">   </span>curl<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USERNAME</span>:<span class="nv">$PASSWORD</span><span class="w"> </span>-L<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>--data-binary<span class="w"> </span><span class="s2">&quot;@</span><span class="nv">$FILE</span><span class="s2">&quot;</span><span class="w"> </span>http://<span class="nv">$HOSTNAME</span>:<span class="nv">$PORT</span>/v1/scheduler/iso8601
+</code></pre></div>
+<p>Once the request will be approved, the administrator will provide <strong>&lt;chronos-instance-password&gt;</strong>, <strong>&lt;chronos-instance-hostname&gt;</strong> and <strong>&lt;chronos-instance-port&gt;</strong> by email.</p>
+<p>To submit the job, execute the following command (supposing the json file name is “<em>job.json</em>” and the submit command file name is “submit_chronos”)</p>
+<div class="highlight"><pre><span></span><code><span class="w">   </span>bash<span class="w"> </span>./submit_chronos<span class="w"> </span>job.json
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since your Chronos instance is not accessible from outside, the unique procedure to submit job is to store json files and the script used to submit jobs in your home directory on frontend.recas.ba.infn.it (officially the ReCaS-Bari storage based on GPFS) and execute the command from there.</p>
+</div>
+<h2 id="33-user-support">3.3 User Support<a class="headerlink" href="#33-user-support" title="Permanent link">&para;</a></h2>
+<p>For any problem related to the Chronos service, use this <a href="https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request">link</a> for create a support request, inserting as title “ReCaS HPC/GPU: Chronos issue”, then describe the problem in the issue box. Your username and job_name <strong>MUST</strong> be added.</p>
+<p>At the moment, users can not access to the job logs. For support on a specific job, submit a support request providing the username, job_name and describing the problem in the issue box.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It is <strong>STRONGLY</strong> advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.</p>
+</div>
+<h2 id="34-access-to-the-chronos-web-interface">3.4 Access to the Chronos Web Interface<a class="headerlink" href="#34-access-to-the-chronos-web-interface" title="Permanent link">&para;</a></h2>
+<p>In order to access your Chronos instance is needed to create a SSH Tunnel.  </p>
+<p>Open a shell and execute the following command:
+<div class="highlight"><pre><span></span><code><span class="w">   </span>ssh<span class="w"> </span>-f<span class="w"> </span>-N<span class="w"> </span>-L<span class="w"> </span><span class="m">127</span>.0.0.1:&lt;localhost-port&gt;:&lt;chronos-instance-hostname&gt;:&lt;chronos-instance-port&gt;<span class="w"> </span>&lt;your-username&gt;@frontend.recas.ba.infn.it
+</code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>&lt;localhost-port&gt;</strong>: you can choose the port by yourself</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">IMPORTANT</p>
+<p>The SSH tunnel works in background (-f flag), if the process crashes or you reboot your machine, you have to create again the SSH tunnel using the above command</p>
+</div>
+<p>Now you are able to access to your Chronos instance using your favorite browser and the url "localhost:&lt;localhost-port&gt;" </p>
+<h2 id="4-example">4 Example<a class="headerlink" href="#4-example" title="Permanent link">&para;</a></h2>
+<p>The following JSON could be used as first test by the user.</p>
+<div class="highlight"><pre><span></span><code><span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;-my-first-job-submission&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;command&quot;</span>:<span class="w"> </span><span class="s2">&quot;sleep 5 &amp;&amp; nvidia-smi&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;shell&quot;</span>:<span class="w"> </span>true,
+<span class="w">  </span><span class="s2">&quot;retries&quot;</span>:<span class="w"> </span><span class="m">4</span>,
+<span class="w">  </span><span class="s2">&quot;description&quot;</span>:<span class="w"> </span><span class="s2">&quot;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;cpus&quot;</span>:<span class="w"> </span><span class="m">1</span>,
+<span class="w">  </span><span class="s2">&quot;disk&quot;</span>:<span class="w"> </span><span class="m">0</span>,
+<span class="w">  </span><span class="s2">&quot;mem&quot;</span>:<span class="w"> </span><span class="m">1024</span>,
+<span class="w">  </span><span class="s2">&quot;gpus&quot;</span>:<span class="w"> </span><span class="m">1</span>,
+<span class="w">  </span><span class="s2">&quot;environmentVariables&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">  </span><span class="s2">&quot;arguments&quot;</span>:<span class="w"> </span><span class="o">[]</span>,
+<span class="w">  </span><span class="s2">&quot;runAsUser&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;owner&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;ownerName&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;username&gt;&quot;</span>,
+<span class="w">  </span><span class="s2">&quot;container&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;forcePullImage&quot;</span>:<span class="w"> </span>true,
+<span class="w">    </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span><span class="s2">&quot;mesos&quot;</span>,
+<span class="w">    </span><span class="s2">&quot;image&quot;</span>:<span class="w"> </span><span class="s2">&quot;registry-clustergpu.recas.ba.infn.it/gvino/cuda11.5.0-base-ubuntu20.04:0.1&quot;</span>
+<span class="w">  </span><span class="o">}</span>,
+<span class="w">  </span><span class="s2">&quot;schedule&quot;</span>:<span class="w"> </span><span class="s2">&quot;R1//P1Y&quot;</span>
+<span class="o">}</span>
+</code></pre></div>
+<p>Save it as "<em>my-first-job.json</em>" on your personal computer and send this file and that used to submit the job to your home in the ReCaS-Bari Storage using the command:</p>
+<div class="highlight"><pre><span></span><code>scp<span class="w"> </span>./my-first-job.json<span class="w"> </span>submit_chronos<span class="w"> </span>&lt;username&gt;@frontend.recas.ba.infn.it:
+</code></pre></div>
+<p>Then access to your storage using:</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>&lt;username&gt;@frontend.recas.ba.infn.it:
+</code></pre></div>
+<p>Finally, submit the job using the command:</p>
+<div class="highlight"><pre><span></span><code>bash<span class="w"> </span>submit_chronos<span class="w"> </span>my-first-job.json
+</code></pre></div>
+<p>Go to the web inteface to verify whether the job was successfully submitted and executed.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 INFN
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.sections", "navigation.expand", "navigation.top", "toc.integrate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
