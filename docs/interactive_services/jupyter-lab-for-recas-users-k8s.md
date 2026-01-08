@@ -1,10 +1,13 @@
 #JupyterHub for ReCaS users
 
-*Updated on 19 May 2025*
+*Updated on 08Jan2026*	
 
-## IMPORTANT: User Support
+## 0) User Support
+If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS JupyterHub support” and then describe your issue.
+It is important insert in the ticket **YOUR USERNAME** used to access to the ReCaS Services.
+
+### Keep you updated!
 If you need support for your application, please use this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request) to create a ticket with title “ReCaS HPC/GPU: JupyterHub support” and then describe your issue.
-
 
 **It is STRONGLY advised to subscribe to the recas-hpu-gpu mailing list. Create a ticket with the title “ReCaS HPC/GPU: subscribe to the mailing list”.**
 
@@ -150,3 +153,4 @@ You can check if the registration is successfully completed by connecting to the
 `ssh <username>@frontend.recas.ba.infn.it`
 
 After that, you can request your personal JupyterLab instance via this [link](https://www.recas-bari.it/index.php/en/recas-bari-servizi-en/support-request).
+

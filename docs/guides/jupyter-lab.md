@@ -257,24 +257,8 @@ conda install -c conda-forge papermill -y
 
 Please task a look of the [official documentation](https://papermill.readthedocs.io/en/latest/).
 
-## 9 RAPIDS
-
-The RAPIDS suite of open source software libraries gives you the freedom to execute end-to-end data science and analytics pipelines entirely on GPUs. 
-
-Seamlessly scale from GPU workstations to multi-GPU servers and multi-node clusters with Dask.
-
-Accelerate your Python data science toolchain with minimal code changes and no new tools to learn.
-
-RAPIDS is an open source project. Supported by NVIDIA, it also relies on Numba, Apache Arrow, and many more open source projects. 
-
-[Reference](https://rapids.ai/)
-
-## 10 Useful links
+## 9 Useful links
 
 [Dask Webpage](https://www.dask.org/)
 
 [Dask GitHub page](https://github.com/dask/dask)
-
-[RAPIDS Webpage](https://rapids.ai/)
-
-[RAPIDS Docker container Webpage](https://hub.docker.com/r/rapidsai/rapidsai/)
